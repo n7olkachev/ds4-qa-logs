@@ -1,0 +1,57 @@
+# ==== ds4 QA evidence ====
+# date_utc: 2026-11-09T21:42:05Z
+# host: 81b8593895f7  runpod_pod: ?  dc: ?  gpu_count: ?
+# gpu: NVIDIA H200, 595.91.07, 143771 MiB, 9.0
+# nvcc: Build cuda_12.8.r12.8/compiler.35583870_0
+# os: Linux 6.8.0-147-generic x86_64  Ubuntu 24.04.3 LTS
+# tree: /data/fix
+# commit: 136e7667a6c91c44038d86b19e2bdcf695f07a38  (Copy model tensors into device memory on a discrete CUDA GPU when they fit)
+# dirty_files: 0
+# origin: https://github.com/n7olkachev/ds4.git
+# description: section 3: eight long Z.AI FP8 cases, rendered prompts, ctx 8192 (every prompt crosses the 2,051-token boundary); DS4_CUDA_NO_MODEL_COPY=unset
+# =========================
+
+$ python3 gguf-tools/quality-testing/render_glm_references.py gguf-tools/quality-testing/data/glm53-flash-openrouter-zai-fp8-long
+
+$ gguf-tools/quality-testing/score_official /data/gguf/GLM-5.3-Flash-Q2.gguf gguf-tools/quality-testing/data/glm53-flash-openrouter-zai-fp8-long/manifest-rendered.tsv /workspace/evidence/fix/glm53-q2-long.tsv 8192 --rendered-prompt
+ds4: Linux cuda backend set oom_score_adj=1000
+ds4: CUDA backend initialized on NVIDIA H200 (sm_90) dev=0
+ds4: CUDA (no-copy) registered 89.88 GiB model mapping for multi-tier selective cache
+ds4: CUDA copying 89.87 GiB of model tensors into device memory (3.02 GiB context planned, 139.05 GiB free)
+ds4: CUDA preparing model tensor mappings
+ds4: CUDA prepared model tensor mappings 16.38 GiB
+ds4: CUDA prepared model tensor mappings 32.13 GiB
+ds4: CUDA prepared model tensor mappings 48.45 GiB
+ds4: CUDA prepared model tensor mappings 64.78 GiB
+ds4: CUDA prepared model tensor mappings 80.23 GiB
+ds4: CUDA startup model preparation covered 89.87 GiB of tensor spans in 1.834s
+ds4: cuda backend initialized for graph diagnostics
+ds4: memory: KV 0.09 GiB (raw 0.00 + compressed 0.09) + buffers 2.93 GiB + resident model 89.87 GiB = 92.89 GiB planned
+ds4: memory detail: ctx=8192 prefill_cap=2048 raw_kv_rows=0 compressed_kv_rows=8192 backend=cuda
+ds4: GLM session ctx=8192 (model max=1048576); prefill/work cap=4096; dense attention limit=2051
+ds4: GLM graph using compact DSA KV only; expanded full-attention KV cache is skipped
+ds4: GLM graph allocating compact DSA cache: rows=8192 logical_ctx=8192 kv_layers=45 indexer_layers=11 f16 0.09 GiB
+ds4: GLM compact indexed prefill chunk=2048 score_rows=2048 score_scratch=16.00 MiB
+case_000 warning: no API logprobs parsed from gguf-tools/quality-testing/data/glm53-flash-openrouter-zai-fp8-long/responses/case_000.json
+case_000 cases=1 prompt=3957 target=127 avg_nll=0.870276 lcp=1 api_target_mae=0.000000 api_top_coverage=0/0 api_top1=0.000 api_topn=0.000 api_pair=0.000
+case_001 warning: no API logprobs parsed from gguf-tools/quality-testing/data/glm53-flash-openrouter-zai-fp8-long/responses/case_001.json
+case_001 cases=2 prompt=7333 target=109 avg_nll=0.438512 lcp=2 api_target_mae=0.000000 api_top_coverage=0/0 api_top1=0.000 api_topn=0.000 api_pair=0.000
+case_002 warning: no API logprobs parsed from gguf-tools/quality-testing/data/glm53-flash-openrouter-zai-fp8-long/responses/case_002.json
+case_002 cases=3 prompt=3667 target=127 avg_nll=0.619738 lcp=6 api_target_mae=0.000000 api_top_coverage=0/0 api_top1=0.000 api_topn=0.000 api_pair=0.000
+case_003 warning: no API logprobs parsed from gguf-tools/quality-testing/data/glm53-flash-openrouter-zai-fp8-long/responses/case_003.json
+case_003 cases=4 prompt=6878 target=65 avg_nll=0.569033 lcp=7 api_target_mae=0.000000 api_top_coverage=0/0 api_top1=0.000 api_topn=0.000 api_pair=0.000
+case_004 warning: no API logprobs parsed from gguf-tools/quality-testing/data/glm53-flash-openrouter-zai-fp8-long/responses/case_004.json
+case_004 cases=5 prompt=2974 target=127 avg_nll=0.835850 lcp=2 api_target_mae=0.000000 api_top_coverage=0/0 api_top1=0.000 api_topn=0.000 api_pair=0.000
+case_005 warning: no API logprobs parsed from gguf-tools/quality-testing/data/glm53-flash-openrouter-zai-fp8-long/responses/case_005.json
+case_005 cases=6 prompt=6190 target=114 avg_nll=0.622576 lcp=2 api_target_mae=0.000000 api_top_coverage=0/0 api_top1=0.000 api_topn=0.000 api_pair=0.000
+case_006 warning: no API logprobs parsed from gguf-tools/quality-testing/data/glm53-flash-openrouter-zai-fp8-long/responses/case_006.json
+case_006 cases=7 prompt=3185 target=39 avg_nll=0.568267 lcp=0 api_target_mae=0.000000 api_top_coverage=0/0 api_top1=0.000 api_topn=0.000 api_pair=0.000
+case_007 warning: no API logprobs parsed from gguf-tools/quality-testing/data/glm53-flash-openrouter-zai-fp8-long/responses/case_007.json
+case_007 cases=8 prompt=6498 target=32 avg_nll=0.701011 lcp=0 api_target_mae=0.000000 api_top_coverage=0/0 api_top1=0.000 api_topn=0.000 api_pair=0.000
+summary cases=8 tokens=740 avg_nll=0.669916439 first_match=6 avg_lcp=2.500
+api_summary ref_tokens=0 target_tokens=0 target_mae=0.000000000 target_mean_delta=0.000000000 top_items=0 top_mapped=0 top_coverage=0.000000000 top1_match=0/0 top1_rate=0.000000000 topn_hit=0/0 topn_recall=0.000000000 top_logprob_count=0 top_mae=0.000000000 top_mean_delta=0.000000000 pair_agree=0/0 pair_rate=0.000000000
+
+real	1m17.174s
+user	0m51.802s
+sys	0m25.384s
+exit=0

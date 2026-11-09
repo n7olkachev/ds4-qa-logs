@@ -1,0 +1,38 @@
+# ==== ds4 QA evidence ====
+# date_utc: 2026-11-09T21:45:10Z
+# host: 81b8593895f7  runpod_pod: ?  dc: ?  gpu_count: ?
+# gpu: NVIDIA H200, 595.91.07, 143771 MiB, 9.0
+# nvcc: Build cuda_12.8.r12.8/compiler.35583870_0
+# os: Linux 6.8.0-147-generic x86_64  Ubuntu 24.04.3 LTS
+# tree: /data/base
+# commit: b3f50180ec2c7324892be1f50bc83555ccb8d5e7  (Read half-aligned Qwen Q2 weight rows correctly on Metal)
+# dirty_files: 0
+# origin: https://github.com/antirez/ds4.git
+# description: DeepSeek V4 Flash 0731 Q2: ds4_test --logprob-vectors (tests/test-vectors/flash-0731/official.vec); DS4_CUDA_NO_MODEL_COPY=unset
+# =========================
+
+$ DS4_TEST_MODEL=/data/gguf/ds4flash-0731-q2.gguf ./ds4_test --logprob-vectors
+logprob-vectors:
+ds4: Linux cuda backend set oom_score_adj=1000
+ds4: CUDA backend initialized on NVIDIA H200 (sm_90) dev=0
+ds4: CUDA (no-copy) registered 80.76 GiB model mapping for multi-tier selective cache
+ds4: CUDA preparing model tensor mappings
+ds4: CUDA prepared model tensor mappings 16.37 GiB
+ds4: CUDA prepared model tensor mappings 32.07 GiB
+ds4: CUDA prepared model tensor mappings 48.43 GiB
+ds4: CUDA prepared model tensor mappings 64.13 GiB
+ds4: CUDA prepared model tensor mappings 80.24 GiB
+ds4: CUDA startup model preparation covered 80.76 GiB of tensor spans in 0.082s
+ds4: cuda backend initialized for graph diagnostics
+ds4-test: vector short_italian_fact
+ds4-test: vector short_code_completion
+ds4-test: vector short_reasoning_plain
+ds4-test: vector long_memory_archive
+ds4-test: vector long_code_audit
+logprob-vectors: OK
+ds4 tests: ok
+
+real	0m30.921s
+user	0m12.159s
+sys	0m18.561s
+exit=0

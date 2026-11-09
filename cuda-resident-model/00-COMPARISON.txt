@@ -1,0 +1,89 @@
+# ==== base b3f5018 vs fix 136e766 — same pod 3s050mzbu75h8t (H200 SXM, driver 595.91.07, nvcc 12.8) — generated 2026-11-09T21:47:21Z ====
+
+## GLM 5.3 Flash Q2 — 100-case fixture, ctx 4096 (Metal reference: 0.458030488 / 89 / 7.37)
+--- base: summary cases=100 tokens=11559 avg_nll=0.459560487 first_match=89 avg_lcp=7.390
+real	83m30.590s
+--- fix: summary cases=100 tokens=11559 avg_nll=0.459560487 first_match=89 avg_lcp=7.390
+real	4m44.102s
+IDENTICAL  base/glm53-q2-100.tsv == fix/glm53-q2-100.tsv (16679 bytes)
+
+## GLM 5.3 Flash Q2 — eight long cases, ctx 8192
+--- base: summary cases=8 tokens=740 avg_nll=0.669916439 first_match=6 avg_lcp=2.500
+real	9m51.995s
+--- fix: summary cases=8 tokens=740 avg_nll=0.669916439 first_match=6 avg_lcp=2.500
+real	1m17.174s
+IDENTICAL  base/glm53-q2-long.tsv == fix/glm53-q2-long.tsv (1684 bytes)
+
+## DeepSeek V4 Flash 0731 Q2 — 100-case data/flash scorer, ctx 4096
+--- base-flash: summary cases=100 tokens=2313 avg_nll=0.412182337 first_match=53 avg_lcp=4.670
+real	30m32.788s
+--- fix-flash: summary cases=100 tokens=2313 avg_nll=0.412182337 first_match=53 avg_lcp=4.670
+real	0m56.015s
+IDENTICAL  base-flash/flash-q2-100.tsv == fix-flash/flash-q2-100.tsv (19021 bytes)
+
+## DeepSeek V4 Flash — ds4_test --logprob-vectors
+--- base-flash: logprob-vectors: OK real	1m47.058s 
+--- fix-flash: logprob-vectors: OK real	0m16.290s 
+
+## CLI smokes (greedy, 64 tokens): stdout sha256 and speed lines
+base             301c74585dcafa37  ds4: GLM prefill: 15.70 t/s, generation: 3.38 t/s
+fix              301c74585dcafa37  ds4: GLM prefill: 88.49 t/s, generation: 47.38 t/s
+fix-nocopy       301c74585dcafa37  ds4: GLM prefill: 15.69 t/s, generation: 3.39 t/s
+fix-no-room      301c74585dcafa37  ds4: GLM prefill: 15.64 t/s, generation: 3.38 t/s
+base-flash       a28cdd2ed04bd61a  ds4: prefill: 7.41 t/s, generation: 1.25 t/s
+fix-flash        a28cdd2ed04bd61a  ds4: prefill: 75.62 t/s, generation: 71.26 t/s
+
+## startup decision lines
+ds4: CUDA copying 89.87 GiB of model tensors into device memory (2.97 GiB context planned, 139.05 GiB free)
+ds4: CUDA startup model preparation covered 89.87 GiB of tensor spans in 1.836s
+ds4: CUDA model stays host-mapped: 89.87 GiB tensors + 2.97 GiB context + 2.80 GiB reserve exceed 28.53 GiB free device memory
+ds4: CUDA startup model preparation covered 89.87 GiB of tensor spans in 0.062s
+ds4: CUDA copying 80.76 GiB of model tensors into device memory (0.42 GiB context planned, 139.06 GiB free)
+ds4: CUDA startup model preparation covered 80.76 GiB of tensor spans in 1.667s
+
+## ds4-bench (GPU idle)
+--- base
+ctx_tokens,prefill_tokens,prefill_tps,gen_tokens,gen_tps,gen_first_ms,gen_steady_tokens,gen_steady_tps,kvcache_bytes
+2048,2048,117.61,64,3.23,304.732,63,3.23,202327452
+4096,2048,114.77,64,3.22,312.560,63,3.22,251356572
+6144,2048,112.93,64,3.22,309.802,63,3.22,300385692
+8192,2048,114.96,64,3.22,309.653,63,3.22,0
+--- fix
+ctx_tokens,prefill_tokens,prefill_tps,gen_tokens,gen_tps,gen_first_ms,gen_steady_tokens,gen_steady_tps,kvcache_bytes
+2048,2048,962.68,64,36.17,26.135,63,36.27,202327452
+4096,2048,823.97,64,35.85,27.780,63,35.97,251356572
+6144,2048,824.43,64,35.76,27.924,63,35.88,300385692
+8192,2048,818.63,64,35.40,27.971,63,35.52,0
+--- base-flash
+ctx_tokens,prefill_tokens,prefill_tps,gen_tokens,gen_tps,gen_first_ms,gen_steady_tokens,gen_steady_tps,kvcache_bytes
+2048,2048,394.46,64,3.90,245.235,63,3.90,52184460
+4096,2048,406.65,64,3.88,256.686,63,3.89,80373132
+6144,2048,404.34,64,3.88,257.157,63,3.89,108561804
+8192,2048,403.40,64,3.88,256.945,63,3.88,0
+--- fix-flash
+ctx_tokens,prefill_tokens,prefill_tps,gen_tokens,gen_tps,gen_first_ms,gen_steady_tokens,gen_steady_tps,kvcache_bytes
+2048,2048,1347.47,64,47.42,18.362,63,47.51,52184460
+4096,2048,1452.00,64,46.34,21.008,63,46.52,80373132
+6144,2048,1435.23,64,46.21,21.437,63,46.39,108561804
+8192,2048,1425.01,64,45.10,21.426,63,45.25,0
+
+## model-free test and sanitizers
+test_cuda_model_copy: 56 MiB copied, reads identical to the mapping: PASS
+test_cuda_model_copy: 56 MiB copied, reads identical to the mapping: PASS
+========= ERROR SUMMARY: 0 errors
+test_cuda_model_copy: 56 MiB copied, reads identical to the mapping: PASS
+========= ERROR SUMMARY: 0 errors
+test_cuda_model_copy: 56 MiB copied, reads identical to the mapping: PASS
+========= RACECHECK SUMMARY: 0 hazards displayed (0 errors, 0 warnings)
+test_cuda_model_copy: 56 MiB copied, reads identical to the mapping: PASS
+========= ERROR SUMMARY: 0 errors
+
+## builds
+build-base.log: warnings=0 build base exit=0
+build-fix.log: warnings=0 make[1]: Leaving directory '/data/fix'
+
+## model identity
+file: /data/gguf/GLM-5.3-Flash-Q2.gguf
+bytes: 96505816384
+hf_api_xet_hash: 3717238bd6bb945cc065012f119519b8ce3ad04645dc2a1011bac077b415ffda
+sha256: e81fd6241c6e55a64e1e14e47a3eab61a173fa8d7e4b5c1d1848827119705b32

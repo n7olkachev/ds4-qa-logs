@@ -1,0 +1,1 @@
+done base: summary cases=100 tokens=11559 avg_nll=0.459560487 first_match=89 avg_lcp=7.390 real	83m30.590s exit=0 summary cases=8 tokens=740 avg_nll=0.669916439 first_match=6 avg_lcp=2.500 real	9m51.995s exit=0 

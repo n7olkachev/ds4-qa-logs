@@ -1,0 +1,26 @@
+# rerun after building ds4_test; 2026-11-09T20:01:14Z
+$ DS4_TEST_MODEL=/data/gguf/ds4flash-0731-q2.gguf DS4_LOCK_FILE=/tmp/ds4-base-flash-lpv.lock ./ds4_test --logprob-vectors
+logprob-vectors:
+ds4: Linux cuda backend set oom_score_adj=1000
+ds4: CUDA backend initialized on NVIDIA H200 (sm_90) dev=0
+ds4: CUDA (no-copy) registered 80.76 GiB model mapping for multi-tier selective cache
+ds4: CUDA preparing model tensor mappings
+ds4: CUDA prepared model tensor mappings 16.37 GiB
+ds4: CUDA prepared model tensor mappings 32.07 GiB
+ds4: CUDA prepared model tensor mappings 48.43 GiB
+ds4: CUDA prepared model tensor mappings 64.13 GiB
+ds4: CUDA prepared model tensor mappings 80.24 GiB
+ds4: CUDA startup model preparation covered 80.76 GiB of tensor spans in 0.079s
+ds4: cuda backend initialized for graph diagnostics
+ds4-test: vector short_italian_fact
+ds4-test: vector short_code_completion
+ds4-test: vector short_reasoning_plain
+ds4-test: vector long_memory_archive
+ds4-test: vector long_code_audit
+logprob-vectors: OK
+ds4 tests: ok
+
+real	1m47.058s
+user	0m52.926s
+sys	0m54.116s
+exit=0

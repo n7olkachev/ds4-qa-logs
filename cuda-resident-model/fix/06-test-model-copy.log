@@ -1,0 +1,43 @@
+# ==== ds4 QA evidence ====
+# date_utc: 2026-11-09T21:34:04Z
+# host: 81b8593895f7  runpod_pod: ?  dc: ?  gpu_count: ?
+# gpu: NVIDIA H200, 595.91.07, 143771 MiB, 9.0
+# nvcc: Build cuda_12.8.r12.8/compiler.35583870_0
+# os: Linux 6.8.0-147-generic x86_64  Ubuntu 24.04.3 LTS
+# tree: /data/fix
+# commit: 136e7667a6c91c44038d86b19e2bdcf695f07a38  (Copy model tensors into device memory on a discrete CUDA GPU when they fit)
+# dirty_files: 0
+# origin: https://github.com/n7olkachev/ds4.git
+# description: make test-cuda-model-copy, then the same binary under the four Compute Sanitizer tools (GPU idle)
+# =========================
+
+$ make test-cuda-model-copy
+/usr/local/cuda/bin/nvcc -O3 -g -lineinfo --use_fast_math  -Xcompiler -march=native -Xcompiler -pthread -std=c++17 -I. -c -o tests/test_cuda_model_copy.o tests/test_cuda_model_copy.cu
+/usr/local/cuda/bin/nvcc -O3 -g -lineinfo --use_fast_math  -Xcompiler -march=native -Xcompiler -pthread -o tests/test_cuda_model_copy tests/test_cuda_model_copy.o ds4_cuda.o ds4_image.o cuda/mmq/ds4_ggml_stubs.o cuda/mmq/ds4_mmq.o cuda/mmq/ds4_mmq_d2r.o cuda/mmq/quantize.o cuda/mmq/mmid.o cuda/mmq/mmvq.o cuda/mmq/ds4_repack.o -lm -Xcompiler -pthread -L/usr/local/cuda/targets/sbsa-linux/lib -L/usr/local/cuda/lib64 -lcudart -lcublas
+./tests/test_cuda_model_copy
+ds4: CUDA backend initialized on NVIDIA H200 (sm_90) dev=0
+ds4: CUDA (no-copy) registered 0.06 GiB model mapping for multi-tier selective cache
+ds4: CUDA model stays host-mapped: 0.05 GiB tensors + 139.22 GiB context + 2.80 GiB reserve exceed 139.22 GiB free device memory
+ds4: CUDA copying 0.05 GiB of model tensors into device memory (0.00 GiB context planned, 139.22 GiB free)
+test_cuda_model_copy: 56 MiB copied, reads identical to the mapping: PASS
+exit=0
+
+$ compute-sanitizer --tool memcheck --error-exitcode 1 ./tests/test_cuda_model_copy
+test_cuda_model_copy: 56 MiB copied, reads identical to the mapping: PASS
+========= ERROR SUMMARY: 0 errors
+exit=0
+
+$ compute-sanitizer --tool initcheck --error-exitcode 1 ./tests/test_cuda_model_copy
+test_cuda_model_copy: 56 MiB copied, reads identical to the mapping: PASS
+========= ERROR SUMMARY: 0 errors
+exit=0
+
+$ compute-sanitizer --tool racecheck --error-exitcode 1 ./tests/test_cuda_model_copy
+test_cuda_model_copy: 56 MiB copied, reads identical to the mapping: PASS
+========= RACECHECK SUMMARY: 0 hazards displayed (0 errors, 0 warnings)
+exit=0
+
+$ compute-sanitizer --tool synccheck --error-exitcode 1 ./tests/test_cuda_model_copy
+test_cuda_model_copy: 56 MiB copied, reads identical to the mapping: PASS
+========= ERROR SUMMARY: 0 errors
+exit=0

@@ -1,0 +1,45 @@
+# ==== ds4 QA evidence ====
+# date_utc: 2026-11-09T19:42:12Z
+# host: 81b8593895f7  runpod_pod: ?  dc: ?  gpu_count: ?
+# gpu: NVIDIA H200, 595.91.07, 143771 MiB, 9.0
+# nvcc: Build cuda_12.8.r12.8/compiler.35583870_0
+# os: Linux 6.8.0-147-generic x86_64  Ubuntu 24.04.3 LTS
+# tree: /data/base
+# commit: b3f50180ec2c7324892be1f50bc83555ccb8d5e7  (Read half-aligned Qwen Q2 weight rows correctly on Metal)
+# dirty_files: 0
+# origin: https://github.com/antirez/ds4.git
+# description: CLI smoke: greedy, 64 tokens, ctx 4096, extra args []
+# =========================
+
+$ ./ds4 -m /data/gguf/GLM-5.3-Flash-Q2.gguf --cuda -c 4096 --temp 0 -n 64  -p "Explain in three sentences why Redis uses a single-threaded event loop."   (stdout -> 01-cli-smoke.out)
+
+real	0m28.451s
+user	0m16.522s
+sys	0m11.892s
+exit=0
+
+--- stderr without the pre-existing graph-capture lines:
+ds4: Linux cuda backend set oom_score_adj=1000
+ds4: CUDA backend initialized on NVIDIA H200 (sm_90) dev=0
+ds4: CUDA (no-copy) registered 89.88 GiB model mapping for multi-tier selective cache
+ds4: CUDA preparing model tensor mappings
+ds4: CUDA prepared model tensor mappings 16.38 GiB
+ds4: CUDA prepared model tensor mappings 32.13 GiB
+ds4: CUDA prepared model tensor mappings 48.45 GiB
+ds4: CUDA prepared model tensor mappings 64.78 GiB
+ds4: CUDA prepared model tensor mappings 80.23 GiB
+ds4: CUDA startup model preparation covered 89.87 GiB of tensor spans in 0.059s
+ds4: cuda backend initialized for graph diagnostics
+ds4: memory: KV 0.05 GiB (raw 0.00 + compressed 0.05) + buffers 2.92 GiB + resident model 89.87 GiB = 92.84 GiB planned
+ds4: memory detail: ctx=4096 prefill_cap=2048 raw_kv_rows=0 compressed_kv_rows=4096 backend=cuda
+ds4: memory: KV 0.05 GiB (raw 0.00 + compressed 0.05) + buffers 2.92 GiB = 2.97 GiB context
+ds4: memory detail: ctx=4096 prefill_cap=2048 raw_kv_rows=0 compressed_kv_rows=4096 backend=cuda
+ds4: using GPU graph generation with graph prefill
+ds4: using GLM full-attention argmax generation path
+ds4: GLM graph using compact DSA KV only; expanded full-attention KV cache is skipped
+ds4: GLM graph allocating compact DSA cache: rows=4096 logical_ctx=4096 kv_layers=45 indexer_layers=11 f16 0.05 GiB
+ds4: GLM compact indexed prefill chunk=2048 score_rows=2048 score_scratch=8.00 MiB
+ds4: GLM prefill: 15.70 t/s, generation: 3.38 t/s
+graph-capture lines (pre-existing on main, see side note): 96
+
+--- stdout sha256: 301c74585dcafa37  bytes: 358

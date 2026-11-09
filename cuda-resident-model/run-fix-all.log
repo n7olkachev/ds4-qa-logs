@@ -1,0 +1,10 @@
+2026-11-09T21:34:04Z model-free test + sanitizers
+2026-11-09T21:34:11Z cuda-regression
+2026-11-09T21:34:12Z GLM CLI smokes
+2026-11-09T21:34:51Z GLM bench
+2026-11-09T21:35:19Z Flash gates
+2026-11-09T21:36:43Z Flash bench
+2026-11-09T21:37:04Z DSpark smoke
+2026-11-09T21:37:20Z GLM fixtures
+2026-11-09T21:43:22Z verbose span count
+2026-11-09T21:43:31Z ALL DONE

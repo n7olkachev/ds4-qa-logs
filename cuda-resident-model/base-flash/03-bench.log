@@ -1,0 +1,42 @@
+# ==== ds4 QA evidence ====
+# date_utc: 2026-11-09T21:24:39Z
+# host: 81b8593895f7  runpod_pod: ?  dc: ?  gpu_count: ?
+# gpu: NVIDIA H200, 595.91.07, 143771 MiB, 9.0
+# nvcc: Build cuda_12.8.r12.8/compiler.35583870_0
+# os: Linux 6.8.0-147-generic x86_64  Ubuntu 24.04.3 LTS
+# tree: /data/base
+# commit: b3f50180ec2c7324892be1f50bc83555ccb8d5e7  (Read half-aligned Qwen Q2 weight rows correctly on Metal)
+# dirty_files: 0
+# origin: https://github.com/antirez/ds4.git
+# description: ds4-bench linear sweep 2048..8192 step 2048, 64 greedy tokens per frontier, GPU otherwise idle, extra args []
+# =========================
+
+$ nvidia-smi --query-gpu=utilization.gpu,memory.used --format=csv,noheader
+0 %, 0 MiB
+$ ./ds4-bench -m /data/gguf/ds4flash-0731-q2.gguf --cuda --prompt-file speed-bench/promessi_sposi.txt --ctx-start 2048 --ctx-max 8192 --step-incr 2048 --gen-tokens 64  --csv /workspace/evidence/base-flash/03-bench.csv
+ds4: Linux cuda backend set oom_score_adj=1000
+ds4: CUDA backend initialized on NVIDIA H200 (sm_90) dev=0
+ds4: CUDA (no-copy) registered 80.76 GiB model mapping for multi-tier selective cache
+ds4: CUDA preparing model tensor mappings
+ds4: CUDA prepared model tensor mappings 16.37 GiB
+ds4: CUDA prepared model tensor mappings 32.07 GiB
+ds4: CUDA prepared model tensor mappings 48.43 GiB
+ds4: CUDA prepared model tensor mappings 64.13 GiB
+ds4: CUDA prepared model tensor mappings 80.24 GiB
+ds4: CUDA startup model preparation covered 80.76 GiB of tensor spans in 0.083s
+ds4: cuda backend initialized for graph diagnostics
+ds4: memory: KV 0.46 GiB (raw 0.36 + compressed 0.11) + buffers 0.07 GiB + resident model 80.76 GiB = 81.29 GiB planned
+ds4: memory detail: ctx=8257 prefill_cap=4096 raw_kv_rows=4352 compressed_kv_rows=2066 backend=cuda
+ds4-bench: context buffers 540.57 MiB (ctx=8257, backend=cuda, prefill_chunk=4096, raw_kv_rows=4352, compressed_kv_rows=2066)
+
+real	1m35.251s
+user	1m17.116s
+sys	0m18.106s
+exit=0
+
+--- csv:
+ctx_tokens,prefill_tokens,prefill_tps,gen_tokens,gen_tps,gen_first_ms,gen_steady_tokens,gen_steady_tps,kvcache_bytes
+2048,2048,394.46,64,3.90,245.235,63,3.90,52184460
+4096,2048,406.65,64,3.88,256.686,63,3.89,80373132
+6144,2048,404.34,64,3.88,257.157,63,3.89,108561804
+8192,2048,403.40,64,3.88,256.945,63,3.88,0

@@ -1,0 +1,1 @@
+Redis uses a single-threaded event loop primarily because its operations are almost always in-memory and extremely fast, so the bottleneck is typically network I/O and system calls rather than CPU computation—meaning multiple threads would add little speedup. A single-threaded design eliminates the need for locks, synchronization, and context switching,

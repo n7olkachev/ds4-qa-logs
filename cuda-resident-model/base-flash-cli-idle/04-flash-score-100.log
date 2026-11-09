@@ -1,0 +1,29 @@
+# ==== ds4 QA evidence ====
+# date_utc: 2026-11-09T21:45:41Z
+# host: 81b8593895f7  runpod_pod: ?  dc: ?  gpu_count: ?
+# gpu: NVIDIA H200, 595.91.07, 143771 MiB, 9.0
+# nvcc: Build cuda_12.8.r12.8/compiler.35583870_0
+# os: Linux 6.8.0-147-generic x86_64  Ubuntu 24.04.3 LTS
+# tree: /data/base
+# commit: b3f50180ec2c7324892be1f50bc83555ccb8d5e7  (Read half-aligned Qwen Q2 weight rows correctly on Metal)
+# dirty_files: 0
+# origin: https://github.com/antirez/ds4.git
+# description: section 3: DeepSeek V4 Flash 0731 smoke vectors, 100 cases, ctx 4096; DS4_CUDA_NO_MODEL_COPY=unset
+# =========================
+
+$ gguf-tools/quality-testing/score_official /data/gguf/ds4flash-0731-q2.gguf gguf-tools/quality-testing/data/flash/manifest.tsv /workspace/evidence/base-flash-cli-idle/flash-q2-100.tsv 4096
+ds4: Linux cuda backend set oom_score_adj=1000
+ds4: CUDA backend initialized on NVIDIA H200 (sm_90) dev=0
+ds4: CUDA (no-copy) registered 80.76 GiB model mapping for multi-tier selective cache
+ds4: CUDA preparing model tensor mappings
+ds4: CUDA prepared model tensor mappings 16.37 GiB
+ds4: CUDA prepared model tensor mappings 32.07 GiB
+ds4: CUDA prepared model tensor mappings 48.43 GiB
+ds4: CUDA prepared model tensor mappings 64.13 GiB
+ds4: CUDA prepared model tensor mappings 80.24 GiB
+ds4: CUDA startup model preparation covered 80.76 GiB of tensor spans in 0.083s
+ds4: cuda backend initialized for graph diagnostics
+ds4: memory: KV 0.39 GiB (raw 0.34 + compressed 0.05) + buffers 0.03 GiB + resident model 80.76 GiB = 81.18 GiB planned
+ds4: memory detail: ctx=4096 prefill_cap=4096 raw_kv_rows=4096 compressed_kv_rows=1026 backend=cuda
+case_000 cases=1 prompt=17 target=24 avg_nll=0.913385 lcp=0 api_target_mae=0.913385 api_top_coverage=480/480 api_top1=0.750 api_topn=0.756 api_pair=0.978
+case_001 cases=2 prompt=18 target=24 avg_nll=0.209322 lcp=0 api_target_mae=0.209322 api_top_coverage=477/480 api_top1=0.875 api_topn=0.782 api_pair=0.993

@@ -1,0 +1,9 @@
+# make cuda-regression on fix (136e766), 2026-11-09T21:34:11Z
+cc -O3 -ffast-math -g -march=native -Wall -Wextra -std=c99 -D_GNU_SOURCE -fno-finite-math-only -I. -c -o tests/cuda_long_context_smoke.o tests/cuda_long_context_smoke.c
+/usr/local/cuda/bin/nvcc -O3 -g -lineinfo --use_fast_math  -Xcompiler -march=native -Xcompiler -pthread -o tests/cuda_long_context_smoke tests/cuda_long_context_smoke.o ds4_cuda.o ds4_image.o cuda/mmq/ds4_ggml_stubs.o cuda/mmq/ds4_mmq.o cuda/mmq/ds4_mmq_d2r.o cuda/mmq/quantize.o cuda/mmq/mmid.o cuda/mmq/mmvq.o cuda/mmq/ds4_repack.o -lm -Xcompiler -pthread -L/usr/local/cuda/targets/sbsa-linux/lib -L/usr/local/cuda/lib64 -lcudart -lcublas
+nvcc warning : Support for offline compilation for architectures prior to '<compute/sm/lto>_75' will be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
+./tests/cuda_long_context_smoke
+ds4: CUDA backend initialized on NVIDIA H200 (sm_90) dev=0
+cuda-regression: top-k n_comp=32768 n_tokens=32 elapsed=0.000s
+cuda long-context regression: OK
+exit=0

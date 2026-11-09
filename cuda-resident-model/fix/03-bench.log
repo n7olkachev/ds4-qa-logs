@@ -1,0 +1,47 @@
+# ==== ds4 QA evidence ====
+# date_utc: 2026-11-09T21:34:51Z
+# host: 81b8593895f7  runpod_pod: ?  dc: ?  gpu_count: ?
+# gpu: NVIDIA H200, 595.91.07, 143771 MiB, 9.0
+# nvcc: Build cuda_12.8.r12.8/compiler.35583870_0
+# os: Linux 6.8.0-147-generic x86_64  Ubuntu 24.04.3 LTS
+# tree: /data/fix
+# commit: 136e7667a6c91c44038d86b19e2bdcf695f07a38  (Copy model tensors into device memory on a discrete CUDA GPU when they fit)
+# dirty_files: 0
+# origin: https://github.com/n7olkachev/ds4.git
+# description: ds4-bench linear sweep 2048..8192 step 2048, 64 greedy tokens per frontier, GPU otherwise idle, extra args []
+# =========================
+
+$ nvidia-smi --query-gpu=utilization.gpu,memory.used --format=csv,noheader
+2 %, 0 MiB
+$ ./ds4-bench -m /data/gguf/GLM-5.3-Flash-Q2.gguf --cuda --prompt-file speed-bench/promessi_sposi.txt --ctx-start 2048 --ctx-max 8192 --step-incr 2048 --gen-tokens 64  --csv /workspace/evidence/fix/03-bench.csv
+ds4: Linux cuda backend set oom_score_adj=1000
+ds4: CUDA backend initialized on NVIDIA H200 (sm_90) dev=0
+ds4: CUDA (no-copy) registered 89.88 GiB model mapping for multi-tier selective cache
+ds4: CUDA copying 89.87 GiB of model tensors into device memory (3.02 GiB context planned, 139.05 GiB free)
+ds4: CUDA preparing model tensor mappings
+ds4: CUDA prepared model tensor mappings 16.38 GiB
+ds4: CUDA prepared model tensor mappings 32.13 GiB
+ds4: CUDA prepared model tensor mappings 48.45 GiB
+ds4: CUDA prepared model tensor mappings 64.78 GiB
+ds4: CUDA prepared model tensor mappings 80.23 GiB
+ds4: CUDA startup model preparation covered 89.87 GiB of tensor spans in 1.831s
+ds4: cuda backend initialized for graph diagnostics
+ds4: memory: KV 0.09 GiB (raw 0.00 + compressed 0.09) + buffers 2.93 GiB + resident model 89.87 GiB = 92.89 GiB planned
+ds4: memory detail: ctx=8257 prefill_cap=2048 raw_kv_rows=0 compressed_kv_rows=8257 backend=cuda
+ds4-bench: context buffers 3094.79 MiB (ctx=8257, backend=cuda, prefill_chunk=2048, raw_kv_rows=0, compressed_kv_rows=8257)
+ds4: GLM session ctx=8257 (model max=1048576); prefill/work cap=4096; dense attention limit=2051
+ds4: GLM graph using compact DSA KV only; expanded full-attention KV cache is skipped
+ds4: GLM graph allocating compact DSA cache: rows=8257 logical_ctx=8257 kv_layers=45 indexer_layers=11 f16 0.09 GiB
+ds4: GLM compact indexed prefill chunk=2048 score_rows=2048 score_scratch=16.13 MiB
+
+real	0m27.038s
+user	0m17.972s
+sys	0m9.038s
+exit=0
+
+--- csv:
+ctx_tokens,prefill_tokens,prefill_tps,gen_tokens,gen_tps,gen_first_ms,gen_steady_tokens,gen_steady_tps,kvcache_bytes
+2048,2048,962.68,64,36.17,26.135,63,36.27,202327452
+4096,2048,823.97,64,35.85,27.780,63,35.97,251356572
+6144,2048,824.43,64,35.76,27.924,63,35.88,300385692
+8192,2048,818.63,64,35.40,27.971,63,35.52,0

@@ -1,0 +1,2 @@
+/workspace/qa/02-fixtures.sh: line 14: syntax error near unexpected token `)'
+/workspace/qa/02-fixtures.sh: line 14: `v "swiglu one failed\|quantize launch failed" ) 2>&1; echo "exit=${PIPESTATUS[0]}"'

@@ -1,0 +1,4 @@
+1.  **Analyze the User's Request**: The user asks to explain *why* Redis uses a single-threaded event loop, and specifically requires the explanation to be in *three sentences*.
+
+2.  **Identify the Core Reasons**:
+    *   Simplicity and lack of race conditions (no
