@@ -1,0 +1,34 @@
+--- fixD test ---
+large decode window count=511 f16=0: PASS
+large decode window count=512 f16=0: PASS
+large decode window count=2051 f16=0: PASS
+large decode window count=12032 f16=0: PASS
+large decode window count=12033 f16=0: PASS
+large decode window count=16384 f16=0: PASS
+large decode window count=65536 f16=0: PASS
+large decode window count=511 f16=1: PASS
+large decode window count=512 f16=1: PASS
+large decode window count=2051 f16=1: PASS
+large decode window count=12032 f16=1: PASS
+large decode window count=12033 f16=1: PASS
+large decode window count=16384 f16=1: PASS
+large decode window count=65536 f16=1: PASS
+normalization and attention reductions: PASS
+exit=0
+GLM-5.3 KDA GPU tests: PASS
+exit=0
+--- bitwise fixD vs base ---
+BITWISE IDENTICAL where base launches
+--- bitwise fixD vs fix(A) on large windows ---
+IDENTICAL to variant A on >12,032 rows
+--- interleaved f16 timing base vs fixD (3 rounds, RUNS=101) ---
+round 1 base: 2051:505.9 4096:961.0 12032:2794.3 
+round 1 fixD: 2051:507.6 4096:974.2 12032:2814.1 12033:2955.8 16384:4000.2 
+round 2 base: 2051:507.2 4096:973.5 12032:2813.4 
+round 2 fixD: 2051:508.3 4096:977.6 12032:2813.4 12033:2952.7 16384:4000.7 
+round 3 base: 2051:509.4 4096:966.3 12032:2810.4 
+round 3 fixD: 2051:506.6 4096:962.0 12032:2796.1 12033:2933.1 16384:3969.5 
+
+dl: 86 GiB
+22:14:22 part 7 ok (1 tries)
+22:14:43 part 8 ok (1 tries)

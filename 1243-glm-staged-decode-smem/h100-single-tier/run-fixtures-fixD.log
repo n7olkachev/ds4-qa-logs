@@ -1,0 +1,10 @@
+2026-11-09T03:06:22Z fixtures fixD (single-tier, host-mapped weights)
+done: /workspace/evidence/fixD/03-score-100.log /workspace/evidence/fixD/04-score-long.log
+summary cases=100 tokens=11559 avg_nll=0.460780550 first_match=88 avg_lcp=7.000
+api_summary ref_tokens=0 target_tokens=0 target_mae=0.000000000 target_mean_delta=0.000000000 top_items=0 top_mapped=0 top_coverage=0.000000000 top1_match=0/0 top1_rate=0.000000000 topn_hit=0/0 topn_recall=0.000000000 top_logprob_count=0 top_mae=0.000000000 top_mean_delta=0.000000000 pair_agree=0/0 pair_rate=0.000000000
+exit=0
+summary cases=8 tokens=740 avg_nll=0.677514420 first_match=6 avg_lcp=2.500
+api_summary ref_tokens=0 target_tokens=0 target_mae=0.000000000 target_mean_delta=0.000000000 top_items=0 top_mapped=0 top_coverage=0.000000000 top1_match=0/0 top1_rate=0.000000000 topn_hit=0/0 topn_recall=0.000000000 top_logprob_count=0 top_mae=0.000000000 top_mean_delta=0.000000000 pair_agree=0/0 pair_rate=0.000000000
+exit=0
+2026-11-09T06:08:35Z FIXTURES fixD DONE
+2026-11-09T06:08:35Z ALL H100 DONE

@@ -1,0 +1,34 @@
+CFLAGS: -O3 -g -march=native -Wall -Wextra -std=c99 -D_GNU_SOURCE -fno-finite-math-only
+=== OLD kernel (b3f5018): hashes + median timing, A40 ===
+ds4: CUDA glm staged decode weights launch failed: invalid argument
+ds4: CUDA glm staged decode weights launch failed: invalid argument
+ds4: CUDA glm staged decode weights launch failed: invalid argument
+ds4: CUDA glm staged decode weights launch failed: invalid argument
+ds4: CUDA glm staged decode weights launch failed: invalid argument
+ds4: CUDA glm staged decode weights launch failed: invalid argument
+ds4: CUDA glm staged decode weights launch failed: invalid argument
+ds4: CUDA glm staged decode weights launch failed: invalid argument
+count=   511 f16=0: hash=7810e5034baf61bb out0=-0x1.41f246p-9 median=148.7 us
+count=   512 f16=0: hash=d76506b6029332a3 out0=-0x1.5bb6ccp-9 median=145.7 us
+count=   600 f16=0: hash=5210bc65f074c3d3 out0=-0x1.1b779ep-9 median=168.5 us
+count=  2051 f16=0: hash=9998bcc4e1700ef3 out0=-0x1.144916p-11 median=543.5 us
+count=  4096 f16=0: hash=6083fd559a130683 out0=-0x1.7c0c48p-15 median=1566.6 us
+count=  8192 f16=0: hash=60d6147b54e78f5b out0=-0x1.6fee4p-17 median=3135.0 us
+count= 12000 f16=0: hash=80a43c2f66ba396b out0=-0x1.319f2ep-13 median=4590.7 us
+count= 12032 f16=0: hash=53e67d2909780803 out0=-0x1.5ed61p-13 median=4602.9 us
+count= 12033 f16=0: FAIL (launch)
+count= 16384 f16=0: FAIL (launch)
+count= 32768 f16=0: FAIL (launch)
+count= 65536 f16=0: FAIL (launch)
+count=   511 f16=1: hash=7810e5034baf61bb out0=-0x1.41f246p-9 median=137.3 us
+count=   512 f16=1: hash=d76506b6029332a3 out0=-0x1.5bb6ccp-9 median=140.1 us
+count=   600 f16=1: hash=5210bc65f074c3d3 out0=-0x1.1b779ep-9 median=166.2 us
+count=  2051 f16=1: hash=9998bcc4e1700ef3 out0=-0x1.144916p-11 median=517.7 us
+count=  4096 f16=1: hash=6083fd559a130683 out0=-0x1.7c0c48p-15 median=1086.4 us
+count=  8192 f16=1: hash=60d6147b54e78f5b out0=-0x1.6fee4p-17 median=2617.1 us
+count= 12000 f16=1: hash=80a43c2f66ba396b out0=-0x1.319f2ep-13 median=3854.7 us
+count= 12032 f16=1: hash=53e67d2909780803 out0=-0x1.5ed61p-13 median=3864.8 us
+count= 12033 f16=1: FAIL (launch)
+count= 16384 f16=1: FAIL (launch)
+count= 32768 f16=1: FAIL (launch)
+count= 65536 f16=1: FAIL (launch)

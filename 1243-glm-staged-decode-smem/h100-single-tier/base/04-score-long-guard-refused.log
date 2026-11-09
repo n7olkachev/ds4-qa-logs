@@ -1,0 +1,24 @@
+# ==== ds4 QA evidence ====
+# date_utc: 2026-11-08T23:24:37Z
+# host: ba2394cc7034  runpod_pod: ?  dc: ?  gpu_count: ?
+# gpu: NVIDIA H100 80GB HBM3, 595.91.07, 81559 MiB, 9.0
+# nvcc: Build cuda_12.8.r12.8/compiler.35583870_0
+# os: Linux 6.8.0-147-generic x86_64  Ubuntu 24.04.3 LTS
+# tree: /data/base
+# commit: b3f50180ec2c7324892be1f50bc83555ccb8d5e7  (Read half-aligned Qwen Q2 weight rows correctly on Metal)
+# dirty_files: 0
+# origin: https://github.com/antirez/ds4.git
+# description: DS4_CUDA_COPY_MODEL=unset GPUFLAGS=[ ] QA_BEFORE_RELEASES.md section 3: eight long Z.AI FP8 cases, rendered prompts, ctx 8192 (every prompt crosses the 2,051-token boundary)
+# =========================
+
+$ python3 gguf-tools/quality-testing/render_glm_references.py gguf-tools/quality-testing/data/glm53-flash-openrouter-zai-fp8-long
+
+$ gguf-tools/quality-testing/score_official /data/base/gguf/GLM-5.3-Flash-Q2.gguf gguf-tools/quality-testing/data/glm53-flash-openrouter-zai-fp8-long/manifest-rendered.tsv /workspace/evidence/base/glm53-q2-long.tsv 8192 --rendered-prompt  
+ds4: Linux cuda backend set oom_score_adj=1000
+ds4: GLM memory guard refused ctx=8192 compact_cap=8192 before GLM graph allocation
+ds4:   model map: 89.88 GiB
+ds4:   graph cache/scratch: 3.02 GiB (full KV 0.00 GiB, compact DSA 0.09 GiB, scratch 2.93 GiB)
+ds4:   required model+graph: 92.90 GiB; guard budget: 47.18 GiB (base 79.18 GiB, fraction 0.99, reserve 32.00 GiB, transient 0.00 GiB)
+ds4:   set DS4_GLM_MEMORY_GUARD=0 to bypass, use a smaller --ctx, tensor parallelism, or SSD streaming
+failed to open model
+exit=1

@@ -1,0 +1,23 @@
+2026-11-08T22:25:44Z mtp scenario base mtp (single-tier H200)
+client done
+# ==== summary (base, mtp) ====
+# 'staged decode weights launch failed' lines: 96
+# 'glm mtp step failed' lines: 96
+# mtp cycles ACCEPT: 4  reject: 2
+# sha256 of greedy texts: 4058fc2d282eaefd
+2026-11-08T22:38:03Z mtp scenario fixD mtp (single-tier H200)
+client done
+/workspace/qa/03-mtp-scenario.sh: line 17: e/qa/client.py: No such file or directory
+# ==== summary (fixD, mtp) ====
+# 'staged decode weights launch failed' lines: 0
+# 'glm mtp step failed' lines: 0
+# mtp cycles ACCEPT: 36  reject: 31
+# sha256 of greedy texts: 4058fc2d282eaefd
+2026-11-08T22:50:28Z mtp scenario fixD nomtp (single-tier H200)
+client done
+# ==== summary (fixD, nomtp) ====
+# 'staged decode weights launch failed' lines: 0
+# 'glm mtp step failed' lines: 0
+# mtp cycles ACCEPT: 0  reject: 0
+# sha256 of greedy texts: 4058fc2d282eaefd
+2026-11-08T23:02:46Z MTP DONE

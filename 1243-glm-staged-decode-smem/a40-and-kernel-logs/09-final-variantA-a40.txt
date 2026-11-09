@@ -1,0 +1,31 @@
+ds4_cuda.o /workspace/variantA/ds4_cuda.o differ: byte 958658, line 993
+object differs (rebuild nondeterminism?)
+=== final: full test_glm_attention (variant A) ===
+attention selected=1 tokens=67 heads=17 dim=512 pos=0 cap=32 rope=0 f16=0: PASS, 0.024 ms
+attention selected=1 tokens=67 heads=17 dim=512 pos=0 cap=32 rope=0 f16=1: PASS, 0.020 ms
+attention selected=1 tokens=64 heads=17 dim=512 pos=0 cap=2052 rope=0 f16=1: PASS, 1.278 ms
+attention selected=0 tokens=257 heads=17 dim=512 pos=127 cap=384 rope=0 f16=1: PASS, 0.562 ms
+attention selected=0 tokens=32 heads=8 dim=512 pos=0 cap=32 rope=64 f16=0: PASS, 0.038 ms
+attention selected=0 tokens=31 heads=17 dim=512 pos=97 cap=128 rope=64 f16=0: PASS, 0.145 ms
+attention selected=0 tokens=32 heads=8 dim=512 pos=0 cap=32 rope=64 f16=1: PASS, 0.035 ms
+attention selected=0 tokens=31 heads=17 dim=512 pos=97 cap=128 rope=64 f16=1: PASS, 0.123 ms
+large decode window count=511 f16=0: PASS
+large decode window count=512 f16=0: PASS
+large decode window count=2051 f16=0: PASS
+large decode window count=12032 f16=0: PASS
+large decode window count=12033 f16=0: PASS
+large decode window count=16384 f16=0: PASS
+large decode window count=65536 f16=0: PASS
+large decode window count=511 f16=1: PASS
+large decode window count=512 f16=1: PASS
+large decode window count=2051 f16=1: PASS
+large decode window count=12032 f16=1: PASS
+large decode window count=12033 f16=1: PASS
+large decode window count=16384 f16=1: PASS
+large decode window count=65536 f16=1: PASS
+normalization and attention reductions: PASS
+exit=0
+=== final: hashes 64 heads, old vs A ===
+BITWISE IDENTICAL on every count the old kernel could launch (64 heads, f16+f32)
+old FAIL count: 0
+new FAIL count: 0

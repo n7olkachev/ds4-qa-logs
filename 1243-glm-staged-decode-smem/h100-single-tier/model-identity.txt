@@ -1,0 +1,5 @@
+file: /data/base/gguf/GLM-5.3-Flash-Q2.gguf
+bytes: 96505816384
+hf_api_xet_hash: 3717238bd6bb945cc065012f119519b8ce3ad04645dc2a1011bac077b415ffda
+hf_resolve_x_linked_etag: e81fd6241c6e55a64e1e14e47a3eab61a173fa8d7e4b5c1d1848827119705b32
+sha256: e81fd6241c6e55a64e1e14e47a3eab61a173fa8d7e4b5c1d1848827119705b32

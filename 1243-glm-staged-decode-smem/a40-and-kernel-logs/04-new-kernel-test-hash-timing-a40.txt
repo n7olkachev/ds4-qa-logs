@@ -1,0 +1,43 @@
+rebuild: 69 s
+=== NEW kernel: full test_glm_attention ===
+large decode window count=511 f16=0: PASS
+large decode window count=512 f16=0: PASS
+large decode window count=2051 f16=0: PASS
+large decode window count=12032 f16=0: PASS
+large decode window count=12033 f16=0: PASS
+large decode window count=16384 f16=0: PASS
+large decode window count=65536 f16=0: PASS
+large decode window count=511 f16=1: PASS
+large decode window count=512 f16=1: PASS
+large decode window count=2051 f16=1: PASS
+large decode window count=12032 f16=1: PASS
+large decode window count=12033 f16=1: PASS
+large decode window count=16384 f16=1: PASS
+large decode window count=65536 f16=1: PASS
+normalization and attention reductions: PASS
+exit=0
+=== NEW kernel: hashes + median timing, A40 ===
+count=   511 f16=0: hash=7810e5034baf61bb out0=-0x1.41f246p-9 median=149.3 us
+count=   512 f16=0: hash=d76506b6029332a3 out0=-0x1.5bb6ccp-9 median=151.3 us
+count=   600 f16=0: hash=5210bc65f074c3d3 out0=-0x1.1b779ep-9 median=185.5 us
+count=  2051 f16=0: hash=9998bcc4e1700ef3 out0=-0x1.144916p-11 median=598.3 us
+count=  4096 f16=0: hash=6083fd559a130683 out0=-0x1.7c0c48p-15 median=1439.3 us
+count=  8192 f16=0: hash=60d6147b54e78f5b out0=-0x1.6fee4p-17 median=2878.5 us
+count= 12000 f16=0: hash=80a43c2f66ba396b out0=-0x1.319f2ep-13 median=4214.7 us
+count= 12032 f16=0: hash=53e67d2909780803 out0=-0x1.5ed61p-13 median=4222.8 us
+count= 12033 f16=0: hash=2e53d9beda71bed3 out0=-0x1.65c94p-13 median=4245.1 us
+count= 16384 f16=0: hash=f40e11fe27310f3b out0=-0x1.7b2b84p-14 median=5740.6 us
+count= 32768 f16=0: hash=79c06bd07e4be03b out0=-0x1.10cbcp-14 median=11455.0 us
+count= 65536 f16=0: hash=6f9e18e75bfe8233 out0=-0x1.a8a3cp-16 median=22896.0 us
+count=   511 f16=1: hash=7810e5034baf61bb out0=-0x1.41f246p-9 median=137.2 us
+count=   512 f16=1: hash=d76506b6029332a3 out0=-0x1.5bb6ccp-9 median=142.1 us
+count=   600 f16=1: hash=5210bc65f074c3d3 out0=-0x1.1b779ep-9 median=167.5 us
+count=  2051 f16=1: hash=9998bcc4e1700ef3 out0=-0x1.144916p-11 median=522.7 us
+count=  4096 f16=1: hash=6083fd559a130683 out0=-0x1.7c0c48p-15 median=1062.2 us
+count=  8192 f16=1: hash=60d6147b54e78f5b out0=-0x1.6fee4p-17 median=2525.1 us
+count= 12000 f16=1: hash=80a43c2f66ba396b out0=-0x1.319f2ep-13 median=3723.0 us
+count= 12032 f16=1: hash=53e67d2909780803 out0=-0x1.5ed61p-13 median=3731.4 us
+count= 12033 f16=1: hash=2e53d9beda71bed3 out0=-0x1.65c94p-13 median=3747.3 us
+count= 16384 f16=1: hash=f40e11fe27310f3b out0=-0x1.7b2b84p-14 median=5069.5 us
+count= 32768 f16=1: hash=79c06bd07e4be03b out0=-0x1.10cbcp-14 median=10117.5 us
+count= 65536 f16=1: hash=6f9e18e75bfe8233 out0=-0x1.a8a3cp-16 median=20207.6 us

@@ -1,0 +1,90 @@
+# ==== comparison base (b3f5018) vs fixD (5ebf36c) — generated 2026-11-09T06:45:31Z ====
+## reference (QA_BEFORE_RELEASES.md, Metal): Q2 avg NLL 0.458030488, first-token 89/100, greedy prefix 7.37
+
+## 100-case fixture summary lines
+--- base
+summary cases=100 tokens=11559 avg_nll=0.460780550 first_match=88 avg_lcp=7.000
+api_summary ref_tokens=0 target_tokens=0 target_mae=0.000000000 target_mean_delta=0.000000000 top_items=0 top_mapped=0 top_coverage=0.000000000 top1_match=0/0 top1_rate=0.000000000 topn_hit=0/0 topn_recall=0.000000000 top_logprob_count=0 top_mae=0.000000000 top_mean_delta=0.000000000 pair_agree=0/0 pair_rate=0.000000000
+exit=0
+--- fixD
+summary cases=100 tokens=11559 avg_nll=0.460780550 first_match=88 avg_lcp=7.000
+api_summary ref_tokens=0 target_tokens=0 target_mae=0.000000000 target_mean_delta=0.000000000 top_items=0 top_mapped=0 top_coverage=0.000000000 top1_match=0/0 top1_rate=0.000000000 topn_hit=0/0 topn_recall=0.000000000 top_logprob_count=0 top_mae=0.000000000 top_mean_delta=0.000000000 pair_agree=0/0 pair_rate=0.000000000
+exit=0
+
+## 100-case: compare_scores.py base → fixD
+new_api_top1_rate	0.000000000
+new_api_topn_recall	0.000000000
+new_api_top_mae	0.000000000
+new_api_top_mean_delta	0.000000000
+new_api_pair_rate	0.000000000
+
+new best cases:
+case_000	delta_nll=0.000000	tokens=127	old=0.412381	new=0.412381
+case_001	delta_nll=0.000000	tokens=127	old=0.662836	new=0.662836
+case_002	delta_nll=0.000000	tokens=127	old=0.608430	new=0.608430
+case_003	delta_nll=0.000000	tokens=103	old=0.257184	new=0.257184
+case_004	delta_nll=0.000000	tokens=127	old=0.558097	new=0.558097
+case_005	delta_nll=0.000000	tokens=127	old=0.245011	new=0.245011
+case_006	delta_nll=0.000000	tokens=127	old=0.331821	new=0.331821
+case_007	delta_nll=0.000000	tokens=127	old=0.541790	new=0.541790
+
+old best cases:
+case_099	delta_nll=0.000000	tokens=38	old=0.234528	new=0.234528
+case_098	delta_nll=0.000000	tokens=32	old=0.309948	new=0.309948
+case_097	delta_nll=0.000000	tokens=12	old=0.054999	new=0.054999
+case_096	delta_nll=0.000000	tokens=17	old=0.151121	new=0.151121
+case_095	delta_nll=0.000000	tokens=11	old=0.111661	new=0.111661
+case_094	delta_nll=0.000000	tokens=2	old=0.558842	new=0.558842
+case_093	delta_nll=0.000000	tokens=127	old=0.615580	new=0.615580
+case_092	delta_nll=0.000000	tokens=127	old=0.207717	new=0.207717
+
+## 100-case TSV byte comparison
+IDENTICAL
+
+## long cases summary lines
+--- base
+summary cases=8 tokens=740 avg_nll=0.677514420 first_match=6 avg_lcp=2.500
+api_summary ref_tokens=0 target_tokens=0 target_mae=0.000000000 target_mean_delta=0.000000000 top_items=0 top_mapped=0 top_coverage=0.000000000 top1_match=0/0 top1_rate=0.000000000 topn_hit=0/0 topn_recall=0.000000000 top_logprob_count=0 top_mae=0.000000000 top_mean_delta=0.000000000 pair_agree=0/0 pair_rate=0.000000000
+exit=0
+--- fixD
+summary cases=8 tokens=740 avg_nll=0.677514420 first_match=6 avg_lcp=2.500
+api_summary ref_tokens=0 target_tokens=0 target_mae=0.000000000 target_mean_delta=0.000000000 top_items=0 top_mapped=0 top_coverage=0.000000000 top1_match=0/0 top1_rate=0.000000000 topn_hit=0/0 topn_recall=0.000000000 top_logprob_count=0 top_mae=0.000000000 top_mean_delta=0.000000000 pair_agree=0/0 pair_rate=0.000000000
+exit=0
+
+## long: compare_scores.py base → fixD
+case_003	delta_nll=0.000000	tokens=65	old=0.602329	new=0.602329
+case_004	delta_nll=0.000000	tokens=127	old=0.864574	new=0.864574
+case_005	delta_nll=0.000000	tokens=114	old=0.642995	new=0.642995
+case_006	delta_nll=0.000000	tokens=39	old=0.554904	new=0.554904
+case_007	delta_nll=0.000000	tokens=32	old=0.695878	new=0.695878
+
+old best cases:
+case_007	delta_nll=0.000000	tokens=32	old=0.695878	new=0.695878
+case_006	delta_nll=0.000000	tokens=39	old=0.554904	new=0.554904
+case_005	delta_nll=0.000000	tokens=114	old=0.642995	new=0.642995
+case_004	delta_nll=0.000000	tokens=127	old=0.864574	new=0.864574
+case_003	delta_nll=0.000000	tokens=65	old=0.602329	new=0.602329
+case_002	delta_nll=0.000000	tokens=127	old=0.631449	new=0.631449
+case_001	delta_nll=0.000000	tokens=109	old=0.440920	new=0.440920
+case_000	delta_nll=0.000000	tokens=127	old=0.842074	new=0.842074
+
+## MTP scenario (single-tier H200): failures and cycles
+base/05-server-mtp: staged-launch-failed=96 step-failed=96 ACCEPT=5 reject=1
+fixD/05-server-mtp: staged-launch-failed=0 step-failed=0 ACCEPT=38 reject=29
+base/05-server-nomtp: staged-launch-failed=0 step-failed=0 ACCEPT=0 reject=0
+
+## generated text per request from --trace (thinking included, trace metadata stripped)
+540b2be94c967f85  240 bytes  base/05-trace-mtp
+540b2be94c967f85  240 bytes  fixD/05-trace-mtp
+f18db4bf77d200ea  238 bytes  base/05-trace-nomtp
+base/05-trace-mtp vs base/05-trace-nomtp: DIFFER (base/05-trace-mtp.text.txt base/05-trace-nomtp.text.txt differ: char 62, line 2)
+
+## model-free: hashes bitwise where base launches (H200)
+BITWISE IDENTICAL
+
+## model identity
+file: /data/base/gguf/GLM-5.3-Flash-Q2.gguf
+bytes: 96505816384
+hf_api_xet_hash: 3717238bd6bb945cc065012f119519b8ce3ad04645dc2a1011bac077b415ffda
+hf_resolve_x_linked_etag: e81fd6241c6e55a64e1e14e47a3eab61a173fa8d7e4b5c1d1848827119705b32
+sha256: e81fd6241c6e55a64e1e14e47a3eab61a173fa8d7e4b5c1d1848827119705b32

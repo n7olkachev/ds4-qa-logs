@@ -1,0 +1,31 @@
+ds4: Metal device Apple M1, 16.00 GiB RAM
+ds4: drift-patch flags hc_stable=on norm_unify=on kv_raw_f32=off rope_exp2_log2=off math_safe=off tensor_matmul=off
+ds4: Metal model views created in 0.099 ms, residency requested in 0.063 ms, warmup 3.253 ms (mapped 0.06 MiB from offset 0.00 MiB)
+ds4: Metal mapped mmaped model as 1 overlapping shared buffers
+large decode window count=16384 f16=0 head=0: 0.26433906 != -9.0279781e-05
+Metal prefill prefix heads=8 count=17 rope=0: rollback/enabled bitwise and CPU reference PASS
+Metal prefill prefix heads=8 count=2051 rope=0: rollback/enabled bitwise and CPU reference PASS
+Metal prefill prefix heads=8 count=17 rope=64: rollback/enabled bitwise and CPU reference PASS
+Metal prefill prefix heads=8 count=2051 rope=64: rollback/enabled bitwise and CPU reference PASS
+Metal prefill prefix heads=64 count=17 rope=0: rollback/enabled bitwise and CPU reference PASS
+Metal prefill prefix heads=64 count=2051 rope=0: rollback/enabled bitwise and CPU reference PASS
+Metal prefill prefix heads=64 count=17 rope=64: rollback/enabled bitwise and CPU reference PASS
+Metal prefill prefix heads=64 count=2051 rope=64: rollback/enabled bitwise and CPU reference PASS
+Metal prefill prefix heads=17 count=17 rope=0: rollback/enabled bitwise and CPU reference PASS
+Metal prefill prefix heads=17 count=2051 rope=0: rollback/enabled bitwise and CPU reference PASS
+Metal prefill prefix heads=17 count=17 rope=64: rollback/enabled bitwise and CPU reference PASS
+Metal prefill prefix heads=17 count=2051 rope=64: rollback/enabled bitwise and CPU reference PASS
+attention selected=1 tokens=67 heads=17 dim=512 pos=0 cap=32 rope=0 f16=0: PASS, 1.229 ms
+attention selected=1 tokens=67 heads=17 dim=512 pos=0 cap=32 rope=0 f16=1: PASS, 0.410 ms
+attention selected=1 tokens=64 heads=17 dim=512 pos=0 cap=2052 rope=0 f16=1: PASS, 12.513 ms
+attention selected=0 tokens=257 heads=17 dim=512 pos=127 cap=384 rope=0 f16=1: PASS, 11.159 ms
+attention selected=0 tokens=32 heads=8 dim=512 pos=0 cap=32 rope=64 f16=0: PASS, 0.365 ms
+attention selected=0 tokens=31 heads=17 dim=512 pos=97 cap=128 rope=64 f16=0: PASS, 1.079 ms
+attention selected=0 tokens=32 heads=8 dim=512 pos=0 cap=32 rope=64 f16=1: PASS, 0.315 ms
+attention selected=0 tokens=31 heads=17 dim=512 pos=97 cap=128 rope=64 f16=1: PASS, 1.044 ms
+large decode window count=511 f16=0: PASS
+large decode window count=512 f16=0: PASS
+large decode window count=2051 f16=0: PASS
+large decode window count=12032 f16=0: PASS
+large decode window count=12033 f16=0: PASS
+exit=1

@@ -1,0 +1,50 @@
+# ==== ds4 QA evidence ====
+# date_utc: 2026-11-09T02:36:48Z
+# host: ba2394cc7034  runpod_pod: ?  dc: ?  gpu_count: ?
+# gpu: NVIDIA H100 80GB HBM3, 595.91.07, 81559 MiB, 9.0
+# nvcc: Build cuda_12.8.r12.8/compiler.35583870_0
+# os: Linux 6.8.0-147-generic x86_64  Ubuntu 24.04.3 LTS
+# tree: /data/fixD
+# commit: 5ebf36c37cb58dc86dd43fe2047099d7b39ab5c0  (Stage GLM decode attention scores in global memory past 12,032 rows)
+# dirty_files: 0
+# origin: https://github.com/n7olkachev/ds4.git
+# description: model-free: make test-glm-attention (CUDA), test_glm53_kda, glm_window_hash (64 heads)
+# =========================
+
+$ make CUDA_ARCH=native tests/test_glm_attention tests/test_glm53_kda
+make: 'tests/test_glm_attention' is up to date.
+make: 'tests/test_glm53_kda' is up to date.
+
+$ ./tests/test_glm_attention
+ds4: CUDA backend initialized on NVIDIA H100 80GB HBM3 (sm_90) dev=0
+ds4: CUDA registered 0.00 GiB model mapping for device access
+attention selected=1 tokens=67 heads=17 dim=512 pos=0 cap=32 rope=0 f16=0: PASS, 1.703 ms
+attention selected=1 tokens=67 heads=17 dim=512 pos=0 cap=32 rope=0 f16=1: PASS, 0.717 ms
+attention selected=1 tokens=64 heads=17 dim=512 pos=0 cap=2052 rope=0 f16=1: PASS, 2.050 ms
+attention selected=0 tokens=257 heads=17 dim=512 pos=127 cap=384 rope=0 f16=1: PASS, 1.806 ms
+attention selected=0 tokens=32 heads=8 dim=512 pos=0 cap=32 rope=64 f16=0: PASS, 2.277 ms
+attention selected=0 tokens=31 heads=17 dim=512 pos=97 cap=128 rope=64 f16=0: PASS, 2.217 ms
+attention selected=0 tokens=32 heads=8 dim=512 pos=0 cap=32 rope=64 f16=1: PASS, 2.281 ms
+attention selected=0 tokens=31 heads=17 dim=512 pos=97 cap=128 rope=64 f16=1: PASS, 2.208 ms
+large decode window count=511 f16=0: PASS
+large decode window count=512 f16=0: PASS
+large decode window count=2051 f16=0: PASS
+large decode window count=12032 f16=0: PASS
+large decode window count=12033 f16=0: PASS
+large decode window count=16384 f16=0: PASS
+large decode window count=65536 f16=0: PASS
+large decode window count=511 f16=1: PASS
+large decode window count=512 f16=1: PASS
+large decode window count=2051 f16=1: PASS
+large decode window count=12032 f16=1: PASS
+large decode window count=12033 f16=1: PASS
+large decode window count=16384 f16=1: PASS
+large decode window count=65536 f16=1: PASS
+normalization and attention reductions: PASS
+exit=0
+
+$ ./tests/test_glm53_kda
+ds4: CUDA backend initialized on NVIDIA H100 80GB HBM3 (sm_90) dev=0
+ds4: CUDA registered 0.00 GiB model mapping for device access
+GLM-5.3 KDA GPU tests: PASS
+exit=0

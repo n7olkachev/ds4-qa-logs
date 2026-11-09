@@ -1,0 +1,9 @@
+2026-11-08T22:16:32Z model complete: 96505816384 bytes
+2026-11-08T22:17:52Z identity: file: /data/base/gguf/GLM-5.3-Flash-Q2.gguf bytes: 96505816384 hf_api_xet_hash: 3717238bd6bb945cc065012f119519b8ce3ad04645dc2a1011bac077b415ffda hf_resolve_x_linked_etag: e81fd6241c6e55a64e1e14e47a3eab61a173fa8d7e4b5c1d1848827119705b32 sha256: e81fd6241c6e55a64e1e14e47a3eab61a173fa8d7e4b5c1d1848827119705b32 
+2026-11-08T22:17:52Z fixtures base
+/workspace/qa/02-fixtures.sh: line 14: syntax error near unexpected token `;'
+/workspace/qa/02-fixtures.sh: line 14: `; echo "exit=${PIPESTATUS[0]}"'
+2026-11-08T22:21:26Z model complete: 96505816384 bytes
+2026-11-08T22:21:27Z identity: file: /data/base/gguf/GLM-5.3-Flash-Q2.gguf bytes: 96505816384 hf_api_xet_hash: 3717238bd6bb945cc065012f119519b8ce3ad04645dc2a1011bac077b415ffda hf_resolve_x_linked_etag: e81fd6241c6e55a64e1e14e47a3eab61a173fa8d7e4b5c1d1848827119705b32 sha256: e81fd6241c6e55a64e1e14e47a3eab61a173fa8d7e4b5c1d1848827119705b32 
+2026-11-08T22:21:27Z fixtures base
+done: /workspace/evidence/base/03-score-100.log /workspace/evidence/base/04-score-long.log

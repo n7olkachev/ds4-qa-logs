@@ -1,0 +1,36 @@
+# ==== ds4 QA evidence ====
+# date_utc: 2026-11-08T21:44:05Z
+# host: 7fb4680f6a16  runpod_pod: ?  dc: ?  gpu_count: ?
+# gpu: NVIDIA H200, 595.91.07, 143771 MiB, 9.0
+# nvcc: Build cuda_12.8.r12.8/compiler.35583870_0
+# os: Linux 6.8.0-147-generic x86_64  Ubuntu 24.04.3 LTS
+# tree: /workspace/base
+# commit: b3f50180ec2c7324892be1f50bc83555ccb8d5e7  (Read half-aligned Qwen Q2 weight rows correctly on Metal)
+# dirty_files: 0
+# origin: https://github.com/antirez/ds4.git
+# description: model-free: make test-glm-attention (CUDA), test_glm53_kda, glm_window_hash (64 heads)
+# =========================
+
+$ make CUDA_ARCH=native tests/test_glm_attention tests/test_glm53_kda
+make: 'tests/test_glm_attention' is up to date.
+make: 'tests/test_glm53_kda' is up to date.
+
+$ ./tests/test_glm_attention
+ds4: CUDA backend initialized on NVIDIA H200 (sm_90) dev=0
+ds4: CUDA registered 0.00 GiB model mapping for device access
+attention selected=1 tokens=67 heads=17 dim=512 pos=0 cap=32 rope=0 f16=0: PASS, 0.019 ms
+attention selected=1 tokens=67 heads=17 dim=512 pos=0 cap=32 rope=0 f16=1: PASS, 0.016 ms
+attention selected=1 tokens=64 heads=17 dim=512 pos=0 cap=2052 rope=0 f16=1: PASS, 1.119 ms
+attention selected=0 tokens=257 heads=17 dim=512 pos=127 cap=384 rope=0 f16=1: PASS, 0.337 ms
+attention selected=0 tokens=32 heads=8 dim=512 pos=0 cap=32 rope=64 f16=0: PASS, 0.035 ms
+attention selected=0 tokens=31 heads=17 dim=512 pos=97 cap=128 rope=64 f16=0: PASS, 0.112 ms
+attention selected=0 tokens=32 heads=8 dim=512 pos=0 cap=32 rope=64 f16=1: PASS, 0.032 ms
+attention selected=0 tokens=31 heads=17 dim=512 pos=97 cap=128 rope=64 f16=1: PASS, 0.099 ms
+normalization and attention reductions: PASS
+exit=0
+
+$ ./tests/test_glm53_kda
+ds4: CUDA backend initialized on NVIDIA H200 (sm_90) dev=0
+ds4: CUDA registered 0.00 GiB model mapping for device access
+GLM-5.3 KDA GPU tests: PASS
+exit=0

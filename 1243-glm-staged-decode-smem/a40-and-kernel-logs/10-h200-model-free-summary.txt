@@ -1,0 +1,38 @@
+01-model-free.sh
+02-fixtures.sh
+03-mtp-scenario.sh
+06-bundle.sh
+__pycache__
+client.py
+glm_window_hash.c
+header.sh
+
+59K	/workspace/base/gguf
+    with session.new_file_download_group(
+RuntimeError: Task error: File reconstruction error: Internal Writer Error: Background writer channel closed
+
+=== run model-free on both trees now (no model needed) ===
+done: /workspace/evidence/base/01-model-free.log /workspace/evidence/base/02-hash-timing.log
+done: /workspace/evidence/fix/01-model-free.log /workspace/evidence/fix/02-hash-timing.log
+
+normalization and attention reductions: PASS
+exit=0
+GLM-5.3 KDA GPU tests: PASS
+exit=0
+...
+large decode window count=511 f16=0: PASS
+large decode window count=512 f16=0: PASS
+large decode window count=2051 f16=0: PASS
+large decode window count=12032 f16=0: PASS
+large decode window count=12033 f16=0: PASS
+large decode window count=16384 f16=0: PASS
+large decode window count=65536 f16=0: PASS
+large decode window count=511 f16=1: PASS
+large decode window count=512 f16=1: PASS
+large decode window count=2051 f16=1: PASS
+large decode window count=12032 f16=1: PASS
+large decode window count=12033 f16=1: PASS
+large decode window count=16384 f16=1: PASS
+large decode window count=65536 f16=1: PASS
+exit=0
+exit=0

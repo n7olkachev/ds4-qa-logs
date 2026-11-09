@@ -1,0 +1,7 @@
+client done
+# ==== summary (base, nomtp) ====
+# 'staged decode weights launch failed' lines: 0
+# 'glm mtp step failed' lines: 0
+# mtp cycles ACCEPT: 0  reject: 0
+# sha256 of greedy texts: 4058fc2d282eaefd
+2026-11-09T03:06:07Z BASE NOMTP DONE

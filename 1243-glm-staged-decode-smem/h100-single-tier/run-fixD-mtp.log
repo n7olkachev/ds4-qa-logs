@@ -1,0 +1,7 @@
+client done
+# ==== summary (fixD, mtp) ====
+# 'staged decode weights launch failed' lines: 0
+# 'glm mtp step failed' lines: 0
+# mtp cycles ACCEPT: 38  reject: 29
+# sha256 of greedy texts: 4058fc2d282eaefd
+2026-11-09T06:42:27Z H100 MTP DONE

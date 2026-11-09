@@ -1,0 +1,45 @@
+# ==== ds4 QA evidence ====
+# date_utc: 2026-11-09T02:37:01Z
+# host: ba2394cc7034  runpod_pod: ?  dc: ?  gpu_count: ?
+# gpu: NVIDIA H100 80GB HBM3, 595.91.07, 81559 MiB, 9.0
+# nvcc: Build cuda_12.8.r12.8/compiler.35583870_0
+# os: Linux 6.8.0-147-generic x86_64  Ubuntu 24.04.3 LTS
+# tree: /data/fixD
+# commit: 5ebf36c37cb58dc86dd43fe2047099d7b39ab5c0  (Stage GLM decode attention scores in global memory past 12,032 rows)
+# dirty_files: 0
+# origin: https://github.com/n7olkachev/ds4.git
+# description: glm_window_hash: FNV-1a of the heads output + median latency of the whole indexed decode entry, HEADS=64 RUNS=51
+# =========================
+
+$ sha256sum tests/glm_window_hash.c
+5f5db8028c18d709355ed99e217149c3fc90b558fdf8a148a56f6b753fb452e1  tests/glm_window_hash.c
+
+$ HEADS=64 RUNS=51 ./tests/glm_window_hash 511 512 600 2048 2051 4096 8192 12000 12032 12033 16384 32768 65536
+ds4: CUDA backend initialized on NVIDIA H100 80GB HBM3 (sm_90) dev=0
+ds4: CUDA registered 0.00 GiB model mapping for device access
+heads=64 count=   511 f16=0: hash=8830171cf0a3a8fb out0=-0x1.41f246p-9 median=2538.0 us
+heads=64 count=   512 f16=0: hash=bce75bb78792062b out0=-0x1.5bb6ccp-9 median=2560.3 us
+heads=64 count=   600 f16=0: hash=114dc9f409139aeb out0=-0x1.1b779ep-9 median=2594.0 us
+heads=64 count=  2048 f16=0: hash=88d5c7a75c0e5563 out0=-0x1.8c3cap-11 median=2929.2 us
+heads=64 count=  2051 f16=0: hash=557d8bd243a188f3 out0=-0x1.144916p-11 median=2956.7 us
+heads=64 count=  4096 f16=0: hash=7510b73af2bddf03 out0=-0x1.7c0c48p-15 median=3450.6 us
+heads=64 count=  8192 f16=0: hash=89f4fb9d21fc340b out0=-0x1.6fee4p-17 median=7800.1 us
+heads=64 count= 12000 f16=0: hash=dc6f1121c169d783 out0=-0x1.319f2ep-13 median=8994.8 us
+heads=64 count= 12032 f16=0: hash=6656152cc58e5963 out0=-0x1.5ed61p-13 median=9521.7 us
+heads=64 count= 12033 f16=0: hash=914f49070df8fb23 out0=-0x1.65c94p-13 median=12317.4 us
+heads=64 count= 16384 f16=0: hash=41eecc01dcf30d53 out0=-0x1.7b2b84p-14 median=14006.1 us
+heads=64 count= 32768 f16=0: hash=69f834bc5af9ee63 out0=-0x1.10cbcp-14 median=28169.1 us
+heads=64 count= 65536 f16=0: hash=4dd70172b51e6643 out0=-0x1.a8a3cp-16 median=56582.9 us
+heads=64 count=   511 f16=1: hash=8830171cf0a3a8fb out0=-0x1.41f246p-9 median=2869.9 us
+heads=64 count=   512 f16=1: hash=bce75bb78792062b out0=-0x1.5bb6ccp-9 median=2897.6 us
+heads=64 count=   600 f16=1: hash=114dc9f409139aeb out0=-0x1.1b779ep-9 median=2930.0 us
+heads=64 count=  2048 f16=1: hash=88d5c7a75c0e5563 out0=-0x1.8c3cap-11 median=3233.6 us
+heads=64 count=  2051 f16=1: hash=557d8bd243a188f3 out0=-0x1.144916p-11 median=3074.1 us
+heads=64 count=  4096 f16=1: hash=7510b73af2bddf03 out0=-0x1.7c0c48p-15 median=3386.7 us
+heads=64 count=  8192 f16=1: hash=89f4fb9d21fc340b out0=-0x1.6fee4p-17 median=7091.7 us
+heads=64 count= 12000 f16=1: hash=dc6f1121c169d783 out0=-0x1.319f2ep-13 median=8124.9 us
+heads=64 count= 12032 f16=1: hash=6656152cc58e5963 out0=-0x1.5ed61p-13 median=8143.3 us
+heads=64 count= 12033 f16=1: hash=914f49070df8fb23 out0=-0x1.65c94p-13 median=8346.6 us
+heads=64 count= 16384 f16=1: hash=41eecc01dcf30d53 out0=-0x1.7b2b84p-14 median=12304.1 us
+heads=64 count= 32768 f16=1: hash=69f834bc5af9ee63 out0=-0x1.10cbcp-14 median=23699.3 us
+heads=64 count= 65536 f16=1: hash=4dd70172b51e6643 out0=-0x1.a8a3cp-16 median=47840.4 us

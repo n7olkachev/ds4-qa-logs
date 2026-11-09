@@ -1,0 +1,10 @@
+=== run (new cases) ===
+ds4: CUDA backend initialized on NVIDIA A40 (sm_86) dev=0
+ds4: CUDA registered 0.00 GiB model mapping for device access
+ds4: CUDA glm staged decode weights launch failed: invalid argument
+window decode attention failed
+large decode window count=511 f16=0: PASS
+large decode window count=512 f16=0: PASS
+large decode window count=2051 f16=0: PASS
+large decode window count=12032 f16=0: PASS
+exit=1

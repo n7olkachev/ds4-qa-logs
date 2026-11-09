@@ -1,0 +1,45 @@
+# ==== ds4 QA evidence ====
+# date_utc: 2026-11-08T22:37:10Z
+# host: 72654fbbca5c  runpod_pod: ?  dc: ?  gpu_count: ?
+# gpu: NVIDIA H100 80GB HBM3, 595.91.07, 81559 MiB, 9.0
+NVIDIA H100 80GB HBM3, 595.91.07, 81559 MiB, 9.0
+# nvcc: Build cuda_12.8.r12.8/compiler.35583870_0
+# os: Linux 6.8.0-147-generic x86_64  Ubuntu 24.04.3 LTS
+# tree: /data/fixD
+# commit: 5ebf36c37cb58dc86dd43fe2047099d7b39ab5c0  (Stage GLM decode attention scores in global memory past 12,032 rows)
+# dirty_files: 0
+# origin: https://github.com/n7olkachev/ds4.git
+# description: ds4-server --cuda --mtp --mtp-timing, three-turn greedy session whose MTP window crosses 12,033 positions (issue #1243 scenario)
+# =========================
+
+$ ./ds4-server --cuda --gpu-devices 0,1 --gpu-vram auto -m /data/base/gguf/GLM-5.3-Flash-Q2.gguf --ctx 32768 --port 8011 --trace /workspace/evidence/fixD/05-trace-mtp.txt --mtp --mtp-timing
+ds4: GPU config: 2 devices [0,1] requested, budgets 75,75 GB; auto=true
+ds4: Linux cuda backend set oom_score_adj=1000
+ds4: CUDA backend initialized on NVIDIA H100 80GB HBM3 (sm_90) dev=0
+ds4: CUDA backend initialized on NVIDIA H100 80GB HBM3 (sm_90) dev=1
+ds4: peer access 0->1 validated across 4 sizes x 4 iterations (max 16 MiB)
+ds4: peer access 1->0 validated across 4 sizes x 4 iterations (max 16 MiB)
+multi-GPU layout:
+  GPU0: layers 0-35 + embedding  (71.2 / 71.8 GB)
+  GPU1: layers 36-45 + output head  (21.7 / 71.8 GB)
+ds4: per-tier graph scratch reserved: 2.98 GiB (pre-subtracted from each GPU budget)
+ds4: peer access matrix (validated): 0->1 DIRECT 1->0 DIRECT
+ds4: CUDA (no-copy) registered 89.88 GiB model mapping for multi-tier selective cache
+ds4: CUDA tier 0 (device 0) selective weights: 68.76 GiB in 1102 ranges
+ds4: CUDA tier 1 (device 1) selective weights: 21.11 GiB in 310 ranges
+1108 22:37:21 ds4-server: context buffers 3422.43 MiB (ctx=32768, backend=cuda, prefill_chunk=2048, raw_kv_rows=0, compressed_kv_rows=32768)
+ds4: GLM session ctx=32768 (model max=1048576); prefill/work cap=4096; dense attention limit=2051
+ds4: GLM graph using compact DSA KV only; expanded full-attention KV cache is skipped
+ds4: GLM graph allocating compact DSA cache: rows=32768 logical_ctx=32768 kv_layers=45 indexer_layers=11 f16 0.37 GiB
+ds4: GLM compact indexed prefill chunk=2048 score_rows=2048 score_scratch=64.00 MiB
+1108 22:37:21 ds4-server: tracing session to /workspace/evidence/fixD/05-trace-mtp.txt
+1108 22:37:21 ds4-server: listening on http://127.0.0.1:8011
+1108 22:37:25 ds4-server: chat ctx=0..32:32 prompt start
+ds4: selective-cache miss for offset=73840321088 bytes=786432 on logical_tier=0 (physical_device=0, current_device=0, label=GLM-5.3 BF16 matrix); this is a placement/cache-install bug
+1108 22:37:28 ds4-server: shutdown requested, draining requests
+
+# ==== summary (fixD, mtp) ====
+# 'staged decode weights launch failed' lines: 0
+# 'glm mtp step failed' lines: 0
+# mtp cycles ACCEPT: 0  reject: 0
+# sha256 of greedy texts: e3b0c44298fc1c14

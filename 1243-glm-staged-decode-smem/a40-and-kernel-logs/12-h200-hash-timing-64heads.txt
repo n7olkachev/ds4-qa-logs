@@ -1,0 +1,70 @@
+# ==== ds4 QA evidence ====
+# date_utc: 2026-11-08T21:44:23Z
+# host: 7fb4680f6a16  runpod_pod: ?  dc: ?  gpu_count: ?
+# gpu: NVIDIA H200, 595.91.07, 143771 MiB, 9.0
+# nvcc: Build cuda_12.8.r12.8/compiler.35583870_0
+# os: Linux 6.8.0-147-generic x86_64  Ubuntu 24.04.3 LTS
+# tree: /workspace/fix
+# commit: 07b70e8125445ebf4adae726c2c731ab55405e7f  (Keep GLM staged decode attention scores in the weights buffer)
+# dirty_files: 0
+# origin: https://github.com/n7olkachev/ds4.git
+# description: glm_window_hash: FNV-1a of the heads output + median latency of the whole indexed decode entry, HEADS=64 RUNS=51
+# =========================
+--- base (b3f5018) ---
+heads=64 count=   511 f16=0: median=128.5 us
+heads=64 count=   512 f16=0: median=146.2 us
+heads=64 count=   600 f16=0: median=176.9 us
+heads=64 count=  2048 f16=0: median=532.2 us
+heads=64 count=  2051 f16=0: median=542.1 us
+heads=64 count=  4096 f16=0: median=1051.5 us
+heads=64 count=  8192 f16=0: median=2283.7 us
+heads=64 count= 12000 f16=0: median=3342.1 us
+heads=64 count= 12032 f16=0: median=3354.1 us
+count= 12033 f16=0: FAIL (launch)
+count= 16384 f16=0: FAIL (launch)
+count= 32768 f16=0: FAIL (launch)
+count= 65536 f16=0: FAIL (launch)
+heads=64 count=   511 f16=1: median=130.1 us
+heads=64 count=   512 f16=1: median=137.8 us
+heads=64 count=   600 f16=1: median=163.9 us
+heads=64 count=  2048 f16=1: median=491.7 us
+heads=64 count=  2051 f16=1: median=505.0 us
+heads=64 count=  4096 f16=1: median=962.1 us
+heads=64 count=  8192 f16=1: median=1959.7 us
+heads=64 count= 12000 f16=1: median=2786.1 us
+heads=64 count= 12032 f16=1: median=2793.2 us
+count= 12033 f16=1: FAIL (launch)
+count= 16384 f16=1: FAIL (launch)
+count= 32768 f16=1: FAIL (launch)
+count= 65536 f16=1: FAIL (launch)
+--- fix (07b70e8) ---
+heads=64 count=   511 f16=0: median=128.7 us
+heads=64 count=   512 f16=0: median=148.3 us
+heads=64 count=   600 f16=0: median=178.9 us
+heads=64 count=  2048 f16=0: median=535.4 us
+heads=64 count=  2051 f16=0: median=549.6 us
+heads=64 count=  4096 f16=0: median=1051.1 us
+heads=64 count=  8192 f16=0: median=2083.9 us
+heads=64 count= 12000 f16=0: median=3341.8 us
+heads=64 count= 12032 f16=0: median=3355.2 us
+heads=64 count= 12033 f16=0: median=3369.9 us
+heads=64 count= 16384 f16=0: median=5519.5 us
+heads=64 count= 32768 f16=0: median=11765.6 us
+heads=64 count= 65536 f16=0: median=23519.1 us
+heads=64 count=   511 f16=1: median=130.2 us
+heads=64 count=   512 f16=1: median=143.1 us
+heads=64 count=   600 f16=1: median=170.1 us
+heads=64 count=  2048 f16=1: median=515.2 us
+heads=64 count=  2051 f16=1: median=527.7 us
+heads=64 count=  4096 f16=1: median=1006.7 us
+heads=64 count=  8192 f16=1: median=1996.1 us
+heads=64 count= 12000 f16=1: median=2912.3 us
+heads=64 count= 12032 f16=1: median=2922.1 us
+heads=64 count= 12033 f16=1: median=2933.6 us
+heads=64 count= 16384 f16=1: median=3969.2 us
+heads=64 count= 32768 f16=1: median=9979.9 us
+heads=64 count= 65536 f16=1: median=20067.0 us
+--- bitwise check ---
+BITWISE IDENTICAL where base launches
+
+download: 0 GiB of 89.9 GiB

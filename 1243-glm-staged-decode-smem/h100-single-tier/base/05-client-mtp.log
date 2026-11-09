@@ -1,0 +1,9 @@
+turn 1: prompt_chars=32 max_tokens=64 usage={"prompt_tokens": 32, "completion_tokens": 9, "total_tokens": 41, "prompt_tokens_details": {"cached_tokens": 0, "cache_write_tokens": 32}} time=13.5s
+turn 1 text: "Hello there, nice to meet you!"
+
+turn 2: prompt_chars=44851 max_tokens=96 usage={"prompt_tokens": 17049, "completion_tokens": 96, "total_tokens": 17145, "prompt_tokens_details": {"cached_tokens": 41, "cache_write_tokens": 17008}} time=521.8s
+turn 2 text: ""
+
+turn 3: prompt_chars=71 max_tokens=64 usage={"prompt_tokens": 17071, "completion_tokens": 2, "total_tokens": 17073, "prompt_tokens_details": {"cached_tokens": 0, "cache_write_tokens": 17071}} time=451.3s
+turn 3 text: "200"
+

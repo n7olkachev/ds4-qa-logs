@@ -1,0 +1,86 @@
+# ==== comparison base (b3f5018) vs fixD (5ebf36c) — generated 2026-11-09T06:46:29Z ====
+## reference (QA_BEFORE_RELEASES.md, Metal): Q2 avg NLL 0.458030488, first-token 89/100, greedy prefix 7.37
+
+## 100-case fixture summary lines
+--- base
+grep: base/03-score-100.log: No such file or directory
+grep: base/03-score-100.log: No such file or directory
+--- fixD
+summary cases=100 tokens=11559 avg_nll=0.459560487 first_match=89 avg_lcp=7.390
+api_summary ref_tokens=0 target_tokens=0 target_mae=0.000000000 target_mean_delta=0.000000000 top_items=0 top_mapped=0 top_coverage=0.000000000 top1_match=0/0 top1_rate=0.000000000 topn_hit=0/0 topn_recall=0.000000000 top_logprob_count=0 top_mae=0.000000000 top_mean_delta=0.000000000 pair_agree=0/0 pair_rate=0.000000000
+exit=0
+
+## 100-case: compare_scores.py base → fixD
+Traceback (most recent call last):
+  File "/Users/n7olkachev/ai/ds4-contrib/ds4/gguf-tools/quality-testing/compare_scores.py", line 160, in <module>
+    raise SystemExit(main())
+                     ~~~~^^
+  File "/Users/n7olkachev/ai/ds4-contrib/ds4/gguf-tools/quality-testing/compare_scores.py", line 99, in main
+    old = load(Path(sys.argv[1]))
+  File "/Users/n7olkachev/ai/ds4-contrib/ds4/gguf-tools/quality-testing/compare_scores.py", line 19, in load
+    with path.open(newline="", encoding="utf-8") as fp:
+         ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/pathlib/__init__.py", line 970, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'base/glm53-q2-100.tsv'
+
+## 100-case TSV byte comparison
+cmp: base/glm53-q2-100.tsv: No such file or directory
+differ — columns that differ:
+cut: base/glm53-q2-100.tsv: No such file or directory
+0a1,101
+> id	prompt_tokens	target_tokens	nll	avg_nll	first_match	greedy_lcp	api_ref_tokens	api_target_tokens	api_target_mae	api_target_mean_delta	api_top_items
+> case_000	20	127	50.186548876	0.395169676	1	14	0	0	0.000000000	0.000000000	0
+> case_001	20	127	85.009767734	0.669368250	1	5	0	0	0.000000000	0.000000000	0
+> case_002	21	127	75.329212184	0.593143403	1	2	0	0	0.000000000	0.000000000	0
+> case_003	21	103	25.575618602	0.248306977	1	5	0	0	0.000000000	0.000000000	0
+> case_004	18	127	69.463335518	0.546955398	1	1	0	0	0.000000000	0.000000000	0
+> case_005	16	127	32.346433514	0.254696327	1	12	0	0	0.000000000	0.000000000	0
+> case_006	20	127	41.223263756	0.324592628	1	1	0	0	0.000000000	0.000000000	0
+> case_007	17	127	68.439699981	0.538895275	1	5	0	0	0.000000000	0.000000000	0
+
+## long cases summary lines
+--- base
+grep: base/04-score-long.log: No such file or directory
+grep: base/04-score-long.log: No such file or directory
+--- fixD
+summary cases=8 tokens=740 avg_nll=0.669916439 first_match=6 avg_lcp=2.500
+api_summary ref_tokens=0 target_tokens=0 target_mae=0.000000000 target_mean_delta=0.000000000 top_items=0 top_mapped=0 top_coverage=0.000000000 top1_match=0/0 top1_rate=0.000000000 topn_hit=0/0 topn_recall=0.000000000 top_logprob_count=0 top_mae=0.000000000 top_mean_delta=0.000000000 pair_agree=0/0 pair_rate=0.000000000
+exit=0
+
+## long: compare_scores.py base → fixD
+Traceback (most recent call last):
+  File "/Users/n7olkachev/ai/ds4-contrib/ds4/gguf-tools/quality-testing/compare_scores.py", line 160, in <module>
+    raise SystemExit(main())
+                     ~~~~^^
+  File "/Users/n7olkachev/ai/ds4-contrib/ds4/gguf-tools/quality-testing/compare_scores.py", line 99, in main
+    old = load(Path(sys.argv[1]))
+  File "/Users/n7olkachev/ai/ds4-contrib/ds4/gguf-tools/quality-testing/compare_scores.py", line 19, in load
+    with path.open(newline="", encoding="utf-8") as fp:
+         ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/pathlib/__init__.py", line 970, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'base/glm53-q2-long.tsv'
+
+## MTP scenario (single-tier H200): failures and cycles
+base/05-server-mtp: staged-launch-failed=96 step-failed=96 ACCEPT=4 reject=2
+fixD/05-server-mtp: staged-launch-failed=0 step-failed=0 ACCEPT=36 reject=31
+fixD/05-server-nomtp: staged-launch-failed=0 step-failed=0 ACCEPT=0 reject=0
+
+## generated text per request from --trace (thinking included, trace metadata stripped)
+ee72e4392a661dfe  233 bytes  base/05-trace-mtp
+540b2be94c967f85  240 bytes  fixD/05-trace-mtp
+540b2be94c967f85  240 bytes  fixD/05-trace-nomtp
+fixD/05-trace-mtp vs fixD/05-trace-nomtp: IDENTICAL
+
+## model-free: hashes bitwise where base launches (H200)
+BITWISE IDENTICAL
+
+## model identity
+file: /data/base/gguf/GLM-5.3-Flash-Q2.gguf
+bytes: 96505816384
+hf_api_xet_hash: 3717238bd6bb945cc065012f119519b8ce3ad04645dc2a1011bac077b415ffda
+hf_resolve_x_linked_etag: e81fd6241c6e55a64e1e14e47a3eab61a173fa8d7e4b5c1d1848827119705b32
+sha256: e81fd6241c6e55a64e1e14e47a3eab61a173fa8d7e4b5c1d1848827119705b32

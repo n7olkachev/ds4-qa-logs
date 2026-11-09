@@ -1,0 +1,1800 @@
+
+===== request 1 2026-11-08 22:38:13 =====
+kind: chat
+model: ds4
+stream: 0
+tools: 0
+think_mode: high
+prompt_tokens: 32
+effective_prompt_tokens: 32
+cached_tokens: 0
+max_tokens: 64
+temperature: 0.000
+top_k: 0
+top_p: 1.000
+min_p: 0.050
+ignore_eos: 0
+seed: 0
+stream_include_usage: 0
+
+--- cache decision ---
+live_tokens_before: 0
+prompt_tokens: 32
+live_prompt_common: 0
+memory_token_reusable: 0
+memory_miss_reason: no-live-checkpoint
+tool_replay: mem=0 disk=0 canonical=0 missing_ids=0
+cache_source: none
+cached_tokens: 0
+disk_cached_tokens: 0
+
+--- raw request json ---
+{"model": "ds4", "messages": [{"role": "system", "content": "You are a terse assistant. Answer directly, no thinking."}, {"role": "user", "content": "Say hello in exactly five words."}], "max_tokens": 64, "temperature": 0, "stream": false}
+
+--- rendered prompt ---
+[gMASK]<sop><|system|>Reasoning Effort: High<|system|>You are a terse assistant. Answer directly, no thinking.<|user|>Say hello in exactly five words.<|assistant|><think>
+
+--- generated text ---
+
+
+--- trace: prefill done; decode_max=64 ctx_room=32736 ---
+
+</think>Hello there, nice to meet you!
+
+--- trace: speculative boundary rewind: from=42 to=41 ---
+
+
+
+--- trace: speculative boundary: kept=1 discarded=1 resample=0 rewind_ms=583.090 ---
+
+
+
+--- parsed message ---
+finish: stop
+generated_tokens: 9
+dsml_start: 0
+dsml_end: 0
+elapsed_sec: 10.167
+
+content:
+Hello there, nice to meet you!
+
+===== end request 1 =====
+
+
+--- trace: thinking live checkpoint remembered: live=41 visible=208 ---
+
+
+===== request 2 2026-11-08 22:38:23 =====
+kind: chat
+model: ds4
+stream: 0
+tools: 0
+think_mode: high
+prompt_tokens: 17049
+effective_prompt_tokens: 17049
+cached_tokens: 41
+max_tokens: 96
+temperature: 0.000
+top_k: 0
+top_p: 1.000
+min_p: 0.050
+ignore_eos: 0
+seed: 0
+stream_include_usage: 0
+
+--- cache decision ---
+live_tokens_before: 41
+prompt_tokens: 17049
+live_prompt_common: 41
+memory_token_reusable: 1
+memory_miss_reason: live-prefix-match
+tool_replay: mem=0 disk=0 canonical=0 missing_ids=0
+cache_source: memory-token
+cached_tokens: 41
+disk_cached_tokens: 0
+
+--- raw request json ---
+{"model": "ds4", "messages": [{"role": "system", "content": "You are a terse assistant. Answer directly, no thinking."}, {"role": "user", "content": "Say hello in exactly five words."}, {"role": "assistant", "content": "Hello there, nice to meet you!"}, {"role": "user", "content": "Here is a sensor log. How many records have status=retry? Reply with the number only.\n\nrecord 00001: sensor=919 status=ok note=alpha-1-beta-1\nrecord 00002: sensor=838 status=ok note=alpha-2-beta-2\nrecord 00003: sensor=757 status=ok note=alpha-3-beta-3\nrecord 00004: sensor=676 status=ok note=alpha-4-beta-4\nrecord 00005: sensor=595 status=ok note=alpha-5-beta-5\nrecord 00006: sensor=514 status=ok note=alpha-6-beta-6\nrecord 00007: sensor=433 status=retry note=alpha-7-beta-7\nrecord 00008: sensor=352 status=ok note=alpha-8-beta-8\nrecord 00009: sensor=271 status=ok note=alpha-9-beta-9\nrecord 00010: sensor=190 status=ok note=alpha-10-beta-10\nrecord 00011: sensor=109 status=ok note=alpha-11-beta-11\nrecord 00012: sensor=28 status=ok note=alpha-12-beta-12\nrecord 00013: sensor=947 status=ok note=alpha-0-beta-13\nrecord 00014: sensor=866 status=retry note=alpha-1-beta-14\nrecord 00015: sensor=785 status=ok note=alpha-2-beta-15\nrecord 00016: sensor=704 status=ok note=alpha-3-beta-16\nrecord 00017: sensor=623 status=ok note=alpha-4-beta-0\nrecord 00018: sensor=542 status=ok note=alpha-5-beta-1\nrecord 00019: sensor=461 status=ok note=alpha-6-beta-2\nrecord 00020: sensor=380 status=ok note=alpha-7-beta-3\nrecord 00021: sensor=299 status=retry note=alpha-8-beta-4\nrecord 00022: sensor=218 status=ok note=alpha-9-beta-5\nrecord 00023: sensor=137 status=ok note=alpha-10-beta-6\nrecord 00024: sensor=56 status=ok note=alpha-11-beta-7\nrecord 00025: sensor=975 status=ok note=alpha-12-beta-8\nrecord 00026: sensor=894 status=ok note=alpha-0-beta-9\nrecord 00027: sensor=813 status=ok note=alpha-1-beta-10\nrecord 00028: sensor=732 status=retry note=alpha-2-beta-11\nrecord 00029: sensor=651 status=ok note=alpha-3-beta-12\nrecord 00030: sensor=570 status=ok note=alpha-4-beta-13\nrecord 00031: sensor=489 status=ok note=alpha-5-beta-14\nrecord 00032: sensor=408 status=ok note=alpha-6-beta-15\nrecord 00033: sensor=327 status=ok note=alpha-7-beta-16\nrecord 00034: sensor=246 status=ok note=alpha-8-beta-0\nrecord 00035: sensor=165 status=retry note=alpha-9-beta-1\nrecord 00036: sensor=84 status=ok note=alpha-10-beta-2\nrecord 00037: sensor=3 status=ok note=alpha-11-beta-3\nrecord 00038: sensor=922 status=ok note=alpha-12-beta-4\nrecord 00039: sensor=841 status=ok note=alpha-0-beta-5\nrecord 00040: sensor=760 status=ok note=alpha-1-beta-6\nrecord 00041: sensor=679 status=ok note=alpha-2-beta-7\nrecord 00042: sensor=598 status=retry note=alpha-3-beta-8\nrecord 00043: sensor=517 status=ok note=alpha-4-beta-9\nrecord 00044: sensor=436 status=ok note=alpha-5-beta-10\nrecord 00045: sensor=355 status=ok note=alpha-6-beta-11\nrecord 00046: sensor=274 status=ok note=alpha-7-beta-12\nrecord 00047: sensor=193 status=ok note=alpha-8-beta-13\nrecord 00048: sensor=112 status=ok note=alpha-9-beta-14\nrecord 00049: sensor=31 status=retry note=alpha-10-beta-15\nrecord 00050: sensor=950 status=ok note=alpha-11-beta-16\nrecord 00051: sensor=869 status=ok note=alpha-12-beta-0\nrecord 00052: sensor=788 status=ok note=alpha-0-beta-1\nrecord 00053: sensor=707 status=ok note=alpha-1-beta-2\nrecord 00054: sensor=626 status=ok note=alpha-2-beta-3\nrecord 00055: sensor=545 status=ok note=alpha-3-beta-4\nrecord 00056: sensor=464 status=retry note=alpha-4-beta-5\nrecord 00057: sensor=383 status=ok note=alpha-5-beta-6\nrecord 00058: sensor=302 status=ok note=alpha-6-beta-7\nrecord 00059: sensor=221 status=ok note=alpha-7-beta-8\nrecord 00060: sensor=140 status=ok note=alpha-8-beta-9\nrecord 00061: sensor=59 status=ok note=alpha-9-beta-10\nrecord 00062: sensor=978 status=ok note=alpha-10-beta-11\nrecord 00063: sensor=897 status=retry note=alpha-11-beta-12\nrecord 00064: sensor=816 status=ok note=alpha-12-beta-13\nrecord 00065: sensor=735 status=ok note=alpha-0-beta-14\nrecord 00066: sensor=654 status=ok note=alpha-1-beta-15\nrecord 00067: sensor=573 status=ok note=alpha-2-beta-16\nrecord 00068: sensor=492 status=ok note=alpha-3-beta-0\nrecord 00069: sensor=411 status=ok note=alpha-4-beta-1\nrecord 00070: sensor=330 status=retry note=alpha-5-beta-2\nrecord 00071: sensor=249 status=ok note=alpha-6-beta-3\nrecord 00072: sensor=168 status=ok note=alpha-7-beta-4\nrecord 00073: sensor=87 status=ok note=alpha-8-beta-5\nrecord 00074: sensor=6 status=ok note=alpha-9-beta-6\nrecord 00075: sensor=925 status=ok note=alpha-10-beta-7\nrecord 00076: sensor=844 status=ok note=alpha-11-beta-8\nrecord 00077: sensor=763 status=retry note=alpha-12-beta-9\nrecord 00078: sensor=682 status=ok note=alpha-0-beta-10\nrecord 00079: sensor=601 status=ok note=alpha-1-beta-11\nrecord 00080: sensor=520 status=ok note=alpha-2-beta-12\nrecord 00081: sensor=439 status=ok note=alpha-3-beta-13\nrecord 00082: sensor=358 status=ok note=alpha-4-beta-14\nrecord 00083: sensor=277 status=ok note=alpha-5-beta-15\nrecord 00084: sensor=196 status=retry note=alpha-6-beta-16\nrecord 00085: sensor=115 status=ok note=alpha-7-beta-0\nrecord 00086: sensor=34 status=ok note=alpha-8-beta-1\nrecord 00087: sensor=953 status=ok note=alpha-9-beta-2\nrecord 00088: sensor=872 status=ok note=alpha-10-beta-3\nrecord 00089: sensor=791 status=ok note=alpha-11-beta-4\nrecord 00090: sensor=710 status=ok note=alpha-12-beta-5\nrecord 00091: sensor=629 status=retry note=alpha-0-beta-6\nrecord 00092: sensor=548 status=ok note=alpha-1-beta-7\nrecord 00093: sensor=467 status=ok note=alpha-2-beta-8\nrecord 00094: sensor=386 status=ok note=alpha-3-beta-9\nrecord 00095: sensor=305 status=ok note=alpha-4-beta-10\nrecord 00096: sensor=224 status=ok note=alpha-5-beta-11\nrecord 00097: sensor=143 status=ok note=alpha-6-beta-12\nrecord 00098: sensor=62 status=retry note=alpha-7-beta-13\nrecord 00099: sensor=981 status=ok note=alpha-8-beta-14\nrecord 00100: sensor=900 status=ok note=alpha-9-beta-15\nrecord 00101: sensor=819 status=ok note=alpha-10-beta-16\nrecord 00102: sensor=738 status=ok note=alpha-11-beta-0\nrecord 00103: sensor=657 status=ok note=alpha-12-beta-1\nrecord 00104: sensor=576 status=ok note=alpha-0-beta-2\nrecord 00105: sensor=495 status=retry note=alpha-1-beta-3\nrecord 00106: sensor=414 status=ok note=alpha-2-beta-4\nrecord 00107: sensor=333 status=ok note=alpha-3-beta-5\nrecord 00108: sensor=252 status=ok note=alpha-4-beta-6\nrecord 00109: sensor=171 status=ok note=alpha-5-beta-7\nrecord 00110: sensor=90 status=ok note=alpha-6-beta-8\nrecord 00111: sensor=9 status=ok note=alpha-7-beta-9\nrecord 00112: sensor=928 status=retry note=alpha-8-beta-10\nrecord 00113: sensor=847 status=ok note=alpha-9-beta-11\nrecord 00114: sensor=766 status=ok note=alpha-10-beta-12\nrecord 00115: sensor=685 status=ok note=alpha-11-beta-13\nrecord 00116: sensor=604 status=ok note=alpha-12-beta-14\nrecord 00117: sensor=523 status=ok note=alpha-0-beta-15\nrecord 00118: sensor=442 status=ok note=alpha-1-beta-16\nrecord 00119: sensor=361 status=retry note=alpha-2-beta-0\nrecord 00120: sensor=280 status=ok note=alpha-3-beta-1\nrecord 00121: sensor=199 status=ok note=alpha-4-beta-2\nrecord 00122: sensor=118 status=ok note=alpha-5-beta-3\nrecord 00123: sensor=37 status=ok note=alpha-6-beta-4\nrecord 00124: sensor=956 status=ok note=alpha-7-beta-5\nrecord 00125: sensor=875 status=ok note=alpha-8-beta-6\nrecord 00126: sensor=794 status=retry note=alpha-9-beta-7\nrecord 00127: sensor=713 status=ok note=alpha-10-beta-8\nrecord 00128: sensor=632 status=ok note=alpha-11-beta-9\nrecord 00129: sensor=551 status=ok note=alpha-12-beta-10\nrecord 00130: sensor=470 status=ok note=alpha-0-beta-11\nrecord 00131: sensor=389 status=ok note=alpha-1-beta-12\nrecord 00132: sensor=308 status=ok note=alpha-2-beta-13\nrecord 00133: sensor=227 status=retry note=alpha-3-beta-14\nrecord 00134: sensor=146 status=ok note=alpha-4-beta-15\nrecord 00135: sensor=65 status=ok note=alpha-5-beta-16\nrecord 00136: sensor=984 status=ok note=alpha-6-beta-0\nrecord 00137: sensor=903 status=ok note=alpha-7-beta-1\nrecord 00138: sensor=822 status=ok note=alpha-8-beta-2\nrecord 00139: sensor=741 status=ok note=alpha-9-beta-3\nrecord 00140: sensor=660 status=retry note=alpha-10-beta-4\nrecord 00141: sensor=579 status=ok note=alpha-11-beta-5\nrecord 00142: sensor=498 status=ok note=alpha-12-beta-6\nrecord 00143: sensor=417 status=ok note=alpha-0-beta-7\nrecord 00144: sensor=336 status=ok note=alpha-1-beta-8\nrecord 00145: sensor=255 status=ok note=alpha-2-beta-9\nrecord 00146: sensor=174 status=ok note=alpha-3-beta-10\nrecord 00147: sensor=93 status=retry note=alpha-4-beta-11\nrecord 00148: sensor=12 status=ok note=alpha-5-beta-12\nrecord 00149: sensor=931 status=ok note=alpha-6-beta-13\nrecord 00150: sensor=850 status=ok note=alpha-7-beta-14\nrecord 00151: sensor=769 status=ok note=alpha-8-beta-15\nrecord 00152: sensor=688 status=ok note=alpha-9-beta-16\nrecord 00153: sensor=607 status=ok note=alpha-10-beta-0\nrecord 00154: sensor=526 status=retry note=alpha-11-beta-1\nrecord 00155: sensor=445 status=ok note=alpha-12-beta-2\nrecord 00156: sensor=364 status=ok note=alpha-0-beta-3\nrecord 00157: sensor=283 status=ok note=alpha-1-beta-4\nrecord 00158: sensor=202 status=ok note=alpha-2-beta-5\nrecord 00159: sensor=121 status=ok note=alpha-3-beta-6\nrecord 00160: sensor=40 status=ok note=alpha-4-beta-7\nrecord 00161: sensor=959 status=retry note=alpha-5-beta-8\nrecord 00162: sensor=878 status=ok note=alpha-6-beta-9\nrecord 00163: sensor=797 status=ok note=alpha-7-beta-10\nrecord 00164: sensor=716 status=ok note=alpha-8-beta-11\nrecord 00165: sensor=635 status=ok note=alpha-9-beta-12\nrecord 00166: sensor=554 status=ok note=alpha-10-beta-13\nrecord 00167: sensor=473 status=ok note=alpha-11-beta-14\nrecord 00168: sensor=392 status=retry note=alpha-12-beta-15\nrecord 00169: sensor=311 status=ok note=alpha-0-beta-16\nrecord 00170: sensor=230 status=ok note=alpha-1-beta-0\nrecord 00171: sensor=149 status=ok note=alpha-2-beta-1\nrecord 00172: sensor=68 status=ok note=alpha-3-beta-2\nrecord 00173: sensor=987 status=ok note=alpha-4-beta-3\nrecord 00174: sensor=906 status=ok note=alpha-5-beta-4\nrecord 00175: sensor=825 status=retry note=alpha-6-beta-5\nrecord 00176: sensor=744 status=ok note=alpha-7-beta-6\nrecord 00177: sensor=663 status=ok note=alpha-8-beta-7\nrecord 00178: sensor=582 status=ok note=alpha-9-beta-8\nrecord 00179: sensor=501 status=ok note=alpha-10-beta-9\nrecord 00180: sensor=420 status=ok note=alpha-11-beta-10\nrecord 00181: sensor=339 status=ok note=alpha-12-beta-11\nrecord 00182: sensor=258 status=retry note=alpha-0-beta-12\nrecord 00183: sensor=177 status=ok note=alpha-1-beta-13\nrecord 00184: sensor=96 status=ok note=alpha-2-beta-14\nrecord 00185: sensor=15 status=ok note=alpha-3-beta-15\nrecord 00186: sensor=934 status=ok note=alpha-4-beta-16\nrecord 00187: sensor=853 status=ok note=alpha-5-beta-0\nrecord 00188: sensor=772 status=ok note=alpha-6-beta-1\nrecord 00189: sensor=691 status=retry note=alpha-7-beta-2\nrecord 00190: sensor=610 status=ok note=alpha-8-beta-3\nrecord 00191: sensor=529 status=ok note=alpha-9-beta-4\nrecord 00192: sensor=448 status=ok note=alpha-10-beta-5\nrecord 00193: sensor=367 status=ok note=alpha-11-beta-6\nrecord 00194: sensor=286 status=ok note=alpha-12-beta-7\nrecord 00195: sensor=205 status=ok note=alpha-0-beta-8\nrecord 00196: sensor=124 status=retry note=alpha-1-beta-9\nrecord 00197: sensor=43 status=ok note=alpha-2-beta-10\nrecord 00198: sensor=962 status=ok note=alpha-3-beta-11\nrecord 00199: sensor=881 status=ok note=alpha-4-beta-12\nrecord 00200: sensor=800 status=ok note=alpha-5-beta-13\nrecord 00201: sensor=719 status=ok note=alpha-6-beta-14\nrecord 00202: sensor=638 status=ok note=alpha-7-beta-15\nrecord 00203: sensor=557 status=retry note=alpha-8-beta-16\nrecord 00204: sensor=476 status=ok note=alpha-9-beta-0\nrecord 00205: sensor=395 status=ok note=alpha-10-beta-1\nrecord 00206: sensor=314 status=ok note=alpha-11-beta-2\nrecord 00207: sensor=233 status=ok note=alpha-12-beta-3\nrecord 00208: sensor=152 status=ok note=alpha-0-beta-4\nrecord 00209: sensor=71 status=ok note=alpha-1-beta-5\nrecord 00210: sensor=990 status=retry note=alpha-2-beta-6\nrecord 00211: sensor=909 status=ok note=alpha-3-beta-7\nrecord 00212: sensor=828 status=ok note=alpha-4-beta-8\nrecord 00213: sensor=747 status=ok note=alpha-5-beta-9\nrecord 00214: sensor=666 status=ok note=alpha-6-beta-10\nrecord 00215: sensor=585 status=ok note=alpha-7-beta-11\nrecord 00216: sensor=504 status=ok note=alpha-8-beta-12\nrecord 00217: sensor=423 status=retry note=alpha-9-beta-13\nrecord 00218: sensor=342 status=ok note=alpha-10-beta-14\nrecord 00219: sensor=261 status=ok note=alpha-11-beta-15\nrecord 00220: sensor=180 status=ok note=alpha-12-beta-16\nrecord 00221: sensor=99 status=ok note=alpha-0-beta-0\nrecord 00222: sensor=18 status=ok note=alpha-1-beta-1\nrecord 00223: sensor=937 status=ok note=alpha-2-beta-2\nrecord 00224: sensor=856 status=retry note=alpha-3-beta-3\nrecord 00225: sensor=775 status=ok note=alpha-4-beta-4\nrecord 00226: sensor=694 status=ok note=alpha-5-beta-5\nrecord 00227: sensor=613 status=ok note=alpha-6-beta-6\nrecord 00228: sensor=532 status=ok note=alpha-7-beta-7\nrecord 00229: sensor=451 status=ok note=alpha-8-beta-8\nrecord 00230: sensor=370 status=ok note=alpha-9-beta-9\nrecord 00231: sensor=289 status=retry note=alpha-10-beta-10\nrecord 00232: sensor=208 status=ok note=alpha-11-beta-11\nrecord 00233: sensor=127 status=ok note=alpha-12-beta-12\nrecord 00234: sensor=46 status=ok note=alpha-0-beta-13\nrecord 00235: sensor=965 status=ok note=alpha-1-beta-14\nrecord 00236: sensor=884 status=ok note=alpha-2-beta-15\nrecord 00237: sensor=803 status=ok note=alpha-3-beta-16\nrecord 00238: sensor=722 status=retry note=alpha-4-beta-0\nrecord 00239: sensor=641 status=ok note=alpha-5-beta-1\nrecord 00240: sensor=560 status=ok note=alpha-6-beta-2\nrecord 00241: sensor=479 status=ok note=alpha-7-beta-3\nrecord 00242: sensor=398 status=ok note=alpha-8-beta-4\nrecord 00243: sensor=317 status=ok note=alpha-9-beta-5\nrecord 00244: sensor=236 status=ok note=alpha-10-beta-6\nrecord 00245: sensor=155 status=retry note=alpha-11-beta-7\nrecord 00246: sensor=74 status=ok note=alpha-12-beta-8\nrecord 00247: sensor=993 status=ok note=alpha-0-beta-9\nrecord 00248: sensor=912 status=ok note=alpha-1-beta-10\nrecord 00249: sensor=831 status=ok note=alpha-2-beta-11\nrecord 00250: sensor=750 status=ok note=alpha-3-beta-12\nrecord 00251: sensor=669 status=ok note=alpha-4-beta-13\nrecord 00252: sensor=588 status=retry note=alpha-5-beta-14\nrecord 00253: sensor=507 status=ok note=alpha-6-beta-15\nrecord 00254: sensor=426 status=ok note=alpha-7-beta-16\nrecord 00255: sensor=345 status=ok note=alpha-8-beta-0\nrecord 00256: sensor=264 status=ok note=alpha-9-beta-1\nrecord 00257: sensor=183 status=ok note=alpha-10-beta-2\nrecord 00258: sensor=102 status=ok note=alpha-11-beta-3\nrecord 00259: sensor=21 status=retry note=alpha-12-beta-4\nrecord 00260: sensor=940 status=ok note=alpha-0-beta-5\nrecord 00261: sensor=859 status=ok note=alpha-1-beta-6\nrecord 00262: sensor=778 status=ok note=alpha-2-beta-7\nrecord 00263: sensor=697 status=ok note=alpha-3-beta-8\nrecord 00264: sensor=616 status=ok note=alpha-4-beta-9\nrecord 00265: sensor=535 status=ok note=alpha-5-beta-10\nrecord 00266: sensor=454 status=retry note=alpha-6-beta-11\nrecord 00267: sensor=373 status=ok note=alpha-7-beta-12\nrecord 00268: sensor=292 status=ok note=alpha-8-beta-13\nrecord 00269: sensor=211 status=ok note=alpha-9-beta-14\nrecord 00270: sensor=130 status=ok note=alpha-10-beta-15\nrecord 00271: sensor=49 status=ok note=alpha-11-beta-16\nrecord 00272: sensor=968 status=ok note=alpha-12-beta-0\nrecord 00273: sensor=887 status=retry note=alpha-0-beta-1\nrecord 00274: sensor=806 status=ok note=alpha-1-beta-2\nrecord 00275: sensor=725 status=ok note=alpha-2-beta-3\nrecord 00276: sensor=644 status=ok note=alpha-3-beta-4\nrecord 00277: sensor=563 status=ok note=alpha-4-beta-5\nrecord 00278: sensor=482 status=ok note=alpha-5-beta-6\nrecord 00279: sensor=401 status=ok note=alpha-6-beta-7\nrecord 00280: sensor=320 status=retry note=alpha-7-beta-8\nrecord 00281: sensor=239 status=ok note=alpha-8-beta-9\nrecord 00282: sensor=158 status=ok note=alpha-9-beta-10\nrecord 00283: sensor=77 status=ok note=alpha-10-beta-11\nrecord 00284: sensor=996 status=ok note=alpha-11-beta-12\nrecord 00285: sensor=915 status=ok note=alpha-12-beta-13\nrecord 00286: sensor=834 status=ok note=alpha-0-beta-14\nrecord 00287: sensor=753 status=retry note=alpha-1-beta-15\nrecord 00288: sensor=672 status=ok note=alpha-2-beta-16\nrecord 00289: sensor=591 status=ok note=alpha-3-beta-0\nrecord 00290: sensor=510 status=ok note=alpha-4-beta-1\nrecord 00291: sensor=429 status=ok note=alpha-5-beta-2\nrecord 00292: sensor=348 status=ok note=alpha-6-beta-3\nrecord 00293: sensor=267 status=ok note=alpha-7-beta-4\nrecord 00294: sensor=186 status=retry note=alpha-8-beta-5\nrecord 00295: sensor=105 status=ok note=alpha-9-beta-6\nrecord 00296: sensor=24 status=ok note=alpha-10-beta-7\nrecord 00297: sensor=943 status=ok note=alpha-11-beta-8\nrecord 00298: sensor=862 status=ok note=alpha-12-beta-9\nrecord 00299: sensor=781 status=ok note=alpha-0-beta-10\nrecord 00300: sensor=700 status=ok note=alpha-1-beta-11\nrecord 00301: sensor=619 status=retry note=alpha-2-beta-12\nrecord 00302: sensor=538 status=ok note=alpha-3-beta-13\nrecord 00303: sensor=457 status=ok note=alpha-4-beta-14\nrecord 00304: sensor=376 status=ok note=alpha-5-beta-15\nrecord 00305: sensor=295 status=ok note=alpha-6-beta-16\nrecord 00306: sensor=214 status=ok note=alpha-7-beta-0\nrecord 00307: sensor=133 status=ok note=alpha-8-beta-1\nrecord 00308: sensor=52 status=retry note=alpha-9-beta-2\nrecord 00309: sensor=971 status=ok note=alpha-10-beta-3\nrecord 00310: sensor=890 status=ok note=alpha-11-beta-4\nrecord 00311: sensor=809 status=ok note=alpha-12-beta-5\nrecord 00312: sensor=728 status=ok note=alpha-0-beta-6\nrecord 00313: sensor=647 status=ok note=alpha-1-beta-7\nrecord 00314: sensor=566 status=ok note=alpha-2-beta-8\nrecord 00315: sensor=485 status=retry note=alpha-3-beta-9\nrecord 00316: sensor=404 status=ok note=alpha-4-beta-10\nrecord 00317: sensor=323 status=ok note=alpha-5-beta-11\nrecord 00318: sensor=242 status=ok note=alpha-6-beta-12\nrecord 00319: sensor=161 status=ok note=alpha-7-beta-13\nrecord 00320: sensor=80 status=ok note=alpha-8-beta-14\nrecord 00321: sensor=999 status=ok note=alpha-9-beta-15\nrecord 00322: sensor=918 status=retry note=alpha-10-beta-16\nrecord 00323: sensor=837 status=ok note=alpha-11-beta-0\nrecord 00324: sensor=756 status=ok note=alpha-12-beta-1\nrecord 00325: sensor=675 status=ok note=alpha-0-beta-2\nrecord 00326: sensor=594 status=ok note=alpha-1-beta-3\nrecord 00327: sensor=513 status=ok note=alpha-2-beta-4\nrecord 00328: sensor=432 status=ok note=alpha-3-beta-5\nrecord 00329: sensor=351 status=retry note=alpha-4-beta-6\nrecord 00330: sensor=270 status=ok note=alpha-5-beta-7\nrecord 00331: sensor=189 status=ok note=alpha-6-beta-8\nrecord 00332: sensor=108 status=ok note=alpha-7-beta-9\nrecord 00333: sensor=27 status=ok note=alpha-8-beta-10\nrecord 00334: sensor=946 status=ok note=alpha-9-beta-11\nrecord 00335: sensor=865 status=ok note=alpha-10-beta-12\nrecord 00336: sensor=784 status=retry note=alpha-11-beta-13\nrecord 00337: sensor=703 status=ok note=alpha-12-beta-14\nrecord 00338: sensor=622 status=ok note=alpha-0-beta-15\nrecord 00339: sensor=541 status=ok note=alpha-1-beta-16\nrecord 00340: sensor=460 status=ok note=alpha-2-beta-0\nrecord 00341: sensor=379 status=ok note=alpha-3-beta-1\nrecord 00342: sensor=298 status=ok note=alpha-4-beta-2\nrecord 00343: sensor=217 status=retry note=alpha-5-beta-3\nrecord 00344: sensor=136 status=ok note=alpha-6-beta-4\nrecord 00345: sensor=55 status=ok note=alpha-7-beta-5\nrecord 00346: sensor=974 status=ok note=alpha-8-beta-6\nrecord 00347: sensor=893 status=ok note=alpha-9-beta-7\nrecord 00348: sensor=812 status=ok note=alpha-10-beta-8\nrecord 00349: sensor=731 status=ok note=alpha-11-beta-9\nrecord 00350: sensor=650 status=retry note=alpha-12-beta-10\nrecord 00351: sensor=569 status=ok note=alpha-0-beta-11\nrecord 00352: sensor=488 status=ok note=alpha-1-beta-12\nrecord 00353: sensor=407 status=ok note=alpha-2-beta-13\nrecord 00354: sensor=326 status=ok note=alpha-3-beta-14\nrecord 00355: sensor=245 status=ok note=alpha-4-beta-15\nrecord 00356: sensor=164 status=ok note=alpha-5-beta-16\nrecord 00357: sensor=83 status=retry note=alpha-6-beta-0\nrecord 00358: sensor=2 status=ok note=alpha-7-beta-1\nrecord 00359: sensor=921 status=ok note=alpha-8-beta-2\nrecord 00360: sensor=840 status=ok note=alpha-9-beta-3\nrecord 00361: sensor=759 status=ok note=alpha-10-beta-4\nrecord 00362: sensor=678 status=ok note=alpha-11-beta-5\nrecord 00363: sensor=597 status=ok note=alpha-12-beta-6\nrecord 00364: sensor=516 status=retry note=alpha-0-beta-7\nrecord 00365: sensor=435 status=ok note=alpha-1-beta-8\nrecord 00366: sensor=354 status=ok note=alpha-2-beta-9\nrecord 00367: sensor=273 status=ok note=alpha-3-beta-10\nrecord 00368: sensor=192 status=ok note=alpha-4-beta-11\nrecord 00369: sensor=111 status=ok note=alpha-5-beta-12\nrecord 00370: sensor=30 status=ok note=alpha-6-beta-13\nrecord 00371: sensor=949 status=retry note=alpha-7-beta-14\nrecord 00372: sensor=868 status=ok note=alpha-8-beta-15\nrecord 00373: sensor=787 status=ok note=alpha-9-beta-16\nrecord 00374: sensor=706 status=ok note=alpha-10-beta-0\nrecord 00375: sensor=625 status=ok note=alpha-11-beta-1\nrecord 00376: sensor=544 status=ok note=alpha-12-beta-2\nrecord 00377: sensor=463 status=ok note=alpha-0-beta-3\nrecord 00378: sensor=382 status=retry note=alpha-1-beta-4\nrecord 00379: sensor=301 status=ok note=alpha-2-beta-5\nrecord 00380: sensor=220 status=ok note=alpha-3-beta-6\nrecord 00381: sensor=139 status=ok note=alpha-4-beta-7\nrecord 00382: sensor=58 status=ok note=alpha-5-beta-8\nrecord 00383: sensor=977 status=ok note=alpha-6-beta-9\nrecord 00384: sensor=896 status=ok note=alpha-7-beta-10\nrecord 00385: sensor=815 status=retry note=alpha-8-beta-11\nrecord 00386: sensor=734 status=ok note=alpha-9-beta-12\nrecord 00387: sensor=653 status=ok note=alpha-10-beta-13\nrecord 00388: sensor=572 status=ok note=alpha-11-beta-14\nrecord 00389: sensor=491 status=ok note=alpha-12-beta-15\nrecord 00390: sensor=410 status=ok note=alpha-0-beta-16\nrecord 00391: sensor=329 status=ok note=alpha-1-beta-0\nrecord 00392: sensor=248 status=retry note=alpha-2-beta-1\nrecord 00393: sensor=167 status=ok note=alpha-3-beta-2\nrecord 00394: sensor=86 status=ok note=alpha-4-beta-3\nrecord 00395: sensor=5 status=ok note=alpha-5-beta-4\nrecord 00396: sensor=924 status=ok note=alpha-6-beta-5\nrecord 00397: sensor=843 status=ok note=alpha-7-beta-6\nrecord 00398: sensor=762 status=ok note=alpha-8-beta-7\nrecord 00399: sensor=681 status=retry note=alpha-9-beta-8\nrecord 00400: sensor=600 status=ok note=alpha-10-beta-9\nrecord 00401: sensor=519 status=ok note=alpha-11-beta-10\nrecord 00402: sensor=438 status=ok note=alpha-12-beta-11\nrecord 00403: sensor=357 status=ok note=alpha-0-beta-12\nrecord 00404: sensor=276 status=ok note=alpha-1-beta-13\nrecord 00405: sensor=195 status=ok note=alpha-2-beta-14\nrecord 00406: sensor=114 status=retry note=alpha-3-beta-15\nrecord 00407: sensor=33 status=ok note=alpha-4-beta-16\nrecord 00408: sensor=952 status=ok note=alpha-5-beta-0\nrecord 00409: sensor=871 status=ok note=alpha-6-beta-1\nrecord 00410: sensor=790 status=ok note=alpha-7-beta-2\nrecord 00411: sensor=709 status=ok note=alpha-8-beta-3\nrecord 00412: sensor=628 status=ok note=alpha-9-beta-4\nrecord 00413: sensor=547 status=retry note=alpha-10-beta-5\nrecord 00414: sensor=466 status=ok note=alpha-11-beta-6\nrecord 00415: sensor=385 status=ok note=alpha-12-beta-7\nrecord 00416: sensor=304 status=ok note=alpha-0-beta-8\nrecord 00417: sensor=223 status=ok note=alpha-1-beta-9\nrecord 00418: sensor=142 status=ok note=alpha-2-beta-10\nrecord 00419: sensor=61 status=ok note=alpha-3-beta-11\nrecord 00420: sensor=980 status=retry note=alpha-4-beta-12\nrecord 00421: sensor=899 status=ok note=alpha-5-beta-13\nrecord 00422: sensor=818 status=ok note=alpha-6-beta-14\nrecord 00423: sensor=737 status=ok note=alpha-7-beta-15\nrecord 00424: sensor=656 status=ok note=alpha-8-beta-16\nrecord 00425: sensor=575 status=ok note=alpha-9-beta-0\nrecord 00426: sensor=494 status=ok note=alpha-10-beta-1\nrecord 00427: sensor=413 status=retry note=alpha-11-beta-2\nrecord 00428: sensor=332 status=ok note=alpha-12-beta-3\nrecord 00429: sensor=251 status=ok note=alpha-0-beta-4\nrecord 00430: sensor=170 status=ok note=alpha-1-beta-5\nrecord 00431: sensor=89 status=ok note=alpha-2-beta-6\nrecord 00432: sensor=8 status=ok note=alpha-3-beta-7\nrecord 00433: sensor=927 status=ok note=alpha-4-beta-8\nrecord 00434: sensor=846 status=retry note=alpha-5-beta-9\nrecord 00435: sensor=765 status=ok note=alpha-6-beta-10\nrecord 00436: sensor=684 status=ok note=alpha-7-beta-11\nrecord 00437: sensor=603 status=ok note=alpha-8-beta-12\nrecord 00438: sensor=522 status=ok note=alpha-9-beta-13\nrecord 00439: sensor=441 status=ok note=alpha-10-beta-14\nrecord 00440: sensor=360 status=ok note=alpha-11-beta-15\nrecord 00441: sensor=279 status=retry note=alpha-12-beta-16\nrecord 00442: sensor=198 status=ok note=alpha-0-beta-0\nrecord 00443: sensor=117 status=ok note=alpha-1-beta-1\nrecord 00444: sensor=36 status=ok note=alpha-2-beta-2\nrecord 00445: sensor=955 status=ok note=alpha-3-beta-3\nrecord 00446: sensor=874 status=ok note=alpha-4-beta-4\nrecord 00447: sensor=793 status=ok note=alpha-5-beta-5\nrecord 00448: sensor=712 status=retry note=alpha-6-beta-6\nrecord 00449: sensor=631 status=ok note=alpha-7-beta-7\nrecord 00450: sensor=550 status=ok note=alpha-8-beta-8\nrecord 00451: sensor=469 status=ok note=alpha-9-beta-9\nrecord 00452: sensor=388 status=ok note=alpha-10-beta-10\nrecord 00453: sensor=307 status=ok note=alpha-11-beta-11\nrecord 00454: sensor=226 status=ok note=alpha-12-beta-12\nrecord 00455: sensor=145 status=retry note=alpha-0-beta-13\nrecord 00456: sensor=64 status=ok note=alpha-1-beta-14\nrecord 00457: sensor=983 status=ok note=alpha-2-beta-15\nrecord 00458: sensor=902 status=ok note=alpha-3-beta-16\nrecord 00459: sensor=821 status=ok note=alpha-4-beta-0\nrecord 00460: sensor=740 status=ok note=alpha-5-beta-1\nrecord 00461: sensor=659 status=ok note=alpha-6-beta-2\nrecord 00462: sensor=578 status=retry note=alpha-7-beta-3\nrecord 00463: sensor=497 status=ok note=alpha-8-beta-4\nrecord 00464: sensor=416 status=ok note=alpha-9-beta-5\nrecord 00465: sensor=335 status=ok note=alpha-10-beta-6\nrecord 00466: sensor=254 status=ok note=alpha-11-beta-7\nrecord 00467: sensor=173 status=ok note=alpha-12-beta-8\nrecord 00468: sensor=92 status=ok note=alpha-0-beta-9\nrecord 00469: sensor=11 status=retry note=alpha-1-beta-10\nrecord 00470: sensor=930 status=ok note=alpha-2-beta-11\nrecord 00471: sensor=849 status=ok note=alpha-3-beta-12\nrecord 00472: sensor=768 status=ok note=alpha-4-beta-13\nrecord 00473: sensor=687 status=ok note=alpha-5-beta-14\nrecord 00474: sensor=606 status=ok note=alpha-6-beta-15\nrecord 00475: sensor=525 status=ok note=alpha-7-beta-16\nrecord 00476: sensor=444 status=retry note=alpha-8-beta-0\nrecord 00477: sensor=363 status=ok note=alpha-9-beta-1\nrecord 00478: sensor=282 status=ok note=alpha-10-beta-2\nrecord 00479: sensor=201 status=ok note=alpha-11-beta-3\nrecord 00480: sensor=120 status=ok note=alpha-12-beta-4\nrecord 00481: sensor=39 status=ok note=alpha-0-beta-5\nrecord 00482: sensor=958 status=ok note=alpha-1-beta-6\nrecord 00483: sensor=877 status=retry note=alpha-2-beta-7\nrecord 00484: sensor=796 status=ok note=alpha-3-beta-8\nrecord 00485: sensor=715 status=ok note=alpha-4-beta-9\nrecord 00486: sensor=634 status=ok note=alpha-5-beta-10\nrecord 00487: sensor=553 status=ok note=alpha-6-beta-11\nrecord 00488: sensor=472 status=ok note=alpha-7-beta-12\nrecord 00489: sensor=391 status=ok note=alpha-8-beta-13\nrecord 00490: sensor=310 status=retry note=alpha-9-beta-14\nrecord 00491: sensor=229 status=ok note=alpha-10-beta-15\nrecord 00492: sensor=148 status=ok note=alpha-11-beta-16\nrecord 00493: sensor=67 status=ok note=alpha-12-beta-0\nrecord 00494: sensor=986 status=ok note=alpha-0-beta-1\nrecord 00495: sensor=905 status=ok note=alpha-1-beta-2\nrecord 00496: sensor=824 status=ok note=alpha-2-beta-3\nrecord 00497: sensor=743 status=retry note=alpha-3-beta-4\nrecord 00498: sensor=662 status=ok note=alpha-4-beta-5\nrecord 00499: sensor=581 status=ok note=alpha-5-beta-6\nrecord 00500: sensor=500 status=ok note=alpha-6-beta-7\nrecord 00501: sensor=419 status=ok note=alpha-7-beta-8\nrecord 00502: sensor=338 status=ok note=alpha-8-beta-9\nrecord 00503: sensor=257 status=ok note=alpha-9-beta-10\nrecord 00504: sensor=176 status=retry note=alpha-10-beta-11\nrecord 00505: sensor=95 status=ok note=alpha-11-beta-12\nrecord 00506: sensor=14 status=ok note=alpha-12-beta-13\nrecord 00507: sensor=933 status=ok note=alpha-0-beta-14\nrecord 00508: sensor=852 status=ok note=alpha-1-beta-15\nrecord 00509: sensor=771 status=ok note=alpha-2-beta-16\nrecord 00510: sensor=690 status=ok note=alpha-3-beta-0\nrecord 00511: sensor=609 status=retry note=alpha-4-beta-1\nrecord 00512: sensor=528 status=ok note=alpha-5-beta-2\nrecord 00513: sensor=447 status=ok note=alpha-6-beta-3\nrecord 00514: sensor=366 status=ok note=alpha-7-beta-4\nrecord 00515: sensor=285 status=ok note=alpha-8-beta-5\nrecord 00516: sensor=204 status=ok note=alpha-9-beta-6\nrecord 00517: sensor=123 status=ok note=alpha-10-beta-7\nrecord 00518: sensor=42 status=retry note=alpha-11-beta-8\nrecord 00519: sensor=961 status=ok note=alpha-12-beta-9\nrecord 00520: sensor=880 status=ok note=alpha-0-beta-10\nrecord 00521: sensor=799 status=ok note=alpha-1-beta-11\nrecord 00522: sensor=718 status=ok note=alpha-2-beta-12\nrecord 00523: sensor=637 status=ok note=alpha-3-beta-13\nrecord 00524: sensor=556 status=ok note=alpha-4-beta-14\nrecord 00525: sensor=475 status=retry note=alpha-5-beta-15\nrecord 00526: sensor=394 status=ok note=alpha-6-beta-16\nrecord 00527: sensor=313 status=ok note=alpha-7-beta-0\nrecord 00528: sensor=232 status=ok note=alpha-8-beta-1\nrecord 00529: sensor=151 status=ok note=alpha-9-beta-2\nrecord 00530: sensor=70 status=ok note=alpha-10-beta-3\nrecord 00531: sensor=989 status=ok note=alpha-11-beta-4\nrecord 00532: sensor=908 status=retry note=alpha-12-beta-5\nrecord 00533: sensor=827 status=ok note=alpha-0-beta-6\nrecord 00534: sensor=746 status=ok note=alpha-1-beta-7\nrecord 00535: sensor=665 status=ok note=alpha-2-beta-8\nrecord 00536: sensor=584 status=ok note=alpha-3-beta-9\nrecord 00537: sensor=503 status=ok note=alpha-4-beta-10\nrecord 00538: sensor=422 status=ok note=alpha-5-beta-11\nrecord 00539: sensor=341 status=retry note=alpha-6-beta-12\nrecord 00540: sensor=260 status=ok note=alpha-7-beta-13\nrecord 00541: sensor=179 status=ok note=alpha-8-beta-14\nrecord 00542: sensor=98 status=ok note=alpha-9-beta-15\nrecord 00543: sensor=17 status=ok note=alpha-10-beta-16\nrecord 00544: sensor=936 status=ok note=alpha-11-beta-0\nrecord 00545: sensor=855 status=ok note=alpha-12-beta-1\nrecord 00546: sensor=774 status=retry note=alpha-0-beta-2\nrecord 00547: sensor=693 status=ok note=alpha-1-beta-3\nrecord 00548: sensor=612 status=ok note=alpha-2-beta-4\nrecord 00549: sensor=531 status=ok note=alpha-3-beta-5\nrecord 00550: sensor=450 status=ok note=alpha-4-beta-6\nrecord 00551: sensor=369 status=ok note=alpha-5-beta-7\nrecord 00552: sensor=288 status=ok note=alpha-6-beta-8\nrecord 00553: sensor=207 status=retry note=alpha-7-beta-9\nrecord 00554: sensor=126 status=ok note=alpha-8-beta-10\nrecord 00555: sensor=45 status=ok note=alpha-9-beta-11\nrecord 00556: sensor=964 status=ok note=alpha-10-beta-12\nrecord 00557: sensor=883 status=ok note=alpha-11-beta-13\nrecord 00558: sensor=802 status=ok note=alpha-12-beta-14\nrecord 00559: sensor=721 status=ok note=alpha-0-beta-15\nrecord 00560: sensor=640 status=retry note=alpha-1-beta-16\nrecord 00561: sensor=559 status=ok note=alpha-2-beta-0\nrecord 00562: sensor=478 status=ok note=alpha-3-beta-1\nrecord 00563: sensor=397 status=ok note=alpha-4-beta-2\nrecord 00564: sensor=316 status=ok note=alpha-5-beta-3\nrecord 00565: sensor=235 status=ok note=alpha-6-beta-4\nrecord 00566: sensor=154 status=ok note=alpha-7-beta-5\nrecord 00567: sensor=73 status=retry note=alpha-8-beta-6\nrecord 00568: sensor=992 status=ok note=alpha-9-beta-7\nrecord 00569: sensor=911 status=ok note=alpha-10-beta-8\nrecord 00570: sensor=830 status=ok note=alpha-11-beta-9\nrecord 00571: sensor=749 status=ok note=alpha-12-beta-10\nrecord 00572: sensor=668 status=ok note=alpha-0-beta-11\nrecord 00573: sensor=587 status=ok note=alpha-1-beta-12\nrecord 00574: sensor=506 status=retry note=alpha-2-beta-13\nrecord 00575: sensor=425 status=ok note=alpha-3-beta-14\nrecord 00576: sensor=344 status=ok note=alpha-4-beta-15\nrecord 00577: sensor=263 status=ok note=alpha-5-beta-16\nrecord 00578: sensor=182 status=ok note=alpha-6-beta-0\nrecord 00579: sensor=101 status=ok note=alpha-7-beta-1\nrecord 00580: sensor=20 status=ok note=alpha-8-beta-2\nrecord 00581: sensor=939 status=retry note=alpha-9-beta-3\nrecord 00582: sensor=858 status=ok note=alpha-10-beta-4\nrecord 00583: sensor=777 status=ok note=alpha-11-beta-5\nrecord 00584: sensor=696 status=ok note=alpha-12-beta-6\nrecord 00585: sensor=615 status=ok note=alpha-0-beta-7\nrecord 00586: sensor=534 status=ok note=alpha-1-beta-8\nrecord 00587: sensor=453 status=ok note=alpha-2-beta-9\nrecord 00588: sensor=372 status=retry note=alpha-3-beta-10\nrecord 00589: sensor=291 status=ok note=alpha-4-beta-11\nrecord 00590: sensor=210 status=ok note=alpha-5-beta-12\nrecord 00591: sensor=129 status=ok note=alpha-6-beta-13\nrecord 00592: sensor=48 status=ok note=alpha-7-beta-14\nrecord 00593: sensor=967 status=ok note=alpha-8-beta-15\nrecord 00594: sensor=886 status=ok note=alpha-9-beta-16\nrecord 00595: sensor=805 status=retry note=alpha-10-beta-0\nrecord 00596: sensor=724 status=ok note=alpha-11-beta-1\nrecord 00597: sensor=643 status=ok note=alpha-12-beta-2\nrecord 00598: sensor=562 status=ok note=alpha-0-beta-3\nrecord 00599: sensor=481 status=ok note=alpha-1-beta-4\nrecord 00600: sensor=400 status=ok note=alpha-2-beta-5\nrecord 00601: sensor=319 status=ok note=alpha-3-beta-6\nrecord 00602: sensor=238 status=retry note=alpha-4-beta-7\nrecord 00603: sensor=157 status=ok note=alpha-5-beta-8\nrecord 00604: sensor=76 status=ok note=alpha-6-beta-9\nrecord 00605: sensor=995 status=ok note=alpha-7-beta-10\nrecord 00606: sensor=914 status=ok note=alpha-8-beta-11\nrecord 00607: sensor=833 status=ok note=alpha-9-beta-12\nrecord 00608: sensor=752 status=ok note=alpha-10-beta-13\nrecord 00609: sensor=671 status=retry note=alpha-11-beta-14\nrecord 00610: sensor=590 status=ok note=alpha-12-beta-15\nrecord 00611: sensor=509 status=ok note=alpha-0-beta-16\nrecord 00612: sensor=428 status=ok note=alpha-1-beta-0\nrecord 00613: sensor=347 status=ok note=alpha-2-beta-1\nrecord 00614: sensor=266 status=ok note=alpha-3-beta-2\nrecord 00615: sensor=185 status=ok note=alpha-4-beta-3\nrecord 00616: sensor=104 status=retry note=alpha-5-beta-4\nrecord 00617: sensor=23 status=ok note=alpha-6-beta-5\nrecord 00618: sensor=942 status=ok note=alpha-7-beta-6\nrecord 00619: sensor=861 status=ok note=alpha-8-beta-7\nrecord 00620: sensor=780 status=ok note=alpha-9-beta-8\nrecord 00621: sensor=699 status=ok note=alpha-10-beta-9\nrecord 00622: sensor=618 status=ok note=alpha-11-beta-10\nrecord 00623: sensor=537 status=retry note=alpha-12-beta-11\nrecord 00624: sensor=456 status=ok note=alpha-0-beta-12\nrecord 00625: sensor=375 status=ok note=alpha-1-beta-13\nrecord 00626: sensor=294 status=ok note=alpha-2-beta-14\nrecord 00627: sensor=213 status=ok note=alpha-3-beta-15\nrecord 00628: sensor=132 status=ok note=alpha-4-beta-16\nrecord 00629: sensor=51 status=ok note=alpha-5-beta-0\nrecord 00630: sensor=970 status=retry note=alpha-6-beta-1\nrecord 00631: sensor=889 status=ok note=alpha-7-beta-2\nrecord 00632: sensor=808 status=ok note=alpha-8-beta-3\nrecord 00633: sensor=727 status=ok note=alpha-9-beta-4\nrecord 00634: sensor=646 status=ok note=alpha-10-beta-5\nrecord 00635: sensor=565 status=ok note=alpha-11-beta-6\nrecord 00636: sensor=484 status=ok note=alpha-12-beta-7\nrecord 00637: sensor=403 status=retry note=alpha-0-beta-8\nrecord 00638: sensor=322 status=ok note=alpha-1-beta-9\nrecord 00639: sensor=241 status=ok note=alpha-2-beta-10\nrecord 00640: sensor=160 status=ok note=alpha-3-beta-11\nrecord 00641: sensor=79 status=ok note=alpha-4-beta-12\nrecord 00642: sensor=998 status=ok note=alpha-5-beta-13\nrecord 00643: sensor=917 status=ok note=alpha-6-beta-14\nrecord 00644: sensor=836 status=retry note=alpha-7-beta-15\nrecord 00645: sensor=755 status=ok note=alpha-8-beta-16\nrecord 00646: sensor=674 status=ok note=alpha-9-beta-0\nrecord 00647: sensor=593 status=ok note=alpha-10-beta-1\nrecord 00648: sensor=512 status=ok note=alpha-11-beta-2\nrecord 00649: sensor=431 status=ok note=alpha-12-beta-3\nrecord 00650: sensor=350 status=ok note=alpha-0-beta-4\nrecord 00651: sensor=269 status=retry note=alpha-1-beta-5\nrecord 00652: sensor=188 status=ok note=alpha-2-beta-6\nrecord 00653: sensor=107 status=ok note=alpha-3-beta-7\nrecord 00654: sensor=26 status=ok note=alpha-4-beta-8\nrecord 00655: sensor=945 status=ok note=alpha-5-beta-9\nrecord 00656: sensor=864 status=ok note=alpha-6-beta-10\nrecord 00657: sensor=783 status=ok note=alpha-7-beta-11\nrecord 00658: sensor=702 status=retry note=alpha-8-beta-12\nrecord 00659: sensor=621 status=ok note=alpha-9-beta-13\nrecord 00660: sensor=540 status=ok note=alpha-10-beta-14\nrecord 00661: sensor=459 status=ok note=alpha-11-beta-15\nrecord 00662: sensor=378 status=ok note=alpha-12-beta-16\nrecord 00663: sensor=297 status=ok note=alpha-0-beta-0\nrecord 00664: sensor=216 status=ok note=alpha-1-beta-1\nrecord 00665: sensor=135 status=retry note=alpha-2-beta-2\nrecord 00666: sensor=54 status=ok note=alpha-3-beta-3\nrecord 00667: sensor=973 status=ok note=alpha-4-beta-4\nrecord 00668: sensor=892 status=ok note=alpha-5-beta-5\nrecord 00669: sensor=811 status=ok note=alpha-6-beta-6\nrecord 00670: sensor=730 status=ok note=alpha-7-beta-7\nrecord 00671: sensor=649 status=ok note=alpha-8-beta-8\nrecord 00672: sensor=568 status=retry note=alpha-9-beta-9\nrecord 00673: sensor=487 status=ok note=alpha-10-beta-10\nrecord 00674: sensor=406 status=ok note=alpha-11-beta-11\nrecord 00675: sensor=325 status=ok note=alpha-12-beta-12\nrecord 00676: sensor=244 status=ok note=alpha-0-beta-13\nrecord 00677: sensor=163 status=ok note=alpha-1-beta-14\nrecord 00678: sensor=82 status=ok note=alpha-2-beta-15\nrecord 00679: sensor=1 status=retry note=alpha-3-beta-16\nrecord 00680: sensor=920 status=ok note=alpha-4-beta-0\nrecord 00681: sensor=839 status=ok note=alpha-5-beta-1\nrecord 00682: sensor=758 status=ok note=alpha-6-beta-2\nrecord 00683: sensor=677 status=ok note=alpha-7-beta-3\nrecord 00684: sensor=596 status=ok note=alpha-8-beta-4\nrecord 00685: sensor=515 status=ok note=alpha-9-beta-5\nrecord 00686: sensor=434 status=retry note=alpha-10-beta-6\nrecord 00687: sensor=353 status=ok note=alpha-11-beta-7\nrecord 00688: sensor=272 status=ok note=alpha-12-beta-8\nrecord 00689: sensor=191 status=ok note=alpha-0-beta-9\nrecord 00690: sensor=110 status=ok note=alpha-1-beta-10\nrecord 00691: sensor=29 status=ok note=alpha-2-beta-11\nrecord 00692: sensor=948 status=ok note=alpha-3-beta-12\nrecord 00693: sensor=867 status=retry note=alpha-4-beta-13\nrecord 00694: sensor=786 status=ok note=alpha-5-beta-14\nrecord 00695: sensor=705 status=ok note=alpha-6-beta-15\nrecord 00696: sensor=624 status=ok note=alpha-7-beta-16\nrecord 00697: sensor=543 status=ok note=alpha-8-beta-0\nrecord 00698: sensor=462 status=ok note=alpha-9-beta-1\nrecord 00699: sensor=381 status=ok note=alpha-10-beta-2\nrecord 00700: sensor=300 status=retry note=alpha-11-beta-3\nrecord 00701: sensor=219 status=ok note=alpha-12-beta-4\nrecord 00702: sensor=138 status=ok note=alpha-0-beta-5\nrecord 00703: sensor=57 status=ok note=alpha-1-beta-6\nrecord 00704: sensor=976 status=ok note=alpha-2-beta-7\nrecord 00705: sensor=895 status=ok note=alpha-3-beta-8\nrecord 00706: sensor=814 status=ok note=alpha-4-beta-9\nrecord 00707: sensor=733 status=retry note=alpha-5-beta-10\nrecord 00708: sensor=652 status=ok note=alpha-6-beta-11\nrecord 00709: sensor=571 status=ok note=alpha-7-beta-12\nrecord 00710: sensor=490 status=ok note=alpha-8-beta-13\nrecord 00711: sensor=409 status=ok note=alpha-9-beta-14\nrecord 00712: sensor=328 status=ok note=alpha-10-beta-15\nrecord 00713: sensor=247 status=ok note=alpha-11-beta-16\nrecord 00714: sensor=166 status=retry note=alpha-12-beta-0\nrecord 00715: sensor=85 status=ok note=alpha-0-beta-1\nrecord 00716: sensor=4 status=ok note=alpha-1-beta-2\nrecord 00717: sensor=923 status=ok note=alpha-2-beta-3\nrecord 00718: sensor=842 status=ok note=alpha-3-beta-4\nrecord 00719: sensor=761 status=ok note=alpha-4-beta-5\nrecord 00720: sensor=680 status=ok note=alpha-5-beta-6\nrecord 00721: sensor=599 status=retry note=alpha-6-beta-7\nrecord 00722: sensor=518 status=ok note=alpha-7-beta-8\nrecord 00723: sensor=437 status=ok note=alpha-8-beta-9\nrecord 00724: sensor=356 status=ok note=alpha-9-beta-10\nrecord 00725: sensor=275 status=ok note=alpha-10-beta-11\nrecord 00726: sensor=194 status=ok note=alpha-11-beta-12\nrecord 00727: sensor=113 status=ok note=alpha-12-beta-13\nrecord 00728: sensor=32 status=retry note=alpha-0-beta-14\nrecord 00729: sensor=951 status=ok note=alpha-1-beta-15\nrecord 00730: sensor=870 status=ok note=alpha-2-beta-16\nrecord 00731: sensor=789 status=ok note=alpha-3-beta-0\nrecord 00732: sensor=708 status=ok note=alpha-4-beta-1\nrecord 00733: sensor=627 status=ok note=alpha-5-beta-2\nrecord 00734: sensor=546 status=ok note=alpha-6-beta-3\nrecord 00735: sensor=465 status=retry note=alpha-7-beta-4\nrecord 00736: sensor=384 status=ok note=alpha-8-beta-5\nrecord 00737: sensor=303 status=ok note=alpha-9-beta-6\nrecord 00738: sensor=222 status=ok note=alpha-10-beta-7\nrecord 00739: sensor=141 status=ok note=alpha-11-beta-8\nrecord 00740: sensor=60 status=ok note=alpha-12-beta-9\nrecord 00741: sensor=979 status=ok note=alpha-0-beta-10\nrecord 00742: sensor=898 status=retry note=alpha-1-beta-11\nrecord 00743: sensor=817 status=ok note=alpha-2-beta-12\nrecord 00744: sensor=736 status=ok note=alpha-3-beta-13\nrecord 00745: sensor=655 status=ok note=alpha-4-beta-14\nrecord 00746: sensor=574 status=ok note=alpha-5-beta-15\nrecord 00747: sensor=493 status=ok note=alpha-6-beta-16\nrecord 00748: sensor=412 status=ok note=alpha-7-beta-0\nrecord 00749: sensor=331 status=retry note=alpha-8-beta-1\nrecord 00750: sensor=250 status=ok note=alpha-9-beta-2\nrecord 00751: sensor=169 status=ok note=alpha-10-beta-3\nrecord 00752: sensor=88 status=ok note=alpha-11-beta-4\nrecord 00753: sensor=7 status=ok note=alpha-12-beta-5\nrecord 00754: sensor=926 status=ok note=alpha-0-beta-6\nrecord 00755: sensor=845 status=ok note=alpha-1-beta-7\nrecord 00756: sensor=764 status=retry note=alpha-2-beta-8\nrecord 00757: sensor=683 status=ok note=alpha-3-beta-9\nrecord 00758: sensor=602 status=ok note=alpha-4-beta-10\nrecord 00759: sensor=521 status=ok note=alpha-5-beta-11\nrecord 00760: sensor=440 status=ok note=alpha-6-beta-12\nrecord 00761: sensor=359 status=ok note=alpha-7-beta-13\nrecord 00762: sensor=278 status=ok note=alpha-8-beta-14\nrecord 00763: sensor=197 status=retry note=alpha-9-beta-15\nrecord 00764: sensor=116 status=ok note=alpha-10-beta-16\nrecord 00765: sensor=35 status=ok note=alpha-11-beta-0\nrecord 00766: sensor=954 status=ok note=alpha-12-beta-1\nrecord 00767: sensor=873 status=ok note=alpha-0-beta-2\nrecord 00768: sensor=792 status=ok note=alpha-1-beta-3\nrecord 00769: sensor=711 status=ok note=alpha-2-beta-4\nrecord 00770: sensor=630 status=retry note=alpha-3-beta-5\nrecord 00771: sensor=549 status=ok note=alpha-4-beta-6\nrecord 00772: sensor=468 status=ok note=alpha-5-beta-7\nrecord 00773: sensor=387 status=ok note=alpha-6-beta-8\nrecord 00774: sensor=306 status=ok note=alpha-7-beta-9\nrecord 00775: sensor=225 status=ok note=alpha-8-beta-10\nrecord 00776: sensor=144 status=ok note=alpha-9-beta-11\nrecord 00777: sensor=63 status=retry note=alpha-10-beta-12\nrecord 00778: sensor=982 status=ok note=alpha-11-beta-13\nrecord 00779: sensor=901 status=ok note=alpha-12-beta-14\nrecord 00780: sensor=820 status=ok note=alpha-0-beta-15\nrecord 00781: sensor=739 status=ok note=alpha-1-beta-16\nrecord 00782: sensor=658 status=ok note=alpha-2-beta-0\nrecord 00783: sensor=577 status=ok note=alpha-3-beta-1\nrecord 00784: sensor=496 status=retry note=alpha-4-beta-2\nrecord 00785: sensor=415 status=ok note=alpha-5-beta-3\nrecord 00786: sensor=334 status=ok note=alpha-6-beta-4\nrecord 00787: sensor=253 status=ok note=alpha-7-beta-5\nrecord 00788: sensor=172 status=ok note=alpha-8-beta-6\nrecord 00789: sensor=91 status=ok note=alpha-9-beta-7\nrecord 00790: sensor=10 status=ok note=alpha-10-beta-8\nrecord 00791: sensor=929 status=retry note=alpha-11-beta-9\nrecord 00792: sensor=848 status=ok note=alpha-12-beta-10\nrecord 00793: sensor=767 status=ok note=alpha-0-beta-11\nrecord 00794: sensor=686 status=ok note=alpha-1-beta-12\nrecord 00795: sensor=605 status=ok note=alpha-2-beta-13\nrecord 00796: sensor=524 status=ok note=alpha-3-beta-14\nrecord 00797: sensor=443 status=ok note=alpha-4-beta-15\nrecord 00798: sensor=362 status=retry note=alpha-5-beta-16\nrecord 00799: sensor=281 status=ok note=alpha-6-beta-0\nrecord 00800: sensor=200 status=ok note=alpha-7-beta-1"}], "max_tokens": 96, "temperature": 0, "stream": false}
+
+--- rendered prompt ---
+[gMASK]<sop><|system|>Reasoning Effort: High<|system|>You are a terse assistant. Answer directly, no thinking.<|user|>Say hello in exactly five words.<|assistant|><think></think>Hello there, nice to meet you!<|user|>Here is a sensor log. How many records have status=retry? Reply with the number only.
+
+record 00001: sensor=919 status=ok note=alpha-1-beta-1
+record 00002: sensor=838 status=ok note=alpha-2-beta-2
+record 00003: sensor=757 status=ok note=alpha-3-beta-3
+record 00004: sensor=676 status=ok note=alpha-4-beta-4
+record 00005: sensor=595 status=ok note=alpha-5-beta-5
+record 00006: sensor=514 status=ok note=alpha-6-beta-6
+record 00007: sensor=433 status=retry note=alpha-7-beta-7
+record 00008: sensor=352 status=ok note=alpha-8-beta-8
+record 00009: sensor=271 status=ok note=alpha-9-beta-9
+record 00010: sensor=190 status=ok note=alpha-10-beta-10
+record 00011: sensor=109 status=ok note=alpha-11-beta-11
+record 00012: sensor=28 status=ok note=alpha-12-beta-12
+record 00013: sensor=947 status=ok note=alpha-0-beta-13
+record 00014: sensor=866 status=retry note=alpha-1-beta-14
+record 00015: sensor=785 status=ok note=alpha-2-beta-15
+record 00016: sensor=704 status=ok note=alpha-3-beta-16
+record 00017: sensor=623 status=ok note=alpha-4-beta-0
+record 00018: sensor=542 status=ok note=alpha-5-beta-1
+record 00019: sensor=461 status=ok note=alpha-6-beta-2
+record 00020: sensor=380 status=ok note=alpha-7-beta-3
+record 00021: sensor=299 status=retry note=alpha-8-beta-4
+record 00022: sensor=218 status=ok note=alpha-9-beta-5
+record 00023: sensor=137 status=ok note=alpha-10-beta-6
+record 00024: sensor=56 status=ok note=alpha-11-beta-7
+record 00025: sensor=975 status=ok note=alpha-12-beta-8
+record 00026: sensor=894 status=ok note=alpha-0-beta-9
+record 00027: sensor=813 status=ok note=alpha-1-beta-10
+record 00028: sensor=732 status=retry note=alpha-2-beta-11
+record 00029: sensor=651 status=ok note=alpha-3-beta-12
+record 00030: sensor=570 status=ok note=alpha-4-beta-13
+record 00031: sensor=489 status=ok note=alpha-5-beta-14
+record 00032: sensor=408 status=ok note=alpha-6-beta-15
+record 00033: sensor=327 status=ok note=alpha-7-beta-16
+record 00034: sensor=246 status=ok note=alpha-8-beta-0
+record 00035: sensor=165 status=retry note=alpha-9-beta-1
+record 00036: sensor=84 status=ok note=alpha-10-beta-2
+record 00037: sensor=3 status=ok note=alpha-11-beta-3
+record 00038: sensor=922 status=ok note=alpha-12-beta-4
+record 00039: sensor=841 status=ok note=alpha-0-beta-5
+record 00040: sensor=760 status=ok note=alpha-1-beta-6
+record 00041: sensor=679 status=ok note=alpha-2-beta-7
+record 00042: sensor=598 status=retry note=alpha-3-beta-8
+record 00043: sensor=517 status=ok note=alpha-4-beta-9
+record 00044: sensor=436 status=ok note=alpha-5-beta-10
+record 00045: sensor=355 status=ok note=alpha-6-beta-11
+record 00046: sensor=274 status=ok note=alpha-7-beta-12
+record 00047: sensor=193 status=ok note=alpha-8-beta-13
+record 00048: sensor=112 status=ok note=alpha-9-beta-14
+record 00049: sensor=31 status=retry note=alpha-10-beta-15
+record 00050: sensor=950 status=ok note=alpha-11-beta-16
+record 00051: sensor=869 status=ok note=alpha-12-beta-0
+record 00052: sensor=788 status=ok note=alpha-0-beta-1
+record 00053: sensor=707 status=ok note=alpha-1-beta-2
+record 00054: sensor=626 status=ok note=alpha-2-beta-3
+record 00055: sensor=545 status=ok note=alpha-3-beta-4
+record 00056: sensor=464 status=retry note=alpha-4-beta-5
+record 00057: sensor=383 status=ok note=alpha-5-beta-6
+record 00058: sensor=302 status=ok note=alpha-6-beta-7
+record 00059: sensor=221 status=ok note=alpha-7-beta-8
+record 00060: sensor=140 status=ok note=alpha-8-beta-9
+record 00061: sensor=59 status=ok note=alpha-9-beta-10
+record 00062: sensor=978 status=ok note=alpha-10-beta-11
+record 00063: sensor=897 status=retry note=alpha-11-beta-12
+record 00064: sensor=816 status=ok note=alpha-12-beta-13
+record 00065: sensor=735 status=ok note=alpha-0-beta-14
+record 00066: sensor=654 status=ok note=alpha-1-beta-15
+record 00067: sensor=573 status=ok note=alpha-2-beta-16
+record 00068: sensor=492 status=ok note=alpha-3-beta-0
+record 00069: sensor=411 status=ok note=alpha-4-beta-1
+record 00070: sensor=330 status=retry note=alpha-5-beta-2
+record 00071: sensor=249 status=ok note=alpha-6-beta-3
+record 00072: sensor=168 status=ok note=alpha-7-beta-4
+record 00073: sensor=87 status=ok note=alpha-8-beta-5
+record 00074: sensor=6 status=ok note=alpha-9-beta-6
+record 00075: sensor=925 status=ok note=alpha-10-beta-7
+record 00076: sensor=844 status=ok note=alpha-11-beta-8
+record 00077: sensor=763 status=retry note=alpha-12-beta-9
+record 00078: sensor=682 status=ok note=alpha-0-beta-10
+record 00079: sensor=601 status=ok note=alpha-1-beta-11
+record 00080: sensor=520 status=ok note=alpha-2-beta-12
+record 00081: sensor=439 status=ok note=alpha-3-beta-13
+record 00082: sensor=358 status=ok note=alpha-4-beta-14
+record 00083: sensor=277 status=ok note=alpha-5-beta-15
+record 00084: sensor=196 status=retry note=alpha-6-beta-16
+record 00085: sensor=115 status=ok note=alpha-7-beta-0
+record 00086: sensor=34 status=ok note=alpha-8-beta-1
+record 00087: sensor=953 status=ok note=alpha-9-beta-2
+record 00088: sensor=872 status=ok note=alpha-10-beta-3
+record 00089: sensor=791 status=ok note=alpha-11-beta-4
+record 00090: sensor=710 status=ok note=alpha-12-beta-5
+record 00091: sensor=629 status=retry note=alpha-0-beta-6
+record 00092: sensor=548 status=ok note=alpha-1-beta-7
+record 00093: sensor=467 status=ok note=alpha-2-beta-8
+record 00094: sensor=386 status=ok note=alpha-3-beta-9
+record 00095: sensor=305 status=ok note=alpha-4-beta-10
+record 00096: sensor=224 status=ok note=alpha-5-beta-11
+record 00097: sensor=143 status=ok note=alpha-6-beta-12
+record 00098: sensor=62 status=retry note=alpha-7-beta-13
+record 00099: sensor=981 status=ok note=alpha-8-beta-14
+record 00100: sensor=900 status=ok note=alpha-9-beta-15
+record 00101: sensor=819 status=ok note=alpha-10-beta-16
+record 00102: sensor=738 status=ok note=alpha-11-beta-0
+record 00103: sensor=657 status=ok note=alpha-12-beta-1
+record 00104: sensor=576 status=ok note=alpha-0-beta-2
+record 00105: sensor=495 status=retry note=alpha-1-beta-3
+record 00106: sensor=414 status=ok note=alpha-2-beta-4
+record 00107: sensor=333 status=ok note=alpha-3-beta-5
+record 00108: sensor=252 status=ok note=alpha-4-beta-6
+record 00109: sensor=171 status=ok note=alpha-5-beta-7
+record 00110: sensor=90 status=ok note=alpha-6-beta-8
+record 00111: sensor=9 status=ok note=alpha-7-beta-9
+record 00112: sensor=928 status=retry note=alpha-8-beta-10
+record 00113: sensor=847 status=ok note=alpha-9-beta-11
+record 00114: sensor=766 status=ok note=alpha-10-beta-12
+record 00115: sensor=685 status=ok note=alpha-11-beta-13
+record 00116: sensor=604 status=ok note=alpha-12-beta-14
+record 00117: sensor=523 status=ok note=alpha-0-beta-15
+record 00118: sensor=442 status=ok note=alpha-1-beta-16
+record 00119: sensor=361 status=retry note=alpha-2-beta-0
+record 00120: sensor=280 status=ok note=alpha-3-beta-1
+record 00121: sensor=199 status=ok note=alpha-4-beta-2
+record 00122: sensor=118 status=ok note=alpha-5-beta-3
+record 00123: sensor=37 status=ok note=alpha-6-beta-4
+record 00124: sensor=956 status=ok note=alpha-7-beta-5
+record 00125: sensor=875 status=ok note=alpha-8-beta-6
+record 00126: sensor=794 status=retry note=alpha-9-beta-7
+record 00127: sensor=713 status=ok note=alpha-10-beta-8
+record 00128: sensor=632 status=ok note=alpha-11-beta-9
+record 00129: sensor=551 status=ok note=alpha-12-beta-10
+record 00130: sensor=470 status=ok note=alpha-0-beta-11
+record 00131: sensor=389 status=ok note=alpha-1-beta-12
+record 00132: sensor=308 status=ok note=alpha-2-beta-13
+record 00133: sensor=227 status=retry note=alpha-3-beta-14
+record 00134: sensor=146 status=ok note=alpha-4-beta-15
+record 00135: sensor=65 status=ok note=alpha-5-beta-16
+record 00136: sensor=984 status=ok note=alpha-6-beta-0
+record 00137: sensor=903 status=ok note=alpha-7-beta-1
+record 00138: sensor=822 status=ok note=alpha-8-beta-2
+record 00139: sensor=741 status=ok note=alpha-9-beta-3
+record 00140: sensor=660 status=retry note=alpha-10-beta-4
+record 00141: sensor=579 status=ok note=alpha-11-beta-5
+record 00142: sensor=498 status=ok note=alpha-12-beta-6
+record 00143: sensor=417 status=ok note=alpha-0-beta-7
+record 00144: sensor=336 status=ok note=alpha-1-beta-8
+record 00145: sensor=255 status=ok note=alpha-2-beta-9
+record 00146: sensor=174 status=ok note=alpha-3-beta-10
+record 00147: sensor=93 status=retry note=alpha-4-beta-11
+record 00148: sensor=12 status=ok note=alpha-5-beta-12
+record 00149: sensor=931 status=ok note=alpha-6-beta-13
+record 00150: sensor=850 status=ok note=alpha-7-beta-14
+record 00151: sensor=769 status=ok note=alpha-8-beta-15
+record 00152: sensor=688 status=ok note=alpha-9-beta-16
+record 00153: sensor=607 status=ok note=alpha-10-beta-0
+record 00154: sensor=526 status=retry note=alpha-11-beta-1
+record 00155: sensor=445 status=ok note=alpha-12-beta-2
+record 00156: sensor=364 status=ok note=alpha-0-beta-3
+record 00157: sensor=283 status=ok note=alpha-1-beta-4
+record 00158: sensor=202 status=ok note=alpha-2-beta-5
+record 00159: sensor=121 status=ok note=alpha-3-beta-6
+record 00160: sensor=40 status=ok note=alpha-4-beta-7
+record 00161: sensor=959 status=retry note=alpha-5-beta-8
+record 00162: sensor=878 status=ok note=alpha-6-beta-9
+record 00163: sensor=797 status=ok note=alpha-7-beta-10
+record 00164: sensor=716 status=ok note=alpha-8-beta-11
+record 00165: sensor=635 status=ok note=alpha-9-beta-12
+record 00166: sensor=554 status=ok note=alpha-10-beta-13
+record 00167: sensor=473 status=ok note=alpha-11-beta-14
+record 00168: sensor=392 status=retry note=alpha-12-beta-15
+record 00169: sensor=311 status=ok note=alpha-0-beta-16
+record 00170: sensor=230 status=ok note=alpha-1-beta-0
+record 00171: sensor=149 status=ok note=alpha-2-beta-1
+record 00172: sensor=68 status=ok note=alpha-3-beta-2
+record 00173: sensor=987 status=ok note=alpha-4-beta-3
+record 00174: sensor=906 status=ok note=alpha-5-beta-4
+record 00175: sensor=825 status=retry note=alpha-6-beta-5
+record 00176: sensor=744 status=ok note=alpha-7-beta-6
+record 00177: sensor=663 status=ok note=alpha-8-beta-7
+record 00178: sensor=582 status=ok note=alpha-9-beta-8
+record 00179: sensor=501 status=ok note=alpha-10-beta-9
+record 00180: sensor=420 status=ok note=alpha-11-beta-10
+record 00181: sensor=339 status=ok note=alpha-12-beta-11
+record 00182: sensor=258 status=retry note=alpha-0-beta-12
+record 00183: sensor=177 status=ok note=alpha-1-beta-13
+record 00184: sensor=96 status=ok note=alpha-2-beta-14
+record 00185: sensor=15 status=ok note=alpha-3-beta-15
+record 00186: sensor=934 status=ok note=alpha-4-beta-16
+record 00187: sensor=853 status=ok note=alpha-5-beta-0
+record 00188: sensor=772 status=ok note=alpha-6-beta-1
+record 00189: sensor=691 status=retry note=alpha-7-beta-2
+record 00190: sensor=610 status=ok note=alpha-8-beta-3
+record 00191: sensor=529 status=ok note=alpha-9-beta-4
+record 00192: sensor=448 status=ok note=alpha-10-beta-5
+record 00193: sensor=367 status=ok note=alpha-11-beta-6
+record 00194: sensor=286 status=ok note=alpha-12-beta-7
+record 00195: sensor=205 status=ok note=alpha-0-beta-8
+record 00196: sensor=124 status=retry note=alpha-1-beta-9
+record 00197: sensor=43 status=ok note=alpha-2-beta-10
+record 00198: sensor=962 status=ok note=alpha-3-beta-11
+record 00199: sensor=881 status=ok note=alpha-4-beta-12
+record 00200: sensor=800 status=ok note=alpha-5-beta-13
+record 00201: sensor=719 status=ok note=alpha-6-beta-14
+record 00202: sensor=638 status=ok note=alpha-7-beta-15
+record 00203: sensor=557 status=retry note=alpha-8-beta-16
+record 00204: sensor=476 status=ok note=alpha-9-beta-0
+record 00205: sensor=395 status=ok note=alpha-10-beta-1
+record 00206: sensor=314 status=ok note=alpha-11-beta-2
+record 00207: sensor=233 status=ok note=alpha-12-beta-3
+record 00208: sensor=152 status=ok note=alpha-0-beta-4
+record 00209: sensor=71 status=ok note=alpha-1-beta-5
+record 00210: sensor=990 status=retry note=alpha-2-beta-6
+record 00211: sensor=909 status=ok note=alpha-3-beta-7
+record 00212: sensor=828 status=ok note=alpha-4-beta-8
+record 00213: sensor=747 status=ok note=alpha-5-beta-9
+record 00214: sensor=666 status=ok note=alpha-6-beta-10
+record 00215: sensor=585 status=ok note=alpha-7-beta-11
+record 00216: sensor=504 status=ok note=alpha-8-beta-12
+record 00217: sensor=423 status=retry note=alpha-9-beta-13
+record 00218: sensor=342 status=ok note=alpha-10-beta-14
+record 00219: sensor=261 status=ok note=alpha-11-beta-15
+record 00220: sensor=180 status=ok note=alpha-12-beta-16
+record 00221: sensor=99 status=ok note=alpha-0-beta-0
+record 00222: sensor=18 status=ok note=alpha-1-beta-1
+record 00223: sensor=937 status=ok note=alpha-2-beta-2
+record 00224: sensor=856 status=retry note=alpha-3-beta-3
+record 00225: sensor=775 status=ok note=alpha-4-beta-4
+record 00226: sensor=694 status=ok note=alpha-5-beta-5
+record 00227: sensor=613 status=ok note=alpha-6-beta-6
+record 00228: sensor=532 status=ok note=alpha-7-beta-7
+record 00229: sensor=451 status=ok note=alpha-8-beta-8
+record 00230: sensor=370 status=ok note=alpha-9-beta-9
+record 00231: sensor=289 status=retry note=alpha-10-beta-10
+record 00232: sensor=208 status=ok note=alpha-11-beta-11
+record 00233: sensor=127 status=ok note=alpha-12-beta-12
+record 00234: sensor=46 status=ok note=alpha-0-beta-13
+record 00235: sensor=965 status=ok note=alpha-1-beta-14
+record 00236: sensor=884 status=ok note=alpha-2-beta-15
+record 00237: sensor=803 status=ok note=alpha-3-beta-16
+record 00238: sensor=722 status=retry note=alpha-4-beta-0
+record 00239: sensor=641 status=ok note=alpha-5-beta-1
+record 00240: sensor=560 status=ok note=alpha-6-beta-2
+record 00241: sensor=479 status=ok note=alpha-7-beta-3
+record 00242: sensor=398 status=ok note=alpha-8-beta-4
+record 00243: sensor=317 status=ok note=alpha-9-beta-5
+record 00244: sensor=236 status=ok note=alpha-10-beta-6
+record 00245: sensor=155 status=retry note=alpha-11-beta-7
+record 00246: sensor=74 status=ok note=alpha-12-beta-8
+record 00247: sensor=993 status=ok note=alpha-0-beta-9
+record 00248: sensor=912 status=ok note=alpha-1-beta-10
+record 00249: sensor=831 status=ok note=alpha-2-beta-11
+record 00250: sensor=750 status=ok note=alpha-3-beta-12
+record 00251: sensor=669 status=ok note=alpha-4-beta-13
+record 00252: sensor=588 status=retry note=alpha-5-beta-14
+record 00253: sensor=507 status=ok note=alpha-6-beta-15
+record 00254: sensor=426 status=ok note=alpha-7-beta-16
+record 00255: sensor=345 status=ok note=alpha-8-beta-0
+record 00256: sensor=264 status=ok note=alpha-9-beta-1
+record 00257: sensor=183 status=ok note=alpha-10-beta-2
+record 00258: sensor=102 status=ok note=alpha-11-beta-3
+record 00259: sensor=21 status=retry note=alpha-12-beta-4
+record 00260: sensor=940 status=ok note=alpha-0-beta-5
+record 00261: sensor=859 status=ok note=alpha-1-beta-6
+record 00262: sensor=778 status=ok note=alpha-2-beta-7
+record 00263: sensor=697 status=ok note=alpha-3-beta-8
+record 00264: sensor=616 status=ok note=alpha-4-beta-9
+record 00265: sensor=535 status=ok note=alpha-5-beta-10
+record 00266: sensor=454 status=retry note=alpha-6-beta-11
+record 00267: sensor=373 status=ok note=alpha-7-beta-12
+record 00268: sensor=292 status=ok note=alpha-8-beta-13
+record 00269: sensor=211 status=ok note=alpha-9-beta-14
+record 00270: sensor=130 status=ok note=alpha-10-beta-15
+record 00271: sensor=49 status=ok note=alpha-11-beta-16
+record 00272: sensor=968 status=ok note=alpha-12-beta-0
+record 00273: sensor=887 status=retry note=alpha-0-beta-1
+record 00274: sensor=806 status=ok note=alpha-1-beta-2
+record 00275: sensor=725 status=ok note=alpha-2-beta-3
+record 00276: sensor=644 status=ok note=alpha-3-beta-4
+record 00277: sensor=563 status=ok note=alpha-4-beta-5
+record 00278: sensor=482 status=ok note=alpha-5-beta-6
+record 00279: sensor=401 status=ok note=alpha-6-beta-7
+record 00280: sensor=320 status=retry note=alpha-7-beta-8
+record 00281: sensor=239 status=ok note=alpha-8-beta-9
+record 00282: sensor=158 status=ok note=alpha-9-beta-10
+record 00283: sensor=77 status=ok note=alpha-10-beta-11
+record 00284: sensor=996 status=ok note=alpha-11-beta-12
+record 00285: sensor=915 status=ok note=alpha-12-beta-13
+record 00286: sensor=834 status=ok note=alpha-0-beta-14
+record 00287: sensor=753 status=retry note=alpha-1-beta-15
+record 00288: sensor=672 status=ok note=alpha-2-beta-16
+record 00289: sensor=591 status=ok note=alpha-3-beta-0
+record 00290: sensor=510 status=ok note=alpha-4-beta-1
+record 00291: sensor=429 status=ok note=alpha-5-beta-2
+record 00292: sensor=348 status=ok note=alpha-6-beta-3
+record 00293: sensor=267 status=ok note=alpha-7-beta-4
+record 00294: sensor=186 status=retry note=alpha-8-beta-5
+record 00295: sensor=105 status=ok note=alpha-9-beta-6
+record 00296: sensor=24 status=ok note=alpha-10-beta-7
+record 00297: sensor=943 status=ok note=alpha-11-beta-8
+record 00298: sensor=862 status=ok note=alpha-12-beta-9
+record 00299: sensor=781 status=ok note=alpha-0-beta-10
+record 00300: sensor=700 status=ok note=alpha-1-beta-11
+record 00301: sensor=619 status=retry note=alpha-2-beta-12
+record 00302: sensor=538 status=ok note=alpha-3-beta-13
+record 00303: sensor=457 status=ok note=alpha-4-beta-14
+record 00304: sensor=376 status=ok note=alpha-5-beta-15
+record 00305: sensor=295 status=ok note=alpha-6-beta-16
+record 00306: sensor=214 status=ok note=alpha-7-beta-0
+record 00307: sensor=133 status=ok note=alpha-8-beta-1
+record 00308: sensor=52 status=retry note=alpha-9-beta-2
+record 00309: sensor=971 status=ok note=alpha-10-beta-3
+record 00310: sensor=890 status=ok note=alpha-11-beta-4
+record 00311: sensor=809 status=ok note=alpha-12-beta-5
+record 00312: sensor=728 status=ok note=alpha-0-beta-6
+record 00313: sensor=647 status=ok note=alpha-1-beta-7
+record 00314: sensor=566 status=ok note=alpha-2-beta-8
+record 00315: sensor=485 status=retry note=alpha-3-beta-9
+record 00316: sensor=404 status=ok note=alpha-4-beta-10
+record 00317: sensor=323 status=ok note=alpha-5-beta-11
+record 00318: sensor=242 status=ok note=alpha-6-beta-12
+record 00319: sensor=161 status=ok note=alpha-7-beta-13
+record 00320: sensor=80 status=ok note=alpha-8-beta-14
+record 00321: sensor=999 status=ok note=alpha-9-beta-15
+record 00322: sensor=918 status=retry note=alpha-10-beta-16
+record 00323: sensor=837 status=ok note=alpha-11-beta-0
+record 00324: sensor=756 status=ok note=alpha-12-beta-1
+record 00325: sensor=675 status=ok note=alpha-0-beta-2
+record 00326: sensor=594 status=ok note=alpha-1-beta-3
+record 00327: sensor=513 status=ok note=alpha-2-beta-4
+record 00328: sensor=432 status=ok note=alpha-3-beta-5
+record 00329: sensor=351 status=retry note=alpha-4-beta-6
+record 00330: sensor=270 status=ok note=alpha-5-beta-7
+record 00331: sensor=189 status=ok note=alpha-6-beta-8
+record 00332: sensor=108 status=ok note=alpha-7-beta-9
+record 00333: sensor=27 status=ok note=alpha-8-beta-10
+record 00334: sensor=946 status=ok note=alpha-9-beta-11
+record 00335: sensor=865 status=ok note=alpha-10-beta-12
+record 00336: sensor=784 status=retry note=alpha-11-beta-13
+record 00337: sensor=703 status=ok note=alpha-12-beta-14
+record 00338: sensor=622 status=ok note=alpha-0-beta-15
+record 00339: sensor=541 status=ok note=alpha-1-beta-16
+record 00340: sensor=460 status=ok note=alpha-2-beta-0
+record 00341: sensor=379 status=ok note=alpha-3-beta-1
+record 00342: sensor=298 status=ok note=alpha-4-beta-2
+record 00343: sensor=217 status=retry note=alpha-5-beta-3
+record 00344: sensor=136 status=ok note=alpha-6-beta-4
+record 00345: sensor=55 status=ok note=alpha-7-beta-5
+record 00346: sensor=974 status=ok note=alpha-8-beta-6
+record 00347: sensor=893 status=ok note=alpha-9-beta-7
+record 00348: sensor=812 status=ok note=alpha-10-beta-8
+record 00349: sensor=731 status=ok note=alpha-11-beta-9
+record 00350: sensor=650 status=retry note=alpha-12-beta-10
+record 00351: sensor=569 status=ok note=alpha-0-beta-11
+record 00352: sensor=488 status=ok note=alpha-1-beta-12
+record 00353: sensor=407 status=ok note=alpha-2-beta-13
+record 00354: sensor=326 status=ok note=alpha-3-beta-14
+record 00355: sensor=245 status=ok note=alpha-4-beta-15
+record 00356: sensor=164 status=ok note=alpha-5-beta-16
+record 00357: sensor=83 status=retry note=alpha-6-beta-0
+record 00358: sensor=2 status=ok note=alpha-7-beta-1
+record 00359: sensor=921 status=ok note=alpha-8-beta-2
+record 00360: sensor=840 status=ok note=alpha-9-beta-3
+record 00361: sensor=759 status=ok note=alpha-10-beta-4
+record 00362: sensor=678 status=ok note=alpha-11-beta-5
+record 00363: sensor=597 status=ok note=alpha-12-beta-6
+record 00364: sensor=516 status=retry note=alpha-0-beta-7
+record 00365: sensor=435 status=ok note=alpha-1-beta-8
+record 00366: sensor=354 status=ok note=alpha-2-beta-9
+record 00367: sensor=273 status=ok note=alpha-3-beta-10
+record 00368: sensor=192 status=ok note=alpha-4-beta-11
+record 00369: sensor=111 status=ok note=alpha-5-beta-12
+record 00370: sensor=30 status=ok note=alpha-6-beta-13
+record 00371: sensor=949 status=retry note=alpha-7-beta-14
+record 00372: sensor=868 status=ok note=alpha-8-beta-15
+record 00373: sensor=787 status=ok note=alpha-9-beta-16
+record 00374: sensor=706 status=ok note=alpha-10-beta-0
+record 00375: sensor=625 status=ok note=alpha-11-beta-1
+record 00376: sensor=544 status=ok note=alpha-12-beta-2
+record 00377: sensor=463 status=ok note=alpha-0-beta-3
+record 00378: sensor=382 status=retry note=alpha-1-beta-4
+record 00379: sensor=301 status=ok note=alpha-2-beta-5
+record 00380: sensor=220 status=ok note=alpha-3-beta-6
+record 00381: sensor=139 status=ok note=alpha-4-beta-7
+record 00382: sensor=58 status=ok note=alpha-5-beta-8
+record 00383: sensor=977 status=ok note=alpha-6-beta-9
+record 00384: sensor=896 status=ok note=alpha-7-beta-10
+record 00385: sensor=815 status=retry note=alpha-8-beta-11
+record 00386: sensor=734 status=ok note=alpha-9-beta-12
+record 00387: sensor=653 status=ok note=alpha-10-beta-13
+record 00388: sensor=572 status=ok note=alpha-11-beta-14
+record 00389: sensor=491 status=ok note=alpha-12-beta-15
+record 00390: sensor=410 status=ok note=alpha-0-beta-16
+record 00391: sensor=329 status=ok note=alpha-1-beta-0
+record 00392: sensor=248 status=retry note=alpha-2-beta-1
+record 00393: sensor=167 status=ok note=alpha-3-beta-2
+record 00394: sensor=86 status=ok note=alpha-4-beta-3
+record 00395: sensor=5 status=ok note=alpha-5-beta-4
+record 00396: sensor=924 status=ok note=alpha-6-beta-5
+record 00397: sensor=843 status=ok note=alpha-7-beta-6
+record 00398: sensor=762 status=ok note=alpha-8-beta-7
+record 00399: sensor=681 status=retry note=alpha-9-beta-8
+record 00400: sensor=600 status=ok note=alpha-10-beta-9
+record 00401: sensor=519 status=ok note=alpha-11-beta-10
+record 00402: sensor=438 status=ok note=alpha-12-beta-11
+record 00403: sensor=357 status=ok note=alpha-0-beta-12
+record 00404: sensor=276 status=ok note=alpha-1-beta-13
+record 00405: sensor=195 status=ok note=alpha-2-beta-14
+record 00406: sensor=114 status=retry note=alpha-3-beta-15
+record 00407: sensor=33 status=ok note=alpha-4-beta-16
+record 00408: sensor=952 status=ok note=alpha-5-beta-0
+record 00409: sensor=871 status=ok note=alpha-6-beta-1
+record 00410: sensor=790 status=ok note=alpha-7-beta-2
+record 00411: sensor=709 status=ok note=alpha-8-beta-3
+record 00412: sensor=628 status=ok note=alpha-9-beta-4
+record 00413: sensor=547 status=retry note=alpha-10-beta-5
+record 00414: sensor=466 status=ok note=alpha-11-beta-6
+record 00415: sensor=385 status=ok note=alpha-12-beta-7
+record 00416: sensor=304 status=ok note=alpha-0-beta-8
+record 00417: sensor=223 status=ok note=alpha-1-beta-9
+record 00418: sensor=142 status=ok note=alpha-2-beta-10
+record 00419: sensor=61 status=ok note=alpha-3-beta-11
+record 00420: sensor=980 status=retry note=alpha-4-beta-12
+record 00421: sensor=899 status=ok note=alpha-5-beta-13
+record 00422: sensor=818 status=ok note=alpha-6-beta-14
+record 00423: sensor=737 status=ok note=alpha-7-beta-15
+record 00424: sensor=656 status=ok note=alpha-8-beta-16
+record 00425: sensor=575 status=ok note=alpha-9-beta-0
+record 00426: sensor=494 status=ok note=alpha-10-beta-1
+record 00427: sensor=413 status=retry note=alpha-11-beta-2
+record 00428: sensor=332 status=ok note=alpha-12-beta-3
+record 00429: sensor=251 status=ok note=alpha-0-beta-4
+record 00430: sensor=170 status=ok note=alpha-1-beta-5
+record 00431: sensor=89 status=ok note=alpha-2-beta-6
+record 00432: sensor=8 status=ok note=alpha-3-beta-7
+record 00433: sensor=927 status=ok note=alpha-4-beta-8
+record 00434: sensor=846 status=retry note=alpha-5-beta-9
+record 00435: sensor=765 status=ok note=alpha-6-beta-10
+record 00436: sensor=684 status=ok note=alpha-7-beta-11
+record 00437: sensor=603 status=ok note=alpha-8-beta-12
+record 00438: sensor=522 status=ok note=alpha-9-beta-13
+record 00439: sensor=441 status=ok note=alpha-10-beta-14
+record 00440: sensor=360 status=ok note=alpha-11-beta-15
+record 00441: sensor=279 status=retry note=alpha-12-beta-16
+record 00442: sensor=198 status=ok note=alpha-0-beta-0
+record 00443: sensor=117 status=ok note=alpha-1-beta-1
+record 00444: sensor=36 status=ok note=alpha-2-beta-2
+record 00445: sensor=955 status=ok note=alpha-3-beta-3
+record 00446: sensor=874 status=ok note=alpha-4-beta-4
+record 00447: sensor=793 status=ok note=alpha-5-beta-5
+record 00448: sensor=712 status=retry note=alpha-6-beta-6
+record 00449: sensor=631 status=ok note=alpha-7-beta-7
+record 00450: sensor=550 status=ok note=alpha-8-beta-8
+record 00451: sensor=469 status=ok note=alpha-9-beta-9
+record 00452: sensor=388 status=ok note=alpha-10-beta-10
+record 00453: sensor=307 status=ok note=alpha-11-beta-11
+record 00454: sensor=226 status=ok note=alpha-12-beta-12
+record 00455: sensor=145 status=retry note=alpha-0-beta-13
+record 00456: sensor=64 status=ok note=alpha-1-beta-14
+record 00457: sensor=983 status=ok note=alpha-2-beta-15
+record 00458: sensor=902 status=ok note=alpha-3-beta-16
+record 00459: sensor=821 status=ok note=alpha-4-beta-0
+record 00460: sensor=740 status=ok note=alpha-5-beta-1
+record 00461: sensor=659 status=ok note=alpha-6-beta-2
+record 00462: sensor=578 status=retry note=alpha-7-beta-3
+record 00463: sensor=497 status=ok note=alpha-8-beta-4
+record 00464: sensor=416 status=ok note=alpha-9-beta-5
+record 00465: sensor=335 status=ok note=alpha-10-beta-6
+record 00466: sensor=254 status=ok note=alpha-11-beta-7
+record 00467: sensor=173 status=ok note=alpha-12-beta-8
+record 00468: sensor=92 status=ok note=alpha-0-beta-9
+record 00469: sensor=11 status=retry note=alpha-1-beta-10
+record 00470: sensor=930 status=ok note=alpha-2-beta-11
+record 00471: sensor=849 status=ok note=alpha-3-beta-12
+record 00472: sensor=768 status=ok note=alpha-4-beta-13
+record 00473: sensor=687 status=ok note=alpha-5-beta-14
+record 00474: sensor=606 status=ok note=alpha-6-beta-15
+record 00475: sensor=525 status=ok note=alpha-7-beta-16
+record 00476: sensor=444 status=retry note=alpha-8-beta-0
+record 00477: sensor=363 status=ok note=alpha-9-beta-1
+record 00478: sensor=282 status=ok note=alpha-10-beta-2
+record 00479: sensor=201 status=ok note=alpha-11-beta-3
+record 00480: sensor=120 status=ok note=alpha-12-beta-4
+record 00481: sensor=39 status=ok note=alpha-0-beta-5
+record 00482: sensor=958 status=ok note=alpha-1-beta-6
+record 00483: sensor=877 status=retry note=alpha-2-beta-7
+record 00484: sensor=796 status=ok note=alpha-3-beta-8
+record 00485: sensor=715 status=ok note=alpha-4-beta-9
+record 00486: sensor=634 status=ok note=alpha-5-beta-10
+record 00487: sensor=553 status=ok note=alpha-6-beta-11
+record 00488: sensor=472 status=ok note=alpha-7-beta-12
+record 00489: sensor=391 status=ok note=alpha-8-beta-13
+record 00490: sensor=310 status=retry note=alpha-9-beta-14
+record 00491: sensor=229 status=ok note=alpha-10-beta-15
+record 00492: sensor=148 status=ok note=alpha-11-beta-16
+record 00493: sensor=67 status=ok note=alpha-12-beta-0
+record 00494: sensor=986 status=ok note=alpha-0-beta-1
+record 00495: sensor=905 status=ok note=alpha-1-beta-2
+record 00496: sensor=824 status=ok note=alpha-2-beta-3
+record 00497: sensor=743 status=retry note=alpha-3-beta-4
+record 00498: sensor=662 status=ok note=alpha-4-beta-5
+record 00499: sensor=581 status=ok note=alpha-5-beta-6
+record 00500: sensor=500 status=ok note=alpha-6-beta-7
+record 00501: sensor=419 status=ok note=alpha-7-beta-8
+record 00502: sensor=338 status=ok note=alpha-8-beta-9
+record 00503: sensor=257 status=ok note=alpha-9-beta-10
+record 00504: sensor=176 status=retry note=alpha-10-beta-11
+record 00505: sensor=95 status=ok note=alpha-11-beta-12
+record 00506: sensor=14 status=ok note=alpha-12-beta-13
+record 00507: sensor=933 status=ok note=alpha-0-beta-14
+record 00508: sensor=852 status=ok note=alpha-1-beta-15
+record 00509: sensor=771 status=ok note=alpha-2-beta-16
+record 00510: sensor=690 status=ok note=alpha-3-beta-0
+record 00511: sensor=609 status=retry note=alpha-4-beta-1
+record 00512: sensor=528 status=ok note=alpha-5-beta-2
+record 00513: sensor=447 status=ok note=alpha-6-beta-3
+record 00514: sensor=366 status=ok note=alpha-7-beta-4
+record 00515: sensor=285 status=ok note=alpha-8-beta-5
+record 00516: sensor=204 status=ok note=alpha-9-beta-6
+record 00517: sensor=123 status=ok note=alpha-10-beta-7
+record 00518: sensor=42 status=retry note=alpha-11-beta-8
+record 00519: sensor=961 status=ok note=alpha-12-beta-9
+record 00520: sensor=880 status=ok note=alpha-0-beta-10
+record 00521: sensor=799 status=ok note=alpha-1-beta-11
+record 00522: sensor=718 status=ok note=alpha-2-beta-12
+record 00523: sensor=637 status=ok note=alpha-3-beta-13
+record 00524: sensor=556 status=ok note=alpha-4-beta-14
+record 00525: sensor=475 status=retry note=alpha-5-beta-15
+record 00526: sensor=394 status=ok note=alpha-6-beta-16
+record 00527: sensor=313 status=ok note=alpha-7-beta-0
+record 00528: sensor=232 status=ok note=alpha-8-beta-1
+record 00529: sensor=151 status=ok note=alpha-9-beta-2
+record 00530: sensor=70 status=ok note=alpha-10-beta-3
+record 00531: sensor=989 status=ok note=alpha-11-beta-4
+record 00532: sensor=908 status=retry note=alpha-12-beta-5
+record 00533: sensor=827 status=ok note=alpha-0-beta-6
+record 00534: sensor=746 status=ok note=alpha-1-beta-7
+record 00535: sensor=665 status=ok note=alpha-2-beta-8
+record 00536: sensor=584 status=ok note=alpha-3-beta-9
+record 00537: sensor=503 status=ok note=alpha-4-beta-10
+record 00538: sensor=422 status=ok note=alpha-5-beta-11
+record 00539: sensor=341 status=retry note=alpha-6-beta-12
+record 00540: sensor=260 status=ok note=alpha-7-beta-13
+record 00541: sensor=179 status=ok note=alpha-8-beta-14
+record 00542: sensor=98 status=ok note=alpha-9-beta-15
+record 00543: sensor=17 status=ok note=alpha-10-beta-16
+record 00544: sensor=936 status=ok note=alpha-11-beta-0
+record 00545: sensor=855 status=ok note=alpha-12-beta-1
+record 00546: sensor=774 status=retry note=alpha-0-beta-2
+record 00547: sensor=693 status=ok note=alpha-1-beta-3
+record 00548: sensor=612 status=ok note=alpha-2-beta-4
+record 00549: sensor=531 status=ok note=alpha-3-beta-5
+record 00550: sensor=450 status=ok note=alpha-4-beta-6
+record 00551: sensor=369 status=ok note=alpha-5-beta-7
+record 00552: sensor=288 status=ok note=alpha-6-beta-8
+record 00553: sensor=207 status=retry note=alpha-7-beta-9
+record 00554: sensor=126 status=ok note=alpha-8-beta-10
+record 00555: sensor=45 status=ok note=alpha-9-beta-11
+record 00556: sensor=964 status=ok note=alpha-10-beta-12
+record 00557: sensor=883 status=ok note=alpha-11-beta-13
+record 00558: sensor=802 status=ok note=alpha-12-beta-14
+record 00559: sensor=721 status=ok note=alpha-0-beta-15
+record 00560: sensor=640 status=retry note=alpha-1-beta-16
+record 00561: sensor=559 status=ok note=alpha-2-beta-0
+record 00562: sensor=478 status=ok note=alpha-3-beta-1
+record 00563: sensor=397 status=ok note=alpha-4-beta-2
+record 00564: sensor=316 status=ok note=alpha-5-beta-3
+record 00565: sensor=235 status=ok note=alpha-6-beta-4
+record 00566: sensor=154 status=ok note=alpha-7-beta-5
+record 00567: sensor=73 status=retry note=alpha-8-beta-6
+record 00568: sensor=992 status=ok note=alpha-9-beta-7
+record 00569: sensor=911 status=ok note=alpha-10-beta-8
+record 00570: sensor=830 status=ok note=alpha-11-beta-9
+record 00571: sensor=749 status=ok note=alpha-12-beta-10
+record 00572: sensor=668 status=ok note=alpha-0-beta-11
+record 00573: sensor=587 status=ok note=alpha-1-beta-12
+record 00574: sensor=506 status=retry note=alpha-2-beta-13
+record 00575: sensor=425 status=ok note=alpha-3-beta-14
+record 00576: sensor=344 status=ok note=alpha-4-beta-15
+record 00577: sensor=263 status=ok note=alpha-5-beta-16
+record 00578: sensor=182 status=ok note=alpha-6-beta-0
+record 00579: sensor=101 status=ok note=alpha-7-beta-1
+record 00580: sensor=20 status=ok note=alpha-8-beta-2
+record 00581: sensor=939 status=retry note=alpha-9-beta-3
+record 00582: sensor=858 status=ok note=alpha-10-beta-4
+record 00583: sensor=777 status=ok note=alpha-11-beta-5
+record 00584: sensor=696 status=ok note=alpha-12-beta-6
+record 00585: sensor=615 status=ok note=alpha-0-beta-7
+record 00586: sensor=534 status=ok note=alpha-1-beta-8
+record 00587: sensor=453 status=ok note=alpha-2-beta-9
+record 00588: sensor=372 status=retry note=alpha-3-beta-10
+record 00589: sensor=291 status=ok note=alpha-4-beta-11
+record 00590: sensor=210 status=ok note=alpha-5-beta-12
+record 00591: sensor=129 status=ok note=alpha-6-beta-13
+record 00592: sensor=48 status=ok note=alpha-7-beta-14
+record 00593: sensor=967 status=ok note=alpha-8-beta-15
+record 00594: sensor=886 status=ok note=alpha-9-beta-16
+record 00595: sensor=805 status=retry note=alpha-10-beta-0
+record 00596: sensor=724 status=ok note=alpha-11-beta-1
+record 00597: sensor=643 status=ok note=alpha-12-beta-2
+record 00598: sensor=562 status=ok note=alpha-0-beta-3
+record 00599: sensor=481 status=ok note=alpha-1-beta-4
+record 00600: sensor=400 status=ok note=alpha-2-beta-5
+record 00601: sensor=319 status=ok note=alpha-3-beta-6
+record 00602: sensor=238 status=retry note=alpha-4-beta-7
+record 00603: sensor=157 status=ok note=alpha-5-beta-8
+record 00604: sensor=76 status=ok note=alpha-6-beta-9
+record 00605: sensor=995 status=ok note=alpha-7-beta-10
+record 00606: sensor=914 status=ok note=alpha-8-beta-11
+record 00607: sensor=833 status=ok note=alpha-9-beta-12
+record 00608: sensor=752 status=ok note=alpha-10-beta-13
+record 00609: sensor=671 status=retry note=alpha-11-beta-14
+record 00610: sensor=590 status=ok note=alpha-12-beta-15
+record 00611: sensor=509 status=ok note=alpha-0-beta-16
+record 00612: sensor=428 status=ok note=alpha-1-beta-0
+record 00613: sensor=347 status=ok note=alpha-2-beta-1
+record 00614: sensor=266 status=ok note=alpha-3-beta-2
+record 00615: sensor=185 status=ok note=alpha-4-beta-3
+record 00616: sensor=104 status=retry note=alpha-5-beta-4
+record 00617: sensor=23 status=ok note=alpha-6-beta-5
+record 00618: sensor=942 status=ok note=alpha-7-beta-6
+record 00619: sensor=861 status=ok note=alpha-8-beta-7
+record 00620: sensor=780 status=ok note=alpha-9-beta-8
+record 00621: sensor=699 status=ok note=alpha-10-beta-9
+record 00622: sensor=618 status=ok note=alpha-11-beta-10
+record 00623: sensor=537 status=retry note=alpha-12-beta-11
+record 00624: sensor=456 status=ok note=alpha-0-beta-12
+record 00625: sensor=375 status=ok note=alpha-1-beta-13
+record 00626: sensor=294 status=ok note=alpha-2-beta-14
+record 00627: sensor=213 status=ok note=alpha-3-beta-15
+record 00628: sensor=132 status=ok note=alpha-4-beta-16
+record 00629: sensor=51 status=ok note=alpha-5-beta-0
+record 00630: sensor=970 status=retry note=alpha-6-beta-1
+record 00631: sensor=889 status=ok note=alpha-7-beta-2
+record 00632: sensor=808 status=ok note=alpha-8-beta-3
+record 00633: sensor=727 status=ok note=alpha-9-beta-4
+record 00634: sensor=646 status=ok note=alpha-10-beta-5
+record 00635: sensor=565 status=ok note=alpha-11-beta-6
+record 00636: sensor=484 status=ok note=alpha-12-beta-7
+record 00637: sensor=403 status=retry note=alpha-0-beta-8
+record 00638: sensor=322 status=ok note=alpha-1-beta-9
+record 00639: sensor=241 status=ok note=alpha-2-beta-10
+record 00640: sensor=160 status=ok note=alpha-3-beta-11
+record 00641: sensor=79 status=ok note=alpha-4-beta-12
+record 00642: sensor=998 status=ok note=alpha-5-beta-13
+record 00643: sensor=917 status=ok note=alpha-6-beta-14
+record 00644: sensor=836 status=retry note=alpha-7-beta-15
+record 00645: sensor=755 status=ok note=alpha-8-beta-16
+record 00646: sensor=674 status=ok note=alpha-9-beta-0
+record 00647: sensor=593 status=ok note=alpha-10-beta-1
+record 00648: sensor=512 status=ok note=alpha-11-beta-2
+record 00649: sensor=431 status=ok note=alpha-12-beta-3
+record 00650: sensor=350 status=ok note=alpha-0-beta-4
+record 00651: sensor=269 status=retry note=alpha-1-beta-5
+record 00652: sensor=188 status=ok note=alpha-2-beta-6
+record 00653: sensor=107 status=ok note=alpha-3-beta-7
+record 00654: sensor=26 status=ok note=alpha-4-beta-8
+record 00655: sensor=945 status=ok note=alpha-5-beta-9
+record 00656: sensor=864 status=ok note=alpha-6-beta-10
+record 00657: sensor=783 status=ok note=alpha-7-beta-11
+record 00658: sensor=702 status=retry note=alpha-8-beta-12
+record 00659: sensor=621 status=ok note=alpha-9-beta-13
+record 00660: sensor=540 status=ok note=alpha-10-beta-14
+record 00661: sensor=459 status=ok note=alpha-11-beta-15
+record 00662: sensor=378 status=ok note=alpha-12-beta-16
+record 00663: sensor=297 status=ok note=alpha-0-beta-0
+record 00664: sensor=216 status=ok note=alpha-1-beta-1
+record 00665: sensor=135 status=retry note=alpha-2-beta-2
+record 00666: sensor=54 status=ok note=alpha-3-beta-3
+record 00667: sensor=973 status=ok note=alpha-4-beta-4
+record 00668: sensor=892 status=ok note=alpha-5-beta-5
+record 00669: sensor=811 status=ok note=alpha-6-beta-6
+record 00670: sensor=730 status=ok note=alpha-7-beta-7
+record 00671: sensor=649 status=ok note=alpha-8-beta-8
+record 00672: sensor=568 status=retry note=alpha-9-beta-9
+record 00673: sensor=487 status=ok note=alpha-10-beta-10
+record 00674: sensor=406 status=ok note=alpha-11-beta-11
+record 00675: sensor=325 status=ok note=alpha-12-beta-12
+record 00676: sensor=244 status=ok note=alpha-0-beta-13
+record 00677: sensor=163 status=ok note=alpha-1-beta-14
+record 00678: sensor=82 status=ok note=alpha-2-beta-15
+record 00679: sensor=1 status=retry note=alpha-3-beta-16
+record 00680: sensor=920 status=ok note=alpha-4-beta-0
+record 00681: sensor=839 status=ok note=alpha-5-beta-1
+record 00682: sensor=758 status=ok note=alpha-6-beta-2
+record 00683: sensor=677 status=ok note=alpha-7-beta-3
+record 00684: sensor=596 status=ok note=alpha-8-beta-4
+record 00685: sensor=515 status=ok note=alpha-9-beta-5
+record 00686: sensor=434 status=retry note=alpha-10-beta-6
+record 00687: sensor=353 status=ok note=alpha-11-beta-7
+record 00688: sensor=272 status=ok note=alpha-12-beta-8
+record 00689: sensor=191 status=ok note=alpha-0-beta-9
+record 00690: sensor=110 status=ok note=alpha-1-beta-10
+record 00691: sensor=29 status=ok note=alpha-2-beta-11
+record 00692: sensor=948 status=ok note=alpha-3-beta-12
+record 00693: sensor=867 status=retry note=alpha-4-beta-13
+record 00694: sensor=786 status=ok note=alpha-5-beta-14
+record 00695: sensor=705 status=ok note=alpha-6-beta-15
+record 00696: sensor=624 status=ok note=alpha-7-beta-16
+record 00697: sensor=543 status=ok note=alpha-8-beta-0
+record 00698: sensor=462 status=ok note=alpha-9-beta-1
+record 00699: sensor=381 status=ok note=alpha-10-beta-2
+record 00700: sensor=300 status=retry note=alpha-11-beta-3
+record 00701: sensor=219 status=ok note=alpha-12-beta-4
+record 00702: sensor=138 status=ok note=alpha-0-beta-5
+record 00703: sensor=57 status=ok note=alpha-1-beta-6
+record 00704: sensor=976 status=ok note=alpha-2-beta-7
+record 00705: sensor=895 status=ok note=alpha-3-beta-8
+record 00706: sensor=814 status=ok note=alpha-4-beta-9
+record 00707: sensor=733 status=retry note=alpha-5-beta-10
+record 00708: sensor=652 status=ok note=alpha-6-beta-11
+record 00709: sensor=571 status=ok note=alpha-7-beta-12
+record 00710: sensor=490 status=ok note=alpha-8-beta-13
+record 00711: sensor=409 status=ok note=alpha-9-beta-14
+record 00712: sensor=328 status=ok note=alpha-10-beta-15
+record 00713: sensor=247 status=ok note=alpha-11-beta-16
+record 00714: sensor=166 status=retry note=alpha-12-beta-0
+record 00715: sensor=85 status=ok note=alpha-0-beta-1
+record 00716: sensor=4 status=ok note=alpha-1-beta-2
+record 00717: sensor=923 status=ok note=alpha-2-beta-3
+record 00718: sensor=842 status=ok note=alpha-3-beta-4
+record 00719: sensor=761 status=ok note=alpha-4-beta-5
+record 00720: sensor=680 status=ok note=alpha-5-beta-6
+record 00721: sensor=599 status=retry note=alpha-6-beta-7
+record 00722: sensor=518 status=ok note=alpha-7-beta-8
+record 00723: sensor=437 status=ok note=alpha-8-beta-9
+record 00724: sensor=356 status=ok note=alpha-9-beta-10
+record 00725: sensor=275 status=ok note=alpha-10-beta-11
+record 00726: sensor=194 status=ok note=alpha-11-beta-12
+record 00727: sensor=113 status=ok note=alpha-12-beta-13
+record 00728: sensor=32 status=retry note=alpha-0-beta-14
+record 00729: sensor=951 status=ok note=alpha-1-beta-15
+record 00730: sensor=870 status=ok note=alpha-2-beta-16
+record 00731: sensor=789 status=ok note=alpha-3-beta-0
+record 00732: sensor=708 status=ok note=alpha-4-beta-1
+record 00733: sensor=627 status=ok note=alpha-5-beta-2
+record 00734: sensor=546 status=ok note=alpha-6-beta-3
+record 00735: sensor=465 status=retry note=alpha-7-beta-4
+record 00736: sensor=384 status=ok note=alpha-8-beta-5
+record 00737: sensor=303 status=ok note=alpha-9-beta-6
+record 00738: sensor=222 status=ok note=alpha-10-beta-7
+record 00739: sensor=141 status=ok note=alpha-11-beta-8
+record 00740: sensor=60 status=ok note=alpha-12-beta-9
+record 00741: sensor=979 status=ok note=alpha-0-beta-10
+record 00742: sensor=898 status=retry note=alpha-1-beta-11
+record 00743: sensor=817 status=ok note=alpha-2-beta-12
+record 00744: sensor=736 status=ok note=alpha-3-beta-13
+record 00745: sensor=655 status=ok note=alpha-4-beta-14
+record 00746: sensor=574 status=ok note=alpha-5-beta-15
+record 00747: sensor=493 status=ok note=alpha-6-beta-16
+record 00748: sensor=412 status=ok note=alpha-7-beta-0
+record 00749: sensor=331 status=retry note=alpha-8-beta-1
+record 00750: sensor=250 status=ok note=alpha-9-beta-2
+record 00751: sensor=169 status=ok note=alpha-10-beta-3
+record 00752: sensor=88 status=ok note=alpha-11-beta-4
+record 00753: sensor=7 status=ok note=alpha-12-beta-5
+record 00754: sensor=926 status=ok note=alpha-0-beta-6
+record 00755: sensor=845 status=ok note=alpha-1-beta-7
+record 00756: sensor=764 status=retry note=alpha-2-beta-8
+record 00757: sensor=683 status=ok note=alpha-3-beta-9
+record 00758: sensor=602 status=ok note=alpha-4-beta-10
+record 00759: sensor=521 status=ok note=alpha-5-beta-11
+record 00760: sensor=440 status=ok note=alpha-6-beta-12
+record 00761: sensor=359 status=ok note=alpha-7-beta-13
+record 00762: sensor=278 status=ok note=alpha-8-beta-14
+record 00763: sensor=197 status=retry note=alpha-9-beta-15
+record 00764: sensor=116 status=ok note=alpha-10-beta-16
+record 00765: sensor=35 status=ok note=alpha-11-beta-0
+record 00766: sensor=954 status=ok note=alpha-12-beta-1
+record 00767: sensor=873 status=ok note=alpha-0-beta-2
+record 00768: sensor=792 status=ok note=alpha-1-beta-3
+record 00769: sensor=711 status=ok note=alpha-2-beta-4
+record 00770: sensor=630 status=retry note=alpha-3-beta-5
+record 00771: sensor=549 status=ok note=alpha-4-beta-6
+record 00772: sensor=468 status=ok note=alpha-5-beta-7
+record 00773: sensor=387 status=ok note=alpha-6-beta-8
+record 00774: sensor=306 status=ok note=alpha-7-beta-9
+record 00775: sensor=225 status=ok note=alpha-8-beta-10
+record 00776: sensor=144 status=ok note=alpha-9-beta-11
+record 00777: sensor=63 status=retry note=alpha-10-beta-12
+record 00778: sensor=982 status=ok note=alpha-11-beta-13
+record 00779: sensor=901 status=ok note=alpha-12-beta-14
+record 00780: sensor=820 status=ok note=alpha-0-beta-15
+record 00781: sensor=739 status=ok note=alpha-1-beta-16
+record 00782: sensor=658 status=ok note=alpha-2-beta-0
+record 00783: sensor=577 status=ok note=alpha-3-beta-1
+record 00784: sensor=496 status=retry note=alpha-4-beta-2
+record 00785: sensor=415 status=ok note=alpha-5-beta-3
+record 00786: sensor=334 status=ok note=alpha-6-beta-4
+record 00787: sensor=253 status=ok note=alpha-7-beta-5
+record 00788: sensor=172 status=ok note=alpha-8-beta-6
+record 00789: sensor=91 status=ok note=alpha-9-beta-7
+record 00790: sensor=10 status=ok note=alpha-10-beta-8
+record 00791: sensor=929 status=retry note=alpha-11-beta-9
+record 00792: sensor=848 status=ok note=alpha-12-beta-10
+record 00793: sensor=767 status=ok note=alpha-0-beta-11
+record 00794: sensor=686 status=ok note=alpha-1-beta-12
+record 00795: sensor=605 status=ok note=alpha-2-beta-13
+record 00796: sensor=524 status=ok note=alpha-3-beta-14
+record 00797: sensor=443 status=ok note=alpha-4-beta-15
+record 00798: sensor=362 status=retry note=alpha-5-beta-16
+record 00799: sensor=281 status=ok note=alpha-6-beta-0
+record 00800: sensor=200 status=ok note=alpha-7-beta-1<|assistant|><think>
+
+--- generated text ---
+
+
+--- trace: prefill done; decode_max=96 ctx_room=15719 ---
+
+Count retries. Pattern seems every 7th record? Let's check: record 7 retry, 14, 21, 28, 35, 42, 49, 56, 63, 70, 77, 84, 91, 98, 105, 112, 119, 126, 133, 140, 147, 154, 161, 168, 175, 182, 
+
+--- parsed message ---
+finish: length
+generated_tokens: 96
+dsml_start: 0
+dsml_end: 0
+elapsed_sec: 390.622
+
+reasoning:
+Count retries. Pattern seems every 7th record? Let's check: record 7 retry, 14, 21, 28, 35, 42, 49, 56, 63, 70, 77, 84, 91, 98, 105, 112, 119, 126, 133, 140, 147, 154, 161, 168, 175, 182, 
+
+===== end request 2 =====
+
+===== request 3 2026-11-08 22:44:54 =====
+kind: chat
+model: ds4
+stream: 0
+tools: 0
+think_mode: high
+prompt_tokens: 17071
+effective_prompt_tokens: 17071
+cached_tokens: 0
+max_tokens: 64
+temperature: 0.000
+top_k: 0
+top_p: 1.000
+min_p: 0.050
+ignore_eos: 0
+seed: 0
+stream_include_usage: 0
+
+--- cache decision ---
+live_tokens_before: 17145
+prompt_tokens: 17071
+live_prompt_common: 17049
+memory_token_reusable: 0
+memory_miss_reason: token-mismatch
+tool_replay: mem=0 disk=0 canonical=0 missing_ids=0
+cache_source: none
+cached_tokens: 0
+disk_cached_tokens: 0
+
+first_mismatch_token: 17049
+token_window: [17041..17058)
+  17041 ==          live 7141 "alpha" | prompt 7141 "alpha"
+  17042 ==          live 12 "-" | prompt 12 "-"
+  17043 ==          live 22 "7" | prompt 22 "7"
+  17044 ==          live 67148 "-beta" | prompt 67148 "-beta"
+  17045 ==          live 12 "-" | prompt 12 "-"
+  17046 ==          live 16 "1" | prompt 16 "1"
+  17047 ==          live 154828 "<|assistant|>" | prompt 154828 "<|assistant|>"
+  17048 ==          live 154841 "<think>" | prompt 154841 "<think>"
+  17049 !=          live 2507 "Count" | prompt 154842 "</think>"
+  17050 !=          live 60178 " retries" | prompt 154827 "<|user|>"
+  17051 !=          live 13 "." | prompt 7039 "Now"
+  17052 !=          live 18800 " Pattern" | prompt 1584 " state"
+  17053 !=          live 4977 " seems" | prompt 279 " the"
+  17054 !=          live 1449 " every" | prompt 11996 " sensor"
+  17055 !=          live 220 " " | prompt 897 " value"
+  17056 !=          live 22 "7" | prompt 315 " of"
+  17057 !=          live 339 "th" | prompt 3255 " record"
+
+--- raw request json ---
+{"model": "ds4", "messages": [{"role": "system", "content": "You are a terse assistant. Answer directly, no thinking."}, {"role": "user", "content": "Say hello in exactly five words."}, {"role": "assistant", "content": "Hello there, nice to meet you!"}, {"role": "user", "content": "Here is a sensor log. How many records have status=retry? Reply with the number only.\n\nrecord 00001: sensor=919 status=ok note=alpha-1-beta-1\nrecord 00002: sensor=838 status=ok note=alpha-2-beta-2\nrecord 00003: sensor=757 status=ok note=alpha-3-beta-3\nrecord 00004: sensor=676 status=ok note=alpha-4-beta-4\nrecord 00005: sensor=595 status=ok note=alpha-5-beta-5\nrecord 00006: sensor=514 status=ok note=alpha-6-beta-6\nrecord 00007: sensor=433 status=retry note=alpha-7-beta-7\nrecord 00008: sensor=352 status=ok note=alpha-8-beta-8\nrecord 00009: sensor=271 status=ok note=alpha-9-beta-9\nrecord 00010: sensor=190 status=ok note=alpha-10-beta-10\nrecord 00011: sensor=109 status=ok note=alpha-11-beta-11\nrecord 00012: sensor=28 status=ok note=alpha-12-beta-12\nrecord 00013: sensor=947 status=ok note=alpha-0-beta-13\nrecord 00014: sensor=866 status=retry note=alpha-1-beta-14\nrecord 00015: sensor=785 status=ok note=alpha-2-beta-15\nrecord 00016: sensor=704 status=ok note=alpha-3-beta-16\nrecord 00017: sensor=623 status=ok note=alpha-4-beta-0\nrecord 00018: sensor=542 status=ok note=alpha-5-beta-1\nrecord 00019: sensor=461 status=ok note=alpha-6-beta-2\nrecord 00020: sensor=380 status=ok note=alpha-7-beta-3\nrecord 00021: sensor=299 status=retry note=alpha-8-beta-4\nrecord 00022: sensor=218 status=ok note=alpha-9-beta-5\nrecord 00023: sensor=137 status=ok note=alpha-10-beta-6\nrecord 00024: sensor=56 status=ok note=alpha-11-beta-7\nrecord 00025: sensor=975 status=ok note=alpha-12-beta-8\nrecord 00026: sensor=894 status=ok note=alpha-0-beta-9\nrecord 00027: sensor=813 status=ok note=alpha-1-beta-10\nrecord 00028: sensor=732 status=retry note=alpha-2-beta-11\nrecord 00029: sensor=651 status=ok note=alpha-3-beta-12\nrecord 00030: sensor=570 status=ok note=alpha-4-beta-13\nrecord 00031: sensor=489 status=ok note=alpha-5-beta-14\nrecord 00032: sensor=408 status=ok note=alpha-6-beta-15\nrecord 00033: sensor=327 status=ok note=alpha-7-beta-16\nrecord 00034: sensor=246 status=ok note=alpha-8-beta-0\nrecord 00035: sensor=165 status=retry note=alpha-9-beta-1\nrecord 00036: sensor=84 status=ok note=alpha-10-beta-2\nrecord 00037: sensor=3 status=ok note=alpha-11-beta-3\nrecord 00038: sensor=922 status=ok note=alpha-12-beta-4\nrecord 00039: sensor=841 status=ok note=alpha-0-beta-5\nrecord 00040: sensor=760 status=ok note=alpha-1-beta-6\nrecord 00041: sensor=679 status=ok note=alpha-2-beta-7\nrecord 00042: sensor=598 status=retry note=alpha-3-beta-8\nrecord 00043: sensor=517 status=ok note=alpha-4-beta-9\nrecord 00044: sensor=436 status=ok note=alpha-5-beta-10\nrecord 00045: sensor=355 status=ok note=alpha-6-beta-11\nrecord 00046: sensor=274 status=ok note=alpha-7-beta-12\nrecord 00047: sensor=193 status=ok note=alpha-8-beta-13\nrecord 00048: sensor=112 status=ok note=alpha-9-beta-14\nrecord 00049: sensor=31 status=retry note=alpha-10-beta-15\nrecord 00050: sensor=950 status=ok note=alpha-11-beta-16\nrecord 00051: sensor=869 status=ok note=alpha-12-beta-0\nrecord 00052: sensor=788 status=ok note=alpha-0-beta-1\nrecord 00053: sensor=707 status=ok note=alpha-1-beta-2\nrecord 00054: sensor=626 status=ok note=alpha-2-beta-3\nrecord 00055: sensor=545 status=ok note=alpha-3-beta-4\nrecord 00056: sensor=464 status=retry note=alpha-4-beta-5\nrecord 00057: sensor=383 status=ok note=alpha-5-beta-6\nrecord 00058: sensor=302 status=ok note=alpha-6-beta-7\nrecord 00059: sensor=221 status=ok note=alpha-7-beta-8\nrecord 00060: sensor=140 status=ok note=alpha-8-beta-9\nrecord 00061: sensor=59 status=ok note=alpha-9-beta-10\nrecord 00062: sensor=978 status=ok note=alpha-10-beta-11\nrecord 00063: sensor=897 status=retry note=alpha-11-beta-12\nrecord 00064: sensor=816 status=ok note=alpha-12-beta-13\nrecord 00065: sensor=735 status=ok note=alpha-0-beta-14\nrecord 00066: sensor=654 status=ok note=alpha-1-beta-15\nrecord 00067: sensor=573 status=ok note=alpha-2-beta-16\nrecord 00068: sensor=492 status=ok note=alpha-3-beta-0\nrecord 00069: sensor=411 status=ok note=alpha-4-beta-1\nrecord 00070: sensor=330 status=retry note=alpha-5-beta-2\nrecord 00071: sensor=249 status=ok note=alpha-6-beta-3\nrecord 00072: sensor=168 status=ok note=alpha-7-beta-4\nrecord 00073: sensor=87 status=ok note=alpha-8-beta-5\nrecord 00074: sensor=6 status=ok note=alpha-9-beta-6\nrecord 00075: sensor=925 status=ok note=alpha-10-beta-7\nrecord 00076: sensor=844 status=ok note=alpha-11-beta-8\nrecord 00077: sensor=763 status=retry note=alpha-12-beta-9\nrecord 00078: sensor=682 status=ok note=alpha-0-beta-10\nrecord 00079: sensor=601 status=ok note=alpha-1-beta-11\nrecord 00080: sensor=520 status=ok note=alpha-2-beta-12\nrecord 00081: sensor=439 status=ok note=alpha-3-beta-13\nrecord 00082: sensor=358 status=ok note=alpha-4-beta-14\nrecord 00083: sensor=277 status=ok note=alpha-5-beta-15\nrecord 00084: sensor=196 status=retry note=alpha-6-beta-16\nrecord 00085: sensor=115 status=ok note=alpha-7-beta-0\nrecord 00086: sensor=34 status=ok note=alpha-8-beta-1\nrecord 00087: sensor=953 status=ok note=alpha-9-beta-2\nrecord 00088: sensor=872 status=ok note=alpha-10-beta-3\nrecord 00089: sensor=791 status=ok note=alpha-11-beta-4\nrecord 00090: sensor=710 status=ok note=alpha-12-beta-5\nrecord 00091: sensor=629 status=retry note=alpha-0-beta-6\nrecord 00092: sensor=548 status=ok note=alpha-1-beta-7\nrecord 00093: sensor=467 status=ok note=alpha-2-beta-8\nrecord 00094: sensor=386 status=ok note=alpha-3-beta-9\nrecord 00095: sensor=305 status=ok note=alpha-4-beta-10\nrecord 00096: sensor=224 status=ok note=alpha-5-beta-11\nrecord 00097: sensor=143 status=ok note=alpha-6-beta-12\nrecord 00098: sensor=62 status=retry note=alpha-7-beta-13\nrecord 00099: sensor=981 status=ok note=alpha-8-beta-14\nrecord 00100: sensor=900 status=ok note=alpha-9-beta-15\nrecord 00101: sensor=819 status=ok note=alpha-10-beta-16\nrecord 00102: sensor=738 status=ok note=alpha-11-beta-0\nrecord 00103: sensor=657 status=ok note=alpha-12-beta-1\nrecord 00104: sensor=576 status=ok note=alpha-0-beta-2\nrecord 00105: sensor=495 status=retry note=alpha-1-beta-3\nrecord 00106: sensor=414 status=ok note=alpha-2-beta-4\nrecord 00107: sensor=333 status=ok note=alpha-3-beta-5\nrecord 00108: sensor=252 status=ok note=alpha-4-beta-6\nrecord 00109: sensor=171 status=ok note=alpha-5-beta-7\nrecord 00110: sensor=90 status=ok note=alpha-6-beta-8\nrecord 00111: sensor=9 status=ok note=alpha-7-beta-9\nrecord 00112: sensor=928 status=retry note=alpha-8-beta-10\nrecord 00113: sensor=847 status=ok note=alpha-9-beta-11\nrecord 00114: sensor=766 status=ok note=alpha-10-beta-12\nrecord 00115: sensor=685 status=ok note=alpha-11-beta-13\nrecord 00116: sensor=604 status=ok note=alpha-12-beta-14\nrecord 00117: sensor=523 status=ok note=alpha-0-beta-15\nrecord 00118: sensor=442 status=ok note=alpha-1-beta-16\nrecord 00119: sensor=361 status=retry note=alpha-2-beta-0\nrecord 00120: sensor=280 status=ok note=alpha-3-beta-1\nrecord 00121: sensor=199 status=ok note=alpha-4-beta-2\nrecord 00122: sensor=118 status=ok note=alpha-5-beta-3\nrecord 00123: sensor=37 status=ok note=alpha-6-beta-4\nrecord 00124: sensor=956 status=ok note=alpha-7-beta-5\nrecord 00125: sensor=875 status=ok note=alpha-8-beta-6\nrecord 00126: sensor=794 status=retry note=alpha-9-beta-7\nrecord 00127: sensor=713 status=ok note=alpha-10-beta-8\nrecord 00128: sensor=632 status=ok note=alpha-11-beta-9\nrecord 00129: sensor=551 status=ok note=alpha-12-beta-10\nrecord 00130: sensor=470 status=ok note=alpha-0-beta-11\nrecord 00131: sensor=389 status=ok note=alpha-1-beta-12\nrecord 00132: sensor=308 status=ok note=alpha-2-beta-13\nrecord 00133: sensor=227 status=retry note=alpha-3-beta-14\nrecord 00134: sensor=146 status=ok note=alpha-4-beta-15\nrecord 00135: sensor=65 status=ok note=alpha-5-beta-16\nrecord 00136: sensor=984 status=ok note=alpha-6-beta-0\nrecord 00137: sensor=903 status=ok note=alpha-7-beta-1\nrecord 00138: sensor=822 status=ok note=alpha-8-beta-2\nrecord 00139: sensor=741 status=ok note=alpha-9-beta-3\nrecord 00140: sensor=660 status=retry note=alpha-10-beta-4\nrecord 00141: sensor=579 status=ok note=alpha-11-beta-5\nrecord 00142: sensor=498 status=ok note=alpha-12-beta-6\nrecord 00143: sensor=417 status=ok note=alpha-0-beta-7\nrecord 00144: sensor=336 status=ok note=alpha-1-beta-8\nrecord 00145: sensor=255 status=ok note=alpha-2-beta-9\nrecord 00146: sensor=174 status=ok note=alpha-3-beta-10\nrecord 00147: sensor=93 status=retry note=alpha-4-beta-11\nrecord 00148: sensor=12 status=ok note=alpha-5-beta-12\nrecord 00149: sensor=931 status=ok note=alpha-6-beta-13\nrecord 00150: sensor=850 status=ok note=alpha-7-beta-14\nrecord 00151: sensor=769 status=ok note=alpha-8-beta-15\nrecord 00152: sensor=688 status=ok note=alpha-9-beta-16\nrecord 00153: sensor=607 status=ok note=alpha-10-beta-0\nrecord 00154: sensor=526 status=retry note=alpha-11-beta-1\nrecord 00155: sensor=445 status=ok note=alpha-12-beta-2\nrecord 00156: sensor=364 status=ok note=alpha-0-beta-3\nrecord 00157: sensor=283 status=ok note=alpha-1-beta-4\nrecord 00158: sensor=202 status=ok note=alpha-2-beta-5\nrecord 00159: sensor=121 status=ok note=alpha-3-beta-6\nrecord 00160: sensor=40 status=ok note=alpha-4-beta-7\nrecord 00161: sensor=959 status=retry note=alpha-5-beta-8\nrecord 00162: sensor=878 status=ok note=alpha-6-beta-9\nrecord 00163: sensor=797 status=ok note=alpha-7-beta-10\nrecord 00164: sensor=716 status=ok note=alpha-8-beta-11\nrecord 00165: sensor=635 status=ok note=alpha-9-beta-12\nrecord 00166: sensor=554 status=ok note=alpha-10-beta-13\nrecord 00167: sensor=473 status=ok note=alpha-11-beta-14\nrecord 00168: sensor=392 status=retry note=alpha-12-beta-15\nrecord 00169: sensor=311 status=ok note=alpha-0-beta-16\nrecord 00170: sensor=230 status=ok note=alpha-1-beta-0\nrecord 00171: sensor=149 status=ok note=alpha-2-beta-1\nrecord 00172: sensor=68 status=ok note=alpha-3-beta-2\nrecord 00173: sensor=987 status=ok note=alpha-4-beta-3\nrecord 00174: sensor=906 status=ok note=alpha-5-beta-4\nrecord 00175: sensor=825 status=retry note=alpha-6-beta-5\nrecord 00176: sensor=744 status=ok note=alpha-7-beta-6\nrecord 00177: sensor=663 status=ok note=alpha-8-beta-7\nrecord 00178: sensor=582 status=ok note=alpha-9-beta-8\nrecord 00179: sensor=501 status=ok note=alpha-10-beta-9\nrecord 00180: sensor=420 status=ok note=alpha-11-beta-10\nrecord 00181: sensor=339 status=ok note=alpha-12-beta-11\nrecord 00182: sensor=258 status=retry note=alpha-0-beta-12\nrecord 00183: sensor=177 status=ok note=alpha-1-beta-13\nrecord 00184: sensor=96 status=ok note=alpha-2-beta-14\nrecord 00185: sensor=15 status=ok note=alpha-3-beta-15\nrecord 00186: sensor=934 status=ok note=alpha-4-beta-16\nrecord 00187: sensor=853 status=ok note=alpha-5-beta-0\nrecord 00188: sensor=772 status=ok note=alpha-6-beta-1\nrecord 00189: sensor=691 status=retry note=alpha-7-beta-2\nrecord 00190: sensor=610 status=ok note=alpha-8-beta-3\nrecord 00191: sensor=529 status=ok note=alpha-9-beta-4\nrecord 00192: sensor=448 status=ok note=alpha-10-beta-5\nrecord 00193: sensor=367 status=ok note=alpha-11-beta-6\nrecord 00194: sensor=286 status=ok note=alpha-12-beta-7\nrecord 00195: sensor=205 status=ok note=alpha-0-beta-8\nrecord 00196: sensor=124 status=retry note=alpha-1-beta-9\nrecord 00197: sensor=43 status=ok note=alpha-2-beta-10\nrecord 00198: sensor=962 status=ok note=alpha-3-beta-11\nrecord 00199: sensor=881 status=ok note=alpha-4-beta-12\nrecord 00200: sensor=800 status=ok note=alpha-5-beta-13\nrecord 00201: sensor=719 status=ok note=alpha-6-beta-14\nrecord 00202: sensor=638 status=ok note=alpha-7-beta-15\nrecord 00203: sensor=557 status=retry note=alpha-8-beta-16\nrecord 00204: sensor=476 status=ok note=alpha-9-beta-0\nrecord 00205: sensor=395 status=ok note=alpha-10-beta-1\nrecord 00206: sensor=314 status=ok note=alpha-11-beta-2\nrecord 00207: sensor=233 status=ok note=alpha-12-beta-3\nrecord 00208: sensor=152 status=ok note=alpha-0-beta-4\nrecord 00209: sensor=71 status=ok note=alpha-1-beta-5\nrecord 00210: sensor=990 status=retry note=alpha-2-beta-6\nrecord 00211: sensor=909 status=ok note=alpha-3-beta-7\nrecord 00212: sensor=828 status=ok note=alpha-4-beta-8\nrecord 00213: sensor=747 status=ok note=alpha-5-beta-9\nrecord 00214: sensor=666 status=ok note=alpha-6-beta-10\nrecord 00215: sensor=585 status=ok note=alpha-7-beta-11\nrecord 00216: sensor=504 status=ok note=alpha-8-beta-12\nrecord 00217: sensor=423 status=retry note=alpha-9-beta-13\nrecord 00218: sensor=342 status=ok note=alpha-10-beta-14\nrecord 00219: sensor=261 status=ok note=alpha-11-beta-15\nrecord 00220: sensor=180 status=ok note=alpha-12-beta-16\nrecord 00221: sensor=99 status=ok note=alpha-0-beta-0\nrecord 00222: sensor=18 status=ok note=alpha-1-beta-1\nrecord 00223: sensor=937 status=ok note=alpha-2-beta-2\nrecord 00224: sensor=856 status=retry note=alpha-3-beta-3\nrecord 00225: sensor=775 status=ok note=alpha-4-beta-4\nrecord 00226: sensor=694 status=ok note=alpha-5-beta-5\nrecord 00227: sensor=613 status=ok note=alpha-6-beta-6\nrecord 00228: sensor=532 status=ok note=alpha-7-beta-7\nrecord 00229: sensor=451 status=ok note=alpha-8-beta-8\nrecord 00230: sensor=370 status=ok note=alpha-9-beta-9\nrecord 00231: sensor=289 status=retry note=alpha-10-beta-10\nrecord 00232: sensor=208 status=ok note=alpha-11-beta-11\nrecord 00233: sensor=127 status=ok note=alpha-12-beta-12\nrecord 00234: sensor=46 status=ok note=alpha-0-beta-13\nrecord 00235: sensor=965 status=ok note=alpha-1-beta-14\nrecord 00236: sensor=884 status=ok note=alpha-2-beta-15\nrecord 00237: sensor=803 status=ok note=alpha-3-beta-16\nrecord 00238: sensor=722 status=retry note=alpha-4-beta-0\nrecord 00239: sensor=641 status=ok note=alpha-5-beta-1\nrecord 00240: sensor=560 status=ok note=alpha-6-beta-2\nrecord 00241: sensor=479 status=ok note=alpha-7-beta-3\nrecord 00242: sensor=398 status=ok note=alpha-8-beta-4\nrecord 00243: sensor=317 status=ok note=alpha-9-beta-5\nrecord 00244: sensor=236 status=ok note=alpha-10-beta-6\nrecord 00245: sensor=155 status=retry note=alpha-11-beta-7\nrecord 00246: sensor=74 status=ok note=alpha-12-beta-8\nrecord 00247: sensor=993 status=ok note=alpha-0-beta-9\nrecord 00248: sensor=912 status=ok note=alpha-1-beta-10\nrecord 00249: sensor=831 status=ok note=alpha-2-beta-11\nrecord 00250: sensor=750 status=ok note=alpha-3-beta-12\nrecord 00251: sensor=669 status=ok note=alpha-4-beta-13\nrecord 00252: sensor=588 status=retry note=alpha-5-beta-14\nrecord 00253: sensor=507 status=ok note=alpha-6-beta-15\nrecord 00254: sensor=426 status=ok note=alpha-7-beta-16\nrecord 00255: sensor=345 status=ok note=alpha-8-beta-0\nrecord 00256: sensor=264 status=ok note=alpha-9-beta-1\nrecord 00257: sensor=183 status=ok note=alpha-10-beta-2\nrecord 00258: sensor=102 status=ok note=alpha-11-beta-3\nrecord 00259: sensor=21 status=retry note=alpha-12-beta-4\nrecord 00260: sensor=940 status=ok note=alpha-0-beta-5\nrecord 00261: sensor=859 status=ok note=alpha-1-beta-6\nrecord 00262: sensor=778 status=ok note=alpha-2-beta-7\nrecord 00263: sensor=697 status=ok note=alpha-3-beta-8\nrecord 00264: sensor=616 status=ok note=alpha-4-beta-9\nrecord 00265: sensor=535 status=ok note=alpha-5-beta-10\nrecord 00266: sensor=454 status=retry note=alpha-6-beta-11\nrecord 00267: sensor=373 status=ok note=alpha-7-beta-12\nrecord 00268: sensor=292 status=ok note=alpha-8-beta-13\nrecord 00269: sensor=211 status=ok note=alpha-9-beta-14\nrecord 00270: sensor=130 status=ok note=alpha-10-beta-15\nrecord 00271: sensor=49 status=ok note=alpha-11-beta-16\nrecord 00272: sensor=968 status=ok note=alpha-12-beta-0\nrecord 00273: sensor=887 status=retry note=alpha-0-beta-1\nrecord 00274: sensor=806 status=ok note=alpha-1-beta-2\nrecord 00275: sensor=725 status=ok note=alpha-2-beta-3\nrecord 00276: sensor=644 status=ok note=alpha-3-beta-4\nrecord 00277: sensor=563 status=ok note=alpha-4-beta-5\nrecord 00278: sensor=482 status=ok note=alpha-5-beta-6\nrecord 00279: sensor=401 status=ok note=alpha-6-beta-7\nrecord 00280: sensor=320 status=retry note=alpha-7-beta-8\nrecord 00281: sensor=239 status=ok note=alpha-8-beta-9\nrecord 00282: sensor=158 status=ok note=alpha-9-beta-10\nrecord 00283: sensor=77 status=ok note=alpha-10-beta-11\nrecord 00284: sensor=996 status=ok note=alpha-11-beta-12\nrecord 00285: sensor=915 status=ok note=alpha-12-beta-13\nrecord 00286: sensor=834 status=ok note=alpha-0-beta-14\nrecord 00287: sensor=753 status=retry note=alpha-1-beta-15\nrecord 00288: sensor=672 status=ok note=alpha-2-beta-16\nrecord 00289: sensor=591 status=ok note=alpha-3-beta-0\nrecord 00290: sensor=510 status=ok note=alpha-4-beta-1\nrecord 00291: sensor=429 status=ok note=alpha-5-beta-2\nrecord 00292: sensor=348 status=ok note=alpha-6-beta-3\nrecord 00293: sensor=267 status=ok note=alpha-7-beta-4\nrecord 00294: sensor=186 status=retry note=alpha-8-beta-5\nrecord 00295: sensor=105 status=ok note=alpha-9-beta-6\nrecord 00296: sensor=24 status=ok note=alpha-10-beta-7\nrecord 00297: sensor=943 status=ok note=alpha-11-beta-8\nrecord 00298: sensor=862 status=ok note=alpha-12-beta-9\nrecord 00299: sensor=781 status=ok note=alpha-0-beta-10\nrecord 00300: sensor=700 status=ok note=alpha-1-beta-11\nrecord 00301: sensor=619 status=retry note=alpha-2-beta-12\nrecord 00302: sensor=538 status=ok note=alpha-3-beta-13\nrecord 00303: sensor=457 status=ok note=alpha-4-beta-14\nrecord 00304: sensor=376 status=ok note=alpha-5-beta-15\nrecord 00305: sensor=295 status=ok note=alpha-6-beta-16\nrecord 00306: sensor=214 status=ok note=alpha-7-beta-0\nrecord 00307: sensor=133 status=ok note=alpha-8-beta-1\nrecord 00308: sensor=52 status=retry note=alpha-9-beta-2\nrecord 00309: sensor=971 status=ok note=alpha-10-beta-3\nrecord 00310: sensor=890 status=ok note=alpha-11-beta-4\nrecord 00311: sensor=809 status=ok note=alpha-12-beta-5\nrecord 00312: sensor=728 status=ok note=alpha-0-beta-6\nrecord 00313: sensor=647 status=ok note=alpha-1-beta-7\nrecord 00314: sensor=566 status=ok note=alpha-2-beta-8\nrecord 00315: sensor=485 status=retry note=alpha-3-beta-9\nrecord 00316: sensor=404 status=ok note=alpha-4-beta-10\nrecord 00317: sensor=323 status=ok note=alpha-5-beta-11\nrecord 00318: sensor=242 status=ok note=alpha-6-beta-12\nrecord 00319: sensor=161 status=ok note=alpha-7-beta-13\nrecord 00320: sensor=80 status=ok note=alpha-8-beta-14\nrecord 00321: sensor=999 status=ok note=alpha-9-beta-15\nrecord 00322: sensor=918 status=retry note=alpha-10-beta-16\nrecord 00323: sensor=837 status=ok note=alpha-11-beta-0\nrecord 00324: sensor=756 status=ok note=alpha-12-beta-1\nrecord 00325: sensor=675 status=ok note=alpha-0-beta-2\nrecord 00326: sensor=594 status=ok note=alpha-1-beta-3\nrecord 00327: sensor=513 status=ok note=alpha-2-beta-4\nrecord 00328: sensor=432 status=ok note=alpha-3-beta-5\nrecord 00329: sensor=351 status=retry note=alpha-4-beta-6\nrecord 00330: sensor=270 status=ok note=alpha-5-beta-7\nrecord 00331: sensor=189 status=ok note=alpha-6-beta-8\nrecord 00332: sensor=108 status=ok note=alpha-7-beta-9\nrecord 00333: sensor=27 status=ok note=alpha-8-beta-10\nrecord 00334: sensor=946 status=ok note=alpha-9-beta-11\nrecord 00335: sensor=865 status=ok note=alpha-10-beta-12\nrecord 00336: sensor=784 status=retry note=alpha-11-beta-13\nrecord 00337: sensor=703 status=ok note=alpha-12-beta-14\nrecord 00338: sensor=622 status=ok note=alpha-0-beta-15\nrecord 00339: sensor=541 status=ok note=alpha-1-beta-16\nrecord 00340: sensor=460 status=ok note=alpha-2-beta-0\nrecord 00341: sensor=379 status=ok note=alpha-3-beta-1\nrecord 00342: sensor=298 status=ok note=alpha-4-beta-2\nrecord 00343: sensor=217 status=retry note=alpha-5-beta-3\nrecord 00344: sensor=136 status=ok note=alpha-6-beta-4\nrecord 00345: sensor=55 status=ok note=alpha-7-beta-5\nrecord 00346: sensor=974 status=ok note=alpha-8-beta-6\nrecord 00347: sensor=893 status=ok note=alpha-9-beta-7\nrecord 00348: sensor=812 status=ok note=alpha-10-beta-8\nrecord 00349: sensor=731 status=ok note=alpha-11-beta-9\nrecord 00350: sensor=650 status=retry note=alpha-12-beta-10\nrecord 00351: sensor=569 status=ok note=alpha-0-beta-11\nrecord 00352: sensor=488 status=ok note=alpha-1-beta-12\nrecord 00353: sensor=407 status=ok note=alpha-2-beta-13\nrecord 00354: sensor=326 status=ok note=alpha-3-beta-14\nrecord 00355: sensor=245 status=ok note=alpha-4-beta-15\nrecord 00356: sensor=164 status=ok note=alpha-5-beta-16\nrecord 00357: sensor=83 status=retry note=alpha-6-beta-0\nrecord 00358: sensor=2 status=ok note=alpha-7-beta-1\nrecord 00359: sensor=921 status=ok note=alpha-8-beta-2\nrecord 00360: sensor=840 status=ok note=alpha-9-beta-3\nrecord 00361: sensor=759 status=ok note=alpha-10-beta-4\nrecord 00362: sensor=678 status=ok note=alpha-11-beta-5\nrecord 00363: sensor=597 status=ok note=alpha-12-beta-6\nrecord 00364: sensor=516 status=retry note=alpha-0-beta-7\nrecord 00365: sensor=435 status=ok note=alpha-1-beta-8\nrecord 00366: sensor=354 status=ok note=alpha-2-beta-9\nrecord 00367: sensor=273 status=ok note=alpha-3-beta-10\nrecord 00368: sensor=192 status=ok note=alpha-4-beta-11\nrecord 00369: sensor=111 status=ok note=alpha-5-beta-12\nrecord 00370: sensor=30 status=ok note=alpha-6-beta-13\nrecord 00371: sensor=949 status=retry note=alpha-7-beta-14\nrecord 00372: sensor=868 status=ok note=alpha-8-beta-15\nrecord 00373: sensor=787 status=ok note=alpha-9-beta-16\nrecord 00374: sensor=706 status=ok note=alpha-10-beta-0\nrecord 00375: sensor=625 status=ok note=alpha-11-beta-1\nrecord 00376: sensor=544 status=ok note=alpha-12-beta-2\nrecord 00377: sensor=463 status=ok note=alpha-0-beta-3\nrecord 00378: sensor=382 status=retry note=alpha-1-beta-4\nrecord 00379: sensor=301 status=ok note=alpha-2-beta-5\nrecord 00380: sensor=220 status=ok note=alpha-3-beta-6\nrecord 00381: sensor=139 status=ok note=alpha-4-beta-7\nrecord 00382: sensor=58 status=ok note=alpha-5-beta-8\nrecord 00383: sensor=977 status=ok note=alpha-6-beta-9\nrecord 00384: sensor=896 status=ok note=alpha-7-beta-10\nrecord 00385: sensor=815 status=retry note=alpha-8-beta-11\nrecord 00386: sensor=734 status=ok note=alpha-9-beta-12\nrecord 00387: sensor=653 status=ok note=alpha-10-beta-13\nrecord 00388: sensor=572 status=ok note=alpha-11-beta-14\nrecord 00389: sensor=491 status=ok note=alpha-12-beta-15\nrecord 00390: sensor=410 status=ok note=alpha-0-beta-16\nrecord 00391: sensor=329 status=ok note=alpha-1-beta-0\nrecord 00392: sensor=248 status=retry note=alpha-2-beta-1\nrecord 00393: sensor=167 status=ok note=alpha-3-beta-2\nrecord 00394: sensor=86 status=ok note=alpha-4-beta-3\nrecord 00395: sensor=5 status=ok note=alpha-5-beta-4\nrecord 00396: sensor=924 status=ok note=alpha-6-beta-5\nrecord 00397: sensor=843 status=ok note=alpha-7-beta-6\nrecord 00398: sensor=762 status=ok note=alpha-8-beta-7\nrecord 00399: sensor=681 status=retry note=alpha-9-beta-8\nrecord 00400: sensor=600 status=ok note=alpha-10-beta-9\nrecord 00401: sensor=519 status=ok note=alpha-11-beta-10\nrecord 00402: sensor=438 status=ok note=alpha-12-beta-11\nrecord 00403: sensor=357 status=ok note=alpha-0-beta-12\nrecord 00404: sensor=276 status=ok note=alpha-1-beta-13\nrecord 00405: sensor=195 status=ok note=alpha-2-beta-14\nrecord 00406: sensor=114 status=retry note=alpha-3-beta-15\nrecord 00407: sensor=33 status=ok note=alpha-4-beta-16\nrecord 00408: sensor=952 status=ok note=alpha-5-beta-0\nrecord 00409: sensor=871 status=ok note=alpha-6-beta-1\nrecord 00410: sensor=790 status=ok note=alpha-7-beta-2\nrecord 00411: sensor=709 status=ok note=alpha-8-beta-3\nrecord 00412: sensor=628 status=ok note=alpha-9-beta-4\nrecord 00413: sensor=547 status=retry note=alpha-10-beta-5\nrecord 00414: sensor=466 status=ok note=alpha-11-beta-6\nrecord 00415: sensor=385 status=ok note=alpha-12-beta-7\nrecord 00416: sensor=304 status=ok note=alpha-0-beta-8\nrecord 00417: sensor=223 status=ok note=alpha-1-beta-9\nrecord 00418: sensor=142 status=ok note=alpha-2-beta-10\nrecord 00419: sensor=61 status=ok note=alpha-3-beta-11\nrecord 00420: sensor=980 status=retry note=alpha-4-beta-12\nrecord 00421: sensor=899 status=ok note=alpha-5-beta-13\nrecord 00422: sensor=818 status=ok note=alpha-6-beta-14\nrecord 00423: sensor=737 status=ok note=alpha-7-beta-15\nrecord 00424: sensor=656 status=ok note=alpha-8-beta-16\nrecord 00425: sensor=575 status=ok note=alpha-9-beta-0\nrecord 00426: sensor=494 status=ok note=alpha-10-beta-1\nrecord 00427: sensor=413 status=retry note=alpha-11-beta-2\nrecord 00428: sensor=332 status=ok note=alpha-12-beta-3\nrecord 00429: sensor=251 status=ok note=alpha-0-beta-4\nrecord 00430: sensor=170 status=ok note=alpha-1-beta-5\nrecord 00431: sensor=89 status=ok note=alpha-2-beta-6\nrecord 00432: sensor=8 status=ok note=alpha-3-beta-7\nrecord 00433: sensor=927 status=ok note=alpha-4-beta-8\nrecord 00434: sensor=846 status=retry note=alpha-5-beta-9\nrecord 00435: sensor=765 status=ok note=alpha-6-beta-10\nrecord 00436: sensor=684 status=ok note=alpha-7-beta-11\nrecord 00437: sensor=603 status=ok note=alpha-8-beta-12\nrecord 00438: sensor=522 status=ok note=alpha-9-beta-13\nrecord 00439: sensor=441 status=ok note=alpha-10-beta-14\nrecord 00440: sensor=360 status=ok note=alpha-11-beta-15\nrecord 00441: sensor=279 status=retry note=alpha-12-beta-16\nrecord 00442: sensor=198 status=ok note=alpha-0-beta-0\nrecord 00443: sensor=117 status=ok note=alpha-1-beta-1\nrecord 00444: sensor=36 status=ok note=alpha-2-beta-2\nrecord 00445: sensor=955 status=ok note=alpha-3-beta-3\nrecord 00446: sensor=874 status=ok note=alpha-4-beta-4\nrecord 00447: sensor=793 status=ok note=alpha-5-beta-5\nrecord 00448: sensor=712 status=retry note=alpha-6-beta-6\nrecord 00449: sensor=631 status=ok note=alpha-7-beta-7\nrecord 00450: sensor=550 status=ok note=alpha-8-beta-8\nrecord 00451: sensor=469 status=ok note=alpha-9-beta-9\nrecord 00452: sensor=388 status=ok note=alpha-10-beta-10\nrecord 00453: sensor=307 status=ok note=alpha-11-beta-11\nrecord 00454: sensor=226 status=ok note=alpha-12-beta-12\nrecord 00455: sensor=145 status=retry note=alpha-0-beta-13\nrecord 00456: sensor=64 status=ok note=alpha-1-beta-14\nrecord 00457: sensor=983 status=ok note=alpha-2-beta-15\nrecord 00458: sensor=902 status=ok note=alpha-3-beta-16\nrecord 00459: sensor=821 status=ok note=alpha-4-beta-0\nrecord 00460: sensor=740 status=ok note=alpha-5-beta-1\nrecord 00461: sensor=659 status=ok note=alpha-6-beta-2\nrecord 00462: sensor=578 status=retry note=alpha-7-beta-3\nrecord 00463: sensor=497 status=ok note=alpha-8-beta-4\nrecord 00464: sensor=416 status=ok note=alpha-9-beta-5\nrecord 00465: sensor=335 status=ok note=alpha-10-beta-6\nrecord 00466: sensor=254 status=ok note=alpha-11-beta-7\nrecord 00467: sensor=173 status=ok note=alpha-12-beta-8\nrecord 00468: sensor=92 status=ok note=alpha-0-beta-9\nrecord 00469: sensor=11 status=retry note=alpha-1-beta-10\nrecord 00470: sensor=930 status=ok note=alpha-2-beta-11\nrecord 00471: sensor=849 status=ok note=alpha-3-beta-12\nrecord 00472: sensor=768 status=ok note=alpha-4-beta-13\nrecord 00473: sensor=687 status=ok note=alpha-5-beta-14\nrecord 00474: sensor=606 status=ok note=alpha-6-beta-15\nrecord 00475: sensor=525 status=ok note=alpha-7-beta-16\nrecord 00476: sensor=444 status=retry note=alpha-8-beta-0\nrecord 00477: sensor=363 status=ok note=alpha-9-beta-1\nrecord 00478: sensor=282 status=ok note=alpha-10-beta-2\nrecord 00479: sensor=201 status=ok note=alpha-11-beta-3\nrecord 00480: sensor=120 status=ok note=alpha-12-beta-4\nrecord 00481: sensor=39 status=ok note=alpha-0-beta-5\nrecord 00482: sensor=958 status=ok note=alpha-1-beta-6\nrecord 00483: sensor=877 status=retry note=alpha-2-beta-7\nrecord 00484: sensor=796 status=ok note=alpha-3-beta-8\nrecord 00485: sensor=715 status=ok note=alpha-4-beta-9\nrecord 00486: sensor=634 status=ok note=alpha-5-beta-10\nrecord 00487: sensor=553 status=ok note=alpha-6-beta-11\nrecord 00488: sensor=472 status=ok note=alpha-7-beta-12\nrecord 00489: sensor=391 status=ok note=alpha-8-beta-13\nrecord 00490: sensor=310 status=retry note=alpha-9-beta-14\nrecord 00491: sensor=229 status=ok note=alpha-10-beta-15\nrecord 00492: sensor=148 status=ok note=alpha-11-beta-16\nrecord 00493: sensor=67 status=ok note=alpha-12-beta-0\nrecord 00494: sensor=986 status=ok note=alpha-0-beta-1\nrecord 00495: sensor=905 status=ok note=alpha-1-beta-2\nrecord 00496: sensor=824 status=ok note=alpha-2-beta-3\nrecord 00497: sensor=743 status=retry note=alpha-3-beta-4\nrecord 00498: sensor=662 status=ok note=alpha-4-beta-5\nrecord 00499: sensor=581 status=ok note=alpha-5-beta-6\nrecord 00500: sensor=500 status=ok note=alpha-6-beta-7\nrecord 00501: sensor=419 status=ok note=alpha-7-beta-8\nrecord 00502: sensor=338 status=ok note=alpha-8-beta-9\nrecord 00503: sensor=257 status=ok note=alpha-9-beta-10\nrecord 00504: sensor=176 status=retry note=alpha-10-beta-11\nrecord 00505: sensor=95 status=ok note=alpha-11-beta-12\nrecord 00506: sensor=14 status=ok note=alpha-12-beta-13\nrecord 00507: sensor=933 status=ok note=alpha-0-beta-14\nrecord 00508: sensor=852 status=ok note=alpha-1-beta-15\nrecord 00509: sensor=771 status=ok note=alpha-2-beta-16\nrecord 00510: sensor=690 status=ok note=alpha-3-beta-0\nrecord 00511: sensor=609 status=retry note=alpha-4-beta-1\nrecord 00512: sensor=528 status=ok note=alpha-5-beta-2\nrecord 00513: sensor=447 status=ok note=alpha-6-beta-3\nrecord 00514: sensor=366 status=ok note=alpha-7-beta-4\nrecord 00515: sensor=285 status=ok note=alpha-8-beta-5\nrecord 00516: sensor=204 status=ok note=alpha-9-beta-6\nrecord 00517: sensor=123 status=ok note=alpha-10-beta-7\nrecord 00518: sensor=42 status=retry note=alpha-11-beta-8\nrecord 00519: sensor=961 status=ok note=alpha-12-beta-9\nrecord 00520: sensor=880 status=ok note=alpha-0-beta-10\nrecord 00521: sensor=799 status=ok note=alpha-1-beta-11\nrecord 00522: sensor=718 status=ok note=alpha-2-beta-12\nrecord 00523: sensor=637 status=ok note=alpha-3-beta-13\nrecord 00524: sensor=556 status=ok note=alpha-4-beta-14\nrecord 00525: sensor=475 status=retry note=alpha-5-beta-15\nrecord 00526: sensor=394 status=ok note=alpha-6-beta-16\nrecord 00527: sensor=313 status=ok note=alpha-7-beta-0\nrecord 00528: sensor=232 status=ok note=alpha-8-beta-1\nrecord 00529: sensor=151 status=ok note=alpha-9-beta-2\nrecord 00530: sensor=70 status=ok note=alpha-10-beta-3\nrecord 00531: sensor=989 status=ok note=alpha-11-beta-4\nrecord 00532: sensor=908 status=retry note=alpha-12-beta-5\nrecord 00533: sensor=827 status=ok note=alpha-0-beta-6\nrecord 00534: sensor=746 status=ok note=alpha-1-beta-7\nrecord 00535: sensor=665 status=ok note=alpha-2-beta-8\nrecord 00536: sensor=584 status=ok note=alpha-3-beta-9\nrecord 00537: sensor=503 status=ok note=alpha-4-beta-10\nrecord 00538: sensor=422 status=ok note=alpha-5-beta-11\nrecord 00539: sensor=341 status=retry note=alpha-6-beta-12\nrecord 00540: sensor=260 status=ok note=alpha-7-beta-13\nrecord 00541: sensor=179 status=ok note=alpha-8-beta-14\nrecord 00542: sensor=98 status=ok note=alpha-9-beta-15\nrecord 00543: sensor=17 status=ok note=alpha-10-beta-16\nrecord 00544: sensor=936 status=ok note=alpha-11-beta-0\nrecord 00545: sensor=855 status=ok note=alpha-12-beta-1\nrecord 00546: sensor=774 status=retry note=alpha-0-beta-2\nrecord 00547: sensor=693 status=ok note=alpha-1-beta-3\nrecord 00548: sensor=612 status=ok note=alpha-2-beta-4\nrecord 00549: sensor=531 status=ok note=alpha-3-beta-5\nrecord 00550: sensor=450 status=ok note=alpha-4-beta-6\nrecord 00551: sensor=369 status=ok note=alpha-5-beta-7\nrecord 00552: sensor=288 status=ok note=alpha-6-beta-8\nrecord 00553: sensor=207 status=retry note=alpha-7-beta-9\nrecord 00554: sensor=126 status=ok note=alpha-8-beta-10\nrecord 00555: sensor=45 status=ok note=alpha-9-beta-11\nrecord 00556: sensor=964 status=ok note=alpha-10-beta-12\nrecord 00557: sensor=883 status=ok note=alpha-11-beta-13\nrecord 00558: sensor=802 status=ok note=alpha-12-beta-14\nrecord 00559: sensor=721 status=ok note=alpha-0-beta-15\nrecord 00560: sensor=640 status=retry note=alpha-1-beta-16\nrecord 00561: sensor=559 status=ok note=alpha-2-beta-0\nrecord 00562: sensor=478 status=ok note=alpha-3-beta-1\nrecord 00563: sensor=397 status=ok note=alpha-4-beta-2\nrecord 00564: sensor=316 status=ok note=alpha-5-beta-3\nrecord 00565: sensor=235 status=ok note=alpha-6-beta-4\nrecord 00566: sensor=154 status=ok note=alpha-7-beta-5\nrecord 00567: sensor=73 status=retry note=alpha-8-beta-6\nrecord 00568: sensor=992 status=ok note=alpha-9-beta-7\nrecord 00569: sensor=911 status=ok note=alpha-10-beta-8\nrecord 00570: sensor=830 status=ok note=alpha-11-beta-9\nrecord 00571: sensor=749 status=ok note=alpha-12-beta-10\nrecord 00572: sensor=668 status=ok note=alpha-0-beta-11\nrecord 00573: sensor=587 status=ok note=alpha-1-beta-12\nrecord 00574: sensor=506 status=retry note=alpha-2-beta-13\nrecord 00575: sensor=425 status=ok note=alpha-3-beta-14\nrecord 00576: sensor=344 status=ok note=alpha-4-beta-15\nrecord 00577: sensor=263 status=ok note=alpha-5-beta-16\nrecord 00578: sensor=182 status=ok note=alpha-6-beta-0\nrecord 00579: sensor=101 status=ok note=alpha-7-beta-1\nrecord 00580: sensor=20 status=ok note=alpha-8-beta-2\nrecord 00581: sensor=939 status=retry note=alpha-9-beta-3\nrecord 00582: sensor=858 status=ok note=alpha-10-beta-4\nrecord 00583: sensor=777 status=ok note=alpha-11-beta-5\nrecord 00584: sensor=696 status=ok note=alpha-12-beta-6\nrecord 00585: sensor=615 status=ok note=alpha-0-beta-7\nrecord 00586: sensor=534 status=ok note=alpha-1-beta-8\nrecord 00587: sensor=453 status=ok note=alpha-2-beta-9\nrecord 00588: sensor=372 status=retry note=alpha-3-beta-10\nrecord 00589: sensor=291 status=ok note=alpha-4-beta-11\nrecord 00590: sensor=210 status=ok note=alpha-5-beta-12\nrecord 00591: sensor=129 status=ok note=alpha-6-beta-13\nrecord 00592: sensor=48 status=ok note=alpha-7-beta-14\nrecord 00593: sensor=967 status=ok note=alpha-8-beta-15\nrecord 00594: sensor=886 status=ok note=alpha-9-beta-16\nrecord 00595: sensor=805 status=retry note=alpha-10-beta-0\nrecord 00596: sensor=724 status=ok note=alpha-11-beta-1\nrecord 00597: sensor=643 status=ok note=alpha-12-beta-2\nrecord 00598: sensor=562 status=ok note=alpha-0-beta-3\nrecord 00599: sensor=481 status=ok note=alpha-1-beta-4\nrecord 00600: sensor=400 status=ok note=alpha-2-beta-5\nrecord 00601: sensor=319 status=ok note=alpha-3-beta-6\nrecord 00602: sensor=238 status=retry note=alpha-4-beta-7\nrecord 00603: sensor=157 status=ok note=alpha-5-beta-8\nrecord 00604: sensor=76 status=ok note=alpha-6-beta-9\nrecord 00605: sensor=995 status=ok note=alpha-7-beta-10\nrecord 00606: sensor=914 status=ok note=alpha-8-beta-11\nrecord 00607: sensor=833 status=ok note=alpha-9-beta-12\nrecord 00608: sensor=752 status=ok note=alpha-10-beta-13\nrecord 00609: sensor=671 status=retry note=alpha-11-beta-14\nrecord 00610: sensor=590 status=ok note=alpha-12-beta-15\nrecord 00611: sensor=509 status=ok note=alpha-0-beta-16\nrecord 00612: sensor=428 status=ok note=alpha-1-beta-0\nrecord 00613: sensor=347 status=ok note=alpha-2-beta-1\nrecord 00614: sensor=266 status=ok note=alpha-3-beta-2\nrecord 00615: sensor=185 status=ok note=alpha-4-beta-3\nrecord 00616: sensor=104 status=retry note=alpha-5-beta-4\nrecord 00617: sensor=23 status=ok note=alpha-6-beta-5\nrecord 00618: sensor=942 status=ok note=alpha-7-beta-6\nrecord 00619: sensor=861 status=ok note=alpha-8-beta-7\nrecord 00620: sensor=780 status=ok note=alpha-9-beta-8\nrecord 00621: sensor=699 status=ok note=alpha-10-beta-9\nrecord 00622: sensor=618 status=ok note=alpha-11-beta-10\nrecord 00623: sensor=537 status=retry note=alpha-12-beta-11\nrecord 00624: sensor=456 status=ok note=alpha-0-beta-12\nrecord 00625: sensor=375 status=ok note=alpha-1-beta-13\nrecord 00626: sensor=294 status=ok note=alpha-2-beta-14\nrecord 00627: sensor=213 status=ok note=alpha-3-beta-15\nrecord 00628: sensor=132 status=ok note=alpha-4-beta-16\nrecord 00629: sensor=51 status=ok note=alpha-5-beta-0\nrecord 00630: sensor=970 status=retry note=alpha-6-beta-1\nrecord 00631: sensor=889 status=ok note=alpha-7-beta-2\nrecord 00632: sensor=808 status=ok note=alpha-8-beta-3\nrecord 00633: sensor=727 status=ok note=alpha-9-beta-4\nrecord 00634: sensor=646 status=ok note=alpha-10-beta-5\nrecord 00635: sensor=565 status=ok note=alpha-11-beta-6\nrecord 00636: sensor=484 status=ok note=alpha-12-beta-7\nrecord 00637: sensor=403 status=retry note=alpha-0-beta-8\nrecord 00638: sensor=322 status=ok note=alpha-1-beta-9\nrecord 00639: sensor=241 status=ok note=alpha-2-beta-10\nrecord 00640: sensor=160 status=ok note=alpha-3-beta-11\nrecord 00641: sensor=79 status=ok note=alpha-4-beta-12\nrecord 00642: sensor=998 status=ok note=alpha-5-beta-13\nrecord 00643: sensor=917 status=ok note=alpha-6-beta-14\nrecord 00644: sensor=836 status=retry note=alpha-7-beta-15\nrecord 00645: sensor=755 status=ok note=alpha-8-beta-16\nrecord 00646: sensor=674 status=ok note=alpha-9-beta-0\nrecord 00647: sensor=593 status=ok note=alpha-10-beta-1\nrecord 00648: sensor=512 status=ok note=alpha-11-beta-2\nrecord 00649: sensor=431 status=ok note=alpha-12-beta-3\nrecord 00650: sensor=350 status=ok note=alpha-0-beta-4\nrecord 00651: sensor=269 status=retry note=alpha-1-beta-5\nrecord 00652: sensor=188 status=ok note=alpha-2-beta-6\nrecord 00653: sensor=107 status=ok note=alpha-3-beta-7\nrecord 00654: sensor=26 status=ok note=alpha-4-beta-8\nrecord 00655: sensor=945 status=ok note=alpha-5-beta-9\nrecord 00656: sensor=864 status=ok note=alpha-6-beta-10\nrecord 00657: sensor=783 status=ok note=alpha-7-beta-11\nrecord 00658: sensor=702 status=retry note=alpha-8-beta-12\nrecord 00659: sensor=621 status=ok note=alpha-9-beta-13\nrecord 00660: sensor=540 status=ok note=alpha-10-beta-14\nrecord 00661: sensor=459 status=ok note=alpha-11-beta-15\nrecord 00662: sensor=378 status=ok note=alpha-12-beta-16\nrecord 00663: sensor=297 status=ok note=alpha-0-beta-0\nrecord 00664: sensor=216 status=ok note=alpha-1-beta-1\nrecord 00665: sensor=135 status=retry note=alpha-2-beta-2\nrecord 00666: sensor=54 status=ok note=alpha-3-beta-3\nrecord 00667: sensor=973 status=ok note=alpha-4-beta-4\nrecord 00668: sensor=892 status=ok note=alpha-5-beta-5\nrecord 00669: sensor=811 status=ok note=alpha-6-beta-6\nrecord 00670: sensor=730 status=ok note=alpha-7-beta-7\nrecord 00671: sensor=649 status=ok note=alpha-8-beta-8\nrecord 00672: sensor=568 status=retry note=alpha-9-beta-9\nrecord 00673: sensor=487 status=ok note=alpha-10-beta-10\nrecord 00674: sensor=406 status=ok note=alpha-11-beta-11\nrecord 00675: sensor=325 status=ok note=alpha-12-beta-12\nrecord 00676: sensor=244 status=ok note=alpha-0-beta-13\nrecord 00677: sensor=163 status=ok note=alpha-1-beta-14\nrecord 00678: sensor=82 status=ok note=alpha-2-beta-15\nrecord 00679: sensor=1 status=retry note=alpha-3-beta-16\nrecord 00680: sensor=920 status=ok note=alpha-4-beta-0\nrecord 00681: sensor=839 status=ok note=alpha-5-beta-1\nrecord 00682: sensor=758 status=ok note=alpha-6-beta-2\nrecord 00683: sensor=677 status=ok note=alpha-7-beta-3\nrecord 00684: sensor=596 status=ok note=alpha-8-beta-4\nrecord 00685: sensor=515 status=ok note=alpha-9-beta-5\nrecord 00686: sensor=434 status=retry note=alpha-10-beta-6\nrecord 00687: sensor=353 status=ok note=alpha-11-beta-7\nrecord 00688: sensor=272 status=ok note=alpha-12-beta-8\nrecord 00689: sensor=191 status=ok note=alpha-0-beta-9\nrecord 00690: sensor=110 status=ok note=alpha-1-beta-10\nrecord 00691: sensor=29 status=ok note=alpha-2-beta-11\nrecord 00692: sensor=948 status=ok note=alpha-3-beta-12\nrecord 00693: sensor=867 status=retry note=alpha-4-beta-13\nrecord 00694: sensor=786 status=ok note=alpha-5-beta-14\nrecord 00695: sensor=705 status=ok note=alpha-6-beta-15\nrecord 00696: sensor=624 status=ok note=alpha-7-beta-16\nrecord 00697: sensor=543 status=ok note=alpha-8-beta-0\nrecord 00698: sensor=462 status=ok note=alpha-9-beta-1\nrecord 00699: sensor=381 status=ok note=alpha-10-beta-2\nrecord 00700: sensor=300 status=retry note=alpha-11-beta-3\nrecord 00701: sensor=219 status=ok note=alpha-12-beta-4\nrecord 00702: sensor=138 status=ok note=alpha-0-beta-5\nrecord 00703: sensor=57 status=ok note=alpha-1-beta-6\nrecord 00704: sensor=976 status=ok note=alpha-2-beta-7\nrecord 00705: sensor=895 status=ok note=alpha-3-beta-8\nrecord 00706: sensor=814 status=ok note=alpha-4-beta-9\nrecord 00707: sensor=733 status=retry note=alpha-5-beta-10\nrecord 00708: sensor=652 status=ok note=alpha-6-beta-11\nrecord 00709: sensor=571 status=ok note=alpha-7-beta-12\nrecord 00710: sensor=490 status=ok note=alpha-8-beta-13\nrecord 00711: sensor=409 status=ok note=alpha-9-beta-14\nrecord 00712: sensor=328 status=ok note=alpha-10-beta-15\nrecord 00713: sensor=247 status=ok note=alpha-11-beta-16\nrecord 00714: sensor=166 status=retry note=alpha-12-beta-0\nrecord 00715: sensor=85 status=ok note=alpha-0-beta-1\nrecord 00716: sensor=4 status=ok note=alpha-1-beta-2\nrecord 00717: sensor=923 status=ok note=alpha-2-beta-3\nrecord 00718: sensor=842 status=ok note=alpha-3-beta-4\nrecord 00719: sensor=761 status=ok note=alpha-4-beta-5\nrecord 00720: sensor=680 status=ok note=alpha-5-beta-6\nrecord 00721: sensor=599 status=retry note=alpha-6-beta-7\nrecord 00722: sensor=518 status=ok note=alpha-7-beta-8\nrecord 00723: sensor=437 status=ok note=alpha-8-beta-9\nrecord 00724: sensor=356 status=ok note=alpha-9-beta-10\nrecord 00725: sensor=275 status=ok note=alpha-10-beta-11\nrecord 00726: sensor=194 status=ok note=alpha-11-beta-12\nrecord 00727: sensor=113 status=ok note=alpha-12-beta-13\nrecord 00728: sensor=32 status=retry note=alpha-0-beta-14\nrecord 00729: sensor=951 status=ok note=alpha-1-beta-15\nrecord 00730: sensor=870 status=ok note=alpha-2-beta-16\nrecord 00731: sensor=789 status=ok note=alpha-3-beta-0\nrecord 00732: sensor=708 status=ok note=alpha-4-beta-1\nrecord 00733: sensor=627 status=ok note=alpha-5-beta-2\nrecord 00734: sensor=546 status=ok note=alpha-6-beta-3\nrecord 00735: sensor=465 status=retry note=alpha-7-beta-4\nrecord 00736: sensor=384 status=ok note=alpha-8-beta-5\nrecord 00737: sensor=303 status=ok note=alpha-9-beta-6\nrecord 00738: sensor=222 status=ok note=alpha-10-beta-7\nrecord 00739: sensor=141 status=ok note=alpha-11-beta-8\nrecord 00740: sensor=60 status=ok note=alpha-12-beta-9\nrecord 00741: sensor=979 status=ok note=alpha-0-beta-10\nrecord 00742: sensor=898 status=retry note=alpha-1-beta-11\nrecord 00743: sensor=817 status=ok note=alpha-2-beta-12\nrecord 00744: sensor=736 status=ok note=alpha-3-beta-13\nrecord 00745: sensor=655 status=ok note=alpha-4-beta-14\nrecord 00746: sensor=574 status=ok note=alpha-5-beta-15\nrecord 00747: sensor=493 status=ok note=alpha-6-beta-16\nrecord 00748: sensor=412 status=ok note=alpha-7-beta-0\nrecord 00749: sensor=331 status=retry note=alpha-8-beta-1\nrecord 00750: sensor=250 status=ok note=alpha-9-beta-2\nrecord 00751: sensor=169 status=ok note=alpha-10-beta-3\nrecord 00752: sensor=88 status=ok note=alpha-11-beta-4\nrecord 00753: sensor=7 status=ok note=alpha-12-beta-5\nrecord 00754: sensor=926 status=ok note=alpha-0-beta-6\nrecord 00755: sensor=845 status=ok note=alpha-1-beta-7\nrecord 00756: sensor=764 status=retry note=alpha-2-beta-8\nrecord 00757: sensor=683 status=ok note=alpha-3-beta-9\nrecord 00758: sensor=602 status=ok note=alpha-4-beta-10\nrecord 00759: sensor=521 status=ok note=alpha-5-beta-11\nrecord 00760: sensor=440 status=ok note=alpha-6-beta-12\nrecord 00761: sensor=359 status=ok note=alpha-7-beta-13\nrecord 00762: sensor=278 status=ok note=alpha-8-beta-14\nrecord 00763: sensor=197 status=retry note=alpha-9-beta-15\nrecord 00764: sensor=116 status=ok note=alpha-10-beta-16\nrecord 00765: sensor=35 status=ok note=alpha-11-beta-0\nrecord 00766: sensor=954 status=ok note=alpha-12-beta-1\nrecord 00767: sensor=873 status=ok note=alpha-0-beta-2\nrecord 00768: sensor=792 status=ok note=alpha-1-beta-3\nrecord 00769: sensor=711 status=ok note=alpha-2-beta-4\nrecord 00770: sensor=630 status=retry note=alpha-3-beta-5\nrecord 00771: sensor=549 status=ok note=alpha-4-beta-6\nrecord 00772: sensor=468 status=ok note=alpha-5-beta-7\nrecord 00773: sensor=387 status=ok note=alpha-6-beta-8\nrecord 00774: sensor=306 status=ok note=alpha-7-beta-9\nrecord 00775: sensor=225 status=ok note=alpha-8-beta-10\nrecord 00776: sensor=144 status=ok note=alpha-9-beta-11\nrecord 00777: sensor=63 status=retry note=alpha-10-beta-12\nrecord 00778: sensor=982 status=ok note=alpha-11-beta-13\nrecord 00779: sensor=901 status=ok note=alpha-12-beta-14\nrecord 00780: sensor=820 status=ok note=alpha-0-beta-15\nrecord 00781: sensor=739 status=ok note=alpha-1-beta-16\nrecord 00782: sensor=658 status=ok note=alpha-2-beta-0\nrecord 00783: sensor=577 status=ok note=alpha-3-beta-1\nrecord 00784: sensor=496 status=retry note=alpha-4-beta-2\nrecord 00785: sensor=415 status=ok note=alpha-5-beta-3\nrecord 00786: sensor=334 status=ok note=alpha-6-beta-4\nrecord 00787: sensor=253 status=ok note=alpha-7-beta-5\nrecord 00788: sensor=172 status=ok note=alpha-8-beta-6\nrecord 00789: sensor=91 status=ok note=alpha-9-beta-7\nrecord 00790: sensor=10 status=ok note=alpha-10-beta-8\nrecord 00791: sensor=929 status=retry note=alpha-11-beta-9\nrecord 00792: sensor=848 status=ok note=alpha-12-beta-10\nrecord 00793: sensor=767 status=ok note=alpha-0-beta-11\nrecord 00794: sensor=686 status=ok note=alpha-1-beta-12\nrecord 00795: sensor=605 status=ok note=alpha-2-beta-13\nrecord 00796: sensor=524 status=ok note=alpha-3-beta-14\nrecord 00797: sensor=443 status=ok note=alpha-4-beta-15\nrecord 00798: sensor=362 status=retry note=alpha-5-beta-16\nrecord 00799: sensor=281 status=ok note=alpha-6-beta-0\nrecord 00800: sensor=200 status=ok note=alpha-7-beta-1"}, {"role": "assistant", "content": ""}, {"role": "user", "content": "Now state the sensor value of record 00800. Reply with the number only."}], "max_tokens": 64, "temperature": 0, "stream": false}
+
+--- rendered prompt ---
+[gMASK]<sop><|system|>Reasoning Effort: High<|system|>You are a terse assistant. Answer directly, no thinking.<|user|>Say hello in exactly five words.<|assistant|><think></think>Hello there, nice to meet you!<|user|>Here is a sensor log. How many records have status=retry? Reply with the number only.
+
+record 00001: sensor=919 status=ok note=alpha-1-beta-1
+record 00002: sensor=838 status=ok note=alpha-2-beta-2
+record 00003: sensor=757 status=ok note=alpha-3-beta-3
+record 00004: sensor=676 status=ok note=alpha-4-beta-4
+record 00005: sensor=595 status=ok note=alpha-5-beta-5
+record 00006: sensor=514 status=ok note=alpha-6-beta-6
+record 00007: sensor=433 status=retry note=alpha-7-beta-7
+record 00008: sensor=352 status=ok note=alpha-8-beta-8
+record 00009: sensor=271 status=ok note=alpha-9-beta-9
+record 00010: sensor=190 status=ok note=alpha-10-beta-10
+record 00011: sensor=109 status=ok note=alpha-11-beta-11
+record 00012: sensor=28 status=ok note=alpha-12-beta-12
+record 00013: sensor=947 status=ok note=alpha-0-beta-13
+record 00014: sensor=866 status=retry note=alpha-1-beta-14
+record 00015: sensor=785 status=ok note=alpha-2-beta-15
+record 00016: sensor=704 status=ok note=alpha-3-beta-16
+record 00017: sensor=623 status=ok note=alpha-4-beta-0
+record 00018: sensor=542 status=ok note=alpha-5-beta-1
+record 00019: sensor=461 status=ok note=alpha-6-beta-2
+record 00020: sensor=380 status=ok note=alpha-7-beta-3
+record 00021: sensor=299 status=retry note=alpha-8-beta-4
+record 00022: sensor=218 status=ok note=alpha-9-beta-5
+record 00023: sensor=137 status=ok note=alpha-10-beta-6
+record 00024: sensor=56 status=ok note=alpha-11-beta-7
+record 00025: sensor=975 status=ok note=alpha-12-beta-8
+record 00026: sensor=894 status=ok note=alpha-0-beta-9
+record 00027: sensor=813 status=ok note=alpha-1-beta-10
+record 00028: sensor=732 status=retry note=alpha-2-beta-11
+record 00029: sensor=651 status=ok note=alpha-3-beta-12
+record 00030: sensor=570 status=ok note=alpha-4-beta-13
+record 00031: sensor=489 status=ok note=alpha-5-beta-14
+record 00032: sensor=408 status=ok note=alpha-6-beta-15
+record 00033: sensor=327 status=ok note=alpha-7-beta-16
+record 00034: sensor=246 status=ok note=alpha-8-beta-0
+record 00035: sensor=165 status=retry note=alpha-9-beta-1
+record 00036: sensor=84 status=ok note=alpha-10-beta-2
+record 00037: sensor=3 status=ok note=alpha-11-beta-3
+record 00038: sensor=922 status=ok note=alpha-12-beta-4
+record 00039: sensor=841 status=ok note=alpha-0-beta-5
+record 00040: sensor=760 status=ok note=alpha-1-beta-6
+record 00041: sensor=679 status=ok note=alpha-2-beta-7
+record 00042: sensor=598 status=retry note=alpha-3-beta-8
+record 00043: sensor=517 status=ok note=alpha-4-beta-9
+record 00044: sensor=436 status=ok note=alpha-5-beta-10
+record 00045: sensor=355 status=ok note=alpha-6-beta-11
+record 00046: sensor=274 status=ok note=alpha-7-beta-12
+record 00047: sensor=193 status=ok note=alpha-8-beta-13
+record 00048: sensor=112 status=ok note=alpha-9-beta-14
+record 00049: sensor=31 status=retry note=alpha-10-beta-15
+record 00050: sensor=950 status=ok note=alpha-11-beta-16
+record 00051: sensor=869 status=ok note=alpha-12-beta-0
+record 00052: sensor=788 status=ok note=alpha-0-beta-1
+record 00053: sensor=707 status=ok note=alpha-1-beta-2
+record 00054: sensor=626 status=ok note=alpha-2-beta-3
+record 00055: sensor=545 status=ok note=alpha-3-beta-4
+record 00056: sensor=464 status=retry note=alpha-4-beta-5
+record 00057: sensor=383 status=ok note=alpha-5-beta-6
+record 00058: sensor=302 status=ok note=alpha-6-beta-7
+record 00059: sensor=221 status=ok note=alpha-7-beta-8
+record 00060: sensor=140 status=ok note=alpha-8-beta-9
+record 00061: sensor=59 status=ok note=alpha-9-beta-10
+record 00062: sensor=978 status=ok note=alpha-10-beta-11
+record 00063: sensor=897 status=retry note=alpha-11-beta-12
+record 00064: sensor=816 status=ok note=alpha-12-beta-13
+record 00065: sensor=735 status=ok note=alpha-0-beta-14
+record 00066: sensor=654 status=ok note=alpha-1-beta-15
+record 00067: sensor=573 status=ok note=alpha-2-beta-16
+record 00068: sensor=492 status=ok note=alpha-3-beta-0
+record 00069: sensor=411 status=ok note=alpha-4-beta-1
+record 00070: sensor=330 status=retry note=alpha-5-beta-2
+record 00071: sensor=249 status=ok note=alpha-6-beta-3
+record 00072: sensor=168 status=ok note=alpha-7-beta-4
+record 00073: sensor=87 status=ok note=alpha-8-beta-5
+record 00074: sensor=6 status=ok note=alpha-9-beta-6
+record 00075: sensor=925 status=ok note=alpha-10-beta-7
+record 00076: sensor=844 status=ok note=alpha-11-beta-8
+record 00077: sensor=763 status=retry note=alpha-12-beta-9
+record 00078: sensor=682 status=ok note=alpha-0-beta-10
+record 00079: sensor=601 status=ok note=alpha-1-beta-11
+record 00080: sensor=520 status=ok note=alpha-2-beta-12
+record 00081: sensor=439 status=ok note=alpha-3-beta-13
+record 00082: sensor=358 status=ok note=alpha-4-beta-14
+record 00083: sensor=277 status=ok note=alpha-5-beta-15
+record 00084: sensor=196 status=retry note=alpha-6-beta-16
+record 00085: sensor=115 status=ok note=alpha-7-beta-0
+record 00086: sensor=34 status=ok note=alpha-8-beta-1
+record 00087: sensor=953 status=ok note=alpha-9-beta-2
+record 00088: sensor=872 status=ok note=alpha-10-beta-3
+record 00089: sensor=791 status=ok note=alpha-11-beta-4
+record 00090: sensor=710 status=ok note=alpha-12-beta-5
+record 00091: sensor=629 status=retry note=alpha-0-beta-6
+record 00092: sensor=548 status=ok note=alpha-1-beta-7
+record 00093: sensor=467 status=ok note=alpha-2-beta-8
+record 00094: sensor=386 status=ok note=alpha-3-beta-9
+record 00095: sensor=305 status=ok note=alpha-4-beta-10
+record 00096: sensor=224 status=ok note=alpha-5-beta-11
+record 00097: sensor=143 status=ok note=alpha-6-beta-12
+record 00098: sensor=62 status=retry note=alpha-7-beta-13
+record 00099: sensor=981 status=ok note=alpha-8-beta-14
+record 00100: sensor=900 status=ok note=alpha-9-beta-15
+record 00101: sensor=819 status=ok note=alpha-10-beta-16
+record 00102: sensor=738 status=ok note=alpha-11-beta-0
+record 00103: sensor=657 status=ok note=alpha-12-beta-1
+record 00104: sensor=576 status=ok note=alpha-0-beta-2
+record 00105: sensor=495 status=retry note=alpha-1-beta-3
+record 00106: sensor=414 status=ok note=alpha-2-beta-4
+record 00107: sensor=333 status=ok note=alpha-3-beta-5
+record 00108: sensor=252 status=ok note=alpha-4-beta-6
+record 00109: sensor=171 status=ok note=alpha-5-beta-7
+record 00110: sensor=90 status=ok note=alpha-6-beta-8
+record 00111: sensor=9 status=ok note=alpha-7-beta-9
+record 00112: sensor=928 status=retry note=alpha-8-beta-10
+record 00113: sensor=847 status=ok note=alpha-9-beta-11
+record 00114: sensor=766 status=ok note=alpha-10-beta-12
+record 00115: sensor=685 status=ok note=alpha-11-beta-13
+record 00116: sensor=604 status=ok note=alpha-12-beta-14
+record 00117: sensor=523 status=ok note=alpha-0-beta-15
+record 00118: sensor=442 status=ok note=alpha-1-beta-16
+record 00119: sensor=361 status=retry note=alpha-2-beta-0
+record 00120: sensor=280 status=ok note=alpha-3-beta-1
+record 00121: sensor=199 status=ok note=alpha-4-beta-2
+record 00122: sensor=118 status=ok note=alpha-5-beta-3
+record 00123: sensor=37 status=ok note=alpha-6-beta-4
+record 00124: sensor=956 status=ok note=alpha-7-beta-5
+record 00125: sensor=875 status=ok note=alpha-8-beta-6
+record 00126: sensor=794 status=retry note=alpha-9-beta-7
+record 00127: sensor=713 status=ok note=alpha-10-beta-8
+record 00128: sensor=632 status=ok note=alpha-11-beta-9
+record 00129: sensor=551 status=ok note=alpha-12-beta-10
+record 00130: sensor=470 status=ok note=alpha-0-beta-11
+record 00131: sensor=389 status=ok note=alpha-1-beta-12
+record 00132: sensor=308 status=ok note=alpha-2-beta-13
+record 00133: sensor=227 status=retry note=alpha-3-beta-14
+record 00134: sensor=146 status=ok note=alpha-4-beta-15
+record 00135: sensor=65 status=ok note=alpha-5-beta-16
+record 00136: sensor=984 status=ok note=alpha-6-beta-0
+record 00137: sensor=903 status=ok note=alpha-7-beta-1
+record 00138: sensor=822 status=ok note=alpha-8-beta-2
+record 00139: sensor=741 status=ok note=alpha-9-beta-3
+record 00140: sensor=660 status=retry note=alpha-10-beta-4
+record 00141: sensor=579 status=ok note=alpha-11-beta-5
+record 00142: sensor=498 status=ok note=alpha-12-beta-6
+record 00143: sensor=417 status=ok note=alpha-0-beta-7
+record 00144: sensor=336 status=ok note=alpha-1-beta-8
+record 00145: sensor=255 status=ok note=alpha-2-beta-9
+record 00146: sensor=174 status=ok note=alpha-3-beta-10
+record 00147: sensor=93 status=retry note=alpha-4-beta-11
+record 00148: sensor=12 status=ok note=alpha-5-beta-12
+record 00149: sensor=931 status=ok note=alpha-6-beta-13
+record 00150: sensor=850 status=ok note=alpha-7-beta-14
+record 00151: sensor=769 status=ok note=alpha-8-beta-15
+record 00152: sensor=688 status=ok note=alpha-9-beta-16
+record 00153: sensor=607 status=ok note=alpha-10-beta-0
+record 00154: sensor=526 status=retry note=alpha-11-beta-1
+record 00155: sensor=445 status=ok note=alpha-12-beta-2
+record 00156: sensor=364 status=ok note=alpha-0-beta-3
+record 00157: sensor=283 status=ok note=alpha-1-beta-4
+record 00158: sensor=202 status=ok note=alpha-2-beta-5
+record 00159: sensor=121 status=ok note=alpha-3-beta-6
+record 00160: sensor=40 status=ok note=alpha-4-beta-7
+record 00161: sensor=959 status=retry note=alpha-5-beta-8
+record 00162: sensor=878 status=ok note=alpha-6-beta-9
+record 00163: sensor=797 status=ok note=alpha-7-beta-10
+record 00164: sensor=716 status=ok note=alpha-8-beta-11
+record 00165: sensor=635 status=ok note=alpha-9-beta-12
+record 00166: sensor=554 status=ok note=alpha-10-beta-13
+record 00167: sensor=473 status=ok note=alpha-11-beta-14
+record 00168: sensor=392 status=retry note=alpha-12-beta-15
+record 00169: sensor=311 status=ok note=alpha-0-beta-16
+record 00170: sensor=230 status=ok note=alpha-1-beta-0
+record 00171: sensor=149 status=ok note=alpha-2-beta-1
+record 00172: sensor=68 status=ok note=alpha-3-beta-2
+record 00173: sensor=987 status=ok note=alpha-4-beta-3
+record 00174: sensor=906 status=ok note=alpha-5-beta-4
+record 00175: sensor=825 status=retry note=alpha-6-beta-5
+record 00176: sensor=744 status=ok note=alpha-7-beta-6
+record 00177: sensor=663 status=ok note=alpha-8-beta-7
+record 00178: sensor=582 status=ok note=alpha-9-beta-8
+record 00179: sensor=501 status=ok note=alpha-10-beta-9
+record 00180: sensor=420 status=ok note=alpha-11-beta-10
+record 00181: sensor=339 status=ok note=alpha-12-beta-11
+record 00182: sensor=258 status=retry note=alpha-0-beta-12
+record 00183: sensor=177 status=ok note=alpha-1-beta-13
+record 00184: sensor=96 status=ok note=alpha-2-beta-14
+record 00185: sensor=15 status=ok note=alpha-3-beta-15
+record 00186: sensor=934 status=ok note=alpha-4-beta-16
+record 00187: sensor=853 status=ok note=alpha-5-beta-0
+record 00188: sensor=772 status=ok note=alpha-6-beta-1
+record 00189: sensor=691 status=retry note=alpha-7-beta-2
+record 00190: sensor=610 status=ok note=alpha-8-beta-3
+record 00191: sensor=529 status=ok note=alpha-9-beta-4
+record 00192: sensor=448 status=ok note=alpha-10-beta-5
+record 00193: sensor=367 status=ok note=alpha-11-beta-6
+record 00194: sensor=286 status=ok note=alpha-12-beta-7
+record 00195: sensor=205 status=ok note=alpha-0-beta-8
+record 00196: sensor=124 status=retry note=alpha-1-beta-9
+record 00197: sensor=43 status=ok note=alpha-2-beta-10
+record 00198: sensor=962 status=ok note=alpha-3-beta-11
+record 00199: sensor=881 status=ok note=alpha-4-beta-12
+record 00200: sensor=800 status=ok note=alpha-5-beta-13
+record 00201: sensor=719 status=ok note=alpha-6-beta-14
+record 00202: sensor=638 status=ok note=alpha-7-beta-15
+record 00203: sensor=557 status=retry note=alpha-8-beta-16
+record 00204: sensor=476 status=ok note=alpha-9-beta-0
+record 00205: sensor=395 status=ok note=alpha-10-beta-1
+record 00206: sensor=314 status=ok note=alpha-11-beta-2
+record 00207: sensor=233 status=ok note=alpha-12-beta-3
+record 00208: sensor=152 status=ok note=alpha-0-beta-4
+record 00209: sensor=71 status=ok note=alpha-1-beta-5
+record 00210: sensor=990 status=retry note=alpha-2-beta-6
+record 00211: sensor=909 status=ok note=alpha-3-beta-7
+record 00212: sensor=828 status=ok note=alpha-4-beta-8
+record 00213: sensor=747 status=ok note=alpha-5-beta-9
+record 00214: sensor=666 status=ok note=alpha-6-beta-10
+record 00215: sensor=585 status=ok note=alpha-7-beta-11
+record 00216: sensor=504 status=ok note=alpha-8-beta-12
+record 00217: sensor=423 status=retry note=alpha-9-beta-13
+record 00218: sensor=342 status=ok note=alpha-10-beta-14
+record 00219: sensor=261 status=ok note=alpha-11-beta-15
+record 00220: sensor=180 status=ok note=alpha-12-beta-16
+record 00221: sensor=99 status=ok note=alpha-0-beta-0
+record 00222: sensor=18 status=ok note=alpha-1-beta-1
+record 00223: sensor=937 status=ok note=alpha-2-beta-2
+record 00224: sensor=856 status=retry note=alpha-3-beta-3
+record 00225: sensor=775 status=ok note=alpha-4-beta-4
+record 00226: sensor=694 status=ok note=alpha-5-beta-5
+record 00227: sensor=613 status=ok note=alpha-6-beta-6
+record 00228: sensor=532 status=ok note=alpha-7-beta-7
+record 00229: sensor=451 status=ok note=alpha-8-beta-8
+record 00230: sensor=370 status=ok note=alpha-9-beta-9
+record 00231: sensor=289 status=retry note=alpha-10-beta-10
+record 00232: sensor=208 status=ok note=alpha-11-beta-11
+record 00233: sensor=127 status=ok note=alpha-12-beta-12
+record 00234: sensor=46 status=ok note=alpha-0-beta-13
+record 00235: sensor=965 status=ok note=alpha-1-beta-14
+record 00236: sensor=884 status=ok note=alpha-2-beta-15
+record 00237: sensor=803 status=ok note=alpha-3-beta-16
+record 00238: sensor=722 status=retry note=alpha-4-beta-0
+record 00239: sensor=641 status=ok note=alpha-5-beta-1
+record 00240: sensor=560 status=ok note=alpha-6-beta-2
+record 00241: sensor=479 status=ok note=alpha-7-beta-3
+record 00242: sensor=398 status=ok note=alpha-8-beta-4
+record 00243: sensor=317 status=ok note=alpha-9-beta-5
+record 00244: sensor=236 status=ok note=alpha-10-beta-6
+record 00245: sensor=155 status=retry note=alpha-11-beta-7
+record 00246: sensor=74 status=ok note=alpha-12-beta-8
+record 00247: sensor=993 status=ok note=alpha-0-beta-9
+record 00248: sensor=912 status=ok note=alpha-1-beta-10
+record 00249: sensor=831 status=ok note=alpha-2-beta-11
+record 00250: sensor=750 status=ok note=alpha-3-beta-12
+record 00251: sensor=669 status=ok note=alpha-4-beta-13
+record 00252: sensor=588 status=retry note=alpha-5-beta-14
+record 00253: sensor=507 status=ok note=alpha-6-beta-15
+record 00254: sensor=426 status=ok note=alpha-7-beta-16
+record 00255: sensor=345 status=ok note=alpha-8-beta-0
+record 00256: sensor=264 status=ok note=alpha-9-beta-1
+record 00257: sensor=183 status=ok note=alpha-10-beta-2
+record 00258: sensor=102 status=ok note=alpha-11-beta-3
+record 00259: sensor=21 status=retry note=alpha-12-beta-4
+record 00260: sensor=940 status=ok note=alpha-0-beta-5
+record 00261: sensor=859 status=ok note=alpha-1-beta-6
+record 00262: sensor=778 status=ok note=alpha-2-beta-7
+record 00263: sensor=697 status=ok note=alpha-3-beta-8
+record 00264: sensor=616 status=ok note=alpha-4-beta-9
+record 00265: sensor=535 status=ok note=alpha-5-beta-10
+record 00266: sensor=454 status=retry note=alpha-6-beta-11
+record 00267: sensor=373 status=ok note=alpha-7-beta-12
+record 00268: sensor=292 status=ok note=alpha-8-beta-13
+record 00269: sensor=211 status=ok note=alpha-9-beta-14
+record 00270: sensor=130 status=ok note=alpha-10-beta-15
+record 00271: sensor=49 status=ok note=alpha-11-beta-16
+record 00272: sensor=968 status=ok note=alpha-12-beta-0
+record 00273: sensor=887 status=retry note=alpha-0-beta-1
+record 00274: sensor=806 status=ok note=alpha-1-beta-2
+record 00275: sensor=725 status=ok note=alpha-2-beta-3
+record 00276: sensor=644 status=ok note=alpha-3-beta-4
+record 00277: sensor=563 status=ok note=alpha-4-beta-5
+record 00278: sensor=482 status=ok note=alpha-5-beta-6
+record 00279: sensor=401 status=ok note=alpha-6-beta-7
+record 00280: sensor=320 status=retry note=alpha-7-beta-8
+record 00281: sensor=239 status=ok note=alpha-8-beta-9
+record 00282: sensor=158 status=ok note=alpha-9-beta-10
+record 00283: sensor=77 status=ok note=alpha-10-beta-11
+record 00284: sensor=996 status=ok note=alpha-11-beta-12
+record 00285: sensor=915 status=ok note=alpha-12-beta-13
+record 00286: sensor=834 status=ok note=alpha-0-beta-14
+record 00287: sensor=753 status=retry note=alpha-1-beta-15
+record 00288: sensor=672 status=ok note=alpha-2-beta-16
+record 00289: sensor=591 status=ok note=alpha-3-beta-0
+record 00290: sensor=510 status=ok note=alpha-4-beta-1
+record 00291: sensor=429 status=ok note=alpha-5-beta-2
+record 00292: sensor=348 status=ok note=alpha-6-beta-3
+record 00293: sensor=267 status=ok note=alpha-7-beta-4
+record 00294: sensor=186 status=retry note=alpha-8-beta-5
+record 00295: sensor=105 status=ok note=alpha-9-beta-6
+record 00296: sensor=24 status=ok note=alpha-10-beta-7
+record 00297: sensor=943 status=ok note=alpha-11-beta-8
+record 00298: sensor=862 status=ok note=alpha-12-beta-9
+record 00299: sensor=781 status=ok note=alpha-0-beta-10
+record 00300: sensor=700 status=ok note=alpha-1-beta-11
+record 00301: sensor=619 status=retry note=alpha-2-beta-12
+record 00302: sensor=538 status=ok note=alpha-3-beta-13
+record 00303: sensor=457 status=ok note=alpha-4-beta-14
+record 00304: sensor=376 status=ok note=alpha-5-beta-15
+record 00305: sensor=295 status=ok note=alpha-6-beta-16
+record 00306: sensor=214 status=ok note=alpha-7-beta-0
+record 00307: sensor=133 status=ok note=alpha-8-beta-1
+record 00308: sensor=52 status=retry note=alpha-9-beta-2
+record 00309: sensor=971 status=ok note=alpha-10-beta-3
+record 00310: sensor=890 status=ok note=alpha-11-beta-4
+record 00311: sensor=809 status=ok note=alpha-12-beta-5
+record 00312: sensor=728 status=ok note=alpha-0-beta-6
+record 00313: sensor=647 status=ok note=alpha-1-beta-7
+record 00314: sensor=566 status=ok note=alpha-2-beta-8
+record 00315: sensor=485 status=retry note=alpha-3-beta-9
+record 00316: sensor=404 status=ok note=alpha-4-beta-10
+record 00317: sensor=323 status=ok note=alpha-5-beta-11
+record 00318: sensor=242 status=ok note=alpha-6-beta-12
+record 00319: sensor=161 status=ok note=alpha-7-beta-13
+record 00320: sensor=80 status=ok note=alpha-8-beta-14
+record 00321: sensor=999 status=ok note=alpha-9-beta-15
+record 00322: sensor=918 status=retry note=alpha-10-beta-16
+record 00323: sensor=837 status=ok note=alpha-11-beta-0
+record 00324: sensor=756 status=ok note=alpha-12-beta-1
+record 00325: sensor=675 status=ok note=alpha-0-beta-2
+record 00326: sensor=594 status=ok note=alpha-1-beta-3
+record 00327: sensor=513 status=ok note=alpha-2-beta-4
+record 00328: sensor=432 status=ok note=alpha-3-beta-5
+record 00329: sensor=351 status=retry note=alpha-4-beta-6
+record 00330: sensor=270 status=ok note=alpha-5-beta-7
+record 00331: sensor=189 status=ok note=alpha-6-beta-8
+record 00332: sensor=108 status=ok note=alpha-7-beta-9
+record 00333: sensor=27 status=ok note=alpha-8-beta-10
+record 00334: sensor=946 status=ok note=alpha-9-beta-11
+record 00335: sensor=865 status=ok note=alpha-10-beta-12
+record 00336: sensor=784 status=retry note=alpha-11-beta-13
+record 00337: sensor=703 status=ok note=alpha-12-beta-14
+record 00338: sensor=622 status=ok note=alpha-0-beta-15
+record 00339: sensor=541 status=ok note=alpha-1-beta-16
+record 00340: sensor=460 status=ok note=alpha-2-beta-0
+record 00341: sensor=379 status=ok note=alpha-3-beta-1
+record 00342: sensor=298 status=ok note=alpha-4-beta-2
+record 00343: sensor=217 status=retry note=alpha-5-beta-3
+record 00344: sensor=136 status=ok note=alpha-6-beta-4
+record 00345: sensor=55 status=ok note=alpha-7-beta-5
+record 00346: sensor=974 status=ok note=alpha-8-beta-6
+record 00347: sensor=893 status=ok note=alpha-9-beta-7
+record 00348: sensor=812 status=ok note=alpha-10-beta-8
+record 00349: sensor=731 status=ok note=alpha-11-beta-9
+record 00350: sensor=650 status=retry note=alpha-12-beta-10
+record 00351: sensor=569 status=ok note=alpha-0-beta-11
+record 00352: sensor=488 status=ok note=alpha-1-beta-12
+record 00353: sensor=407 status=ok note=alpha-2-beta-13
+record 00354: sensor=326 status=ok note=alpha-3-beta-14
+record 00355: sensor=245 status=ok note=alpha-4-beta-15
+record 00356: sensor=164 status=ok note=alpha-5-beta-16
+record 00357: sensor=83 status=retry note=alpha-6-beta-0
+record 00358: sensor=2 status=ok note=alpha-7-beta-1
+record 00359: sensor=921 status=ok note=alpha-8-beta-2
+record 00360: sensor=840 status=ok note=alpha-9-beta-3
+record 00361: sensor=759 status=ok note=alpha-10-beta-4
+record 00362: sensor=678 status=ok note=alpha-11-beta-5
+record 00363: sensor=597 status=ok note=alpha-12-beta-6
+record 00364: sensor=516 status=retry note=alpha-0-beta-7
+record 00365: sensor=435 status=ok note=alpha-1-beta-8
+record 00366: sensor=354 status=ok note=alpha-2-beta-9
+record 00367: sensor=273 status=ok note=alpha-3-beta-10
+record 00368: sensor=192 status=ok note=alpha-4-beta-11
+record 00369: sensor=111 status=ok note=alpha-5-beta-12
+record 00370: sensor=30 status=ok note=alpha-6-beta-13
+record 00371: sensor=949 status=retry note=alpha-7-beta-14
+record 00372: sensor=868 status=ok note=alpha-8-beta-15
+record 00373: sensor=787 status=ok note=alpha-9-beta-16
+record 00374: sensor=706 status=ok note=alpha-10-beta-0
+record 00375: sensor=625 status=ok note=alpha-11-beta-1
+record 00376: sensor=544 status=ok note=alpha-12-beta-2
+record 00377: sensor=463 status=ok note=alpha-0-beta-3
+record 00378: sensor=382 status=retry note=alpha-1-beta-4
+record 00379: sensor=301 status=ok note=alpha-2-beta-5
+record 00380: sensor=220 status=ok note=alpha-3-beta-6
+record 00381: sensor=139 status=ok note=alpha-4-beta-7
+record 00382: sensor=58 status=ok note=alpha-5-beta-8
+record 00383: sensor=977 status=ok note=alpha-6-beta-9
+record 00384: sensor=896 status=ok note=alpha-7-beta-10
+record 00385: sensor=815 status=retry note=alpha-8-beta-11
+record 00386: sensor=734 status=ok note=alpha-9-beta-12
+record 00387: sensor=653 status=ok note=alpha-10-beta-13
+record 00388: sensor=572 status=ok note=alpha-11-beta-14
+record 00389: sensor=491 status=ok note=alpha-12-beta-15
+record 00390: sensor=410 status=ok note=alpha-0-beta-16
+record 00391: sensor=329 status=ok note=alpha-1-beta-0
+record 00392: sensor=248 status=retry note=alpha-2-beta-1
+record 00393: sensor=167 status=ok note=alpha-3-beta-2
+record 00394: sensor=86 status=ok note=alpha-4-beta-3
+record 00395: sensor=5 status=ok note=alpha-5-beta-4
+record 00396: sensor=924 status=ok note=alpha-6-beta-5
+record 00397: sensor=843 status=ok note=alpha-7-beta-6
+record 00398: sensor=762 status=ok note=alpha-8-beta-7
+record 00399: sensor=681 status=retry note=alpha-9-beta-8
+record 00400: sensor=600 status=ok note=alpha-10-beta-9
+record 00401: sensor=519 status=ok note=alpha-11-beta-10
+record 00402: sensor=438 status=ok note=alpha-12-beta-11
+record 00403: sensor=357 status=ok note=alpha-0-beta-12
+record 00404: sensor=276 status=ok note=alpha-1-beta-13
+record 00405: sensor=195 status=ok note=alpha-2-beta-14
+record 00406: sensor=114 status=retry note=alpha-3-beta-15
+record 00407: sensor=33 status=ok note=alpha-4-beta-16
+record 00408: sensor=952 status=ok note=alpha-5-beta-0
+record 00409: sensor=871 status=ok note=alpha-6-beta-1
+record 00410: sensor=790 status=ok note=alpha-7-beta-2
+record 00411: sensor=709 status=ok note=alpha-8-beta-3
+record 00412: sensor=628 status=ok note=alpha-9-beta-4
+record 00413: sensor=547 status=retry note=alpha-10-beta-5
+record 00414: sensor=466 status=ok note=alpha-11-beta-6
+record 00415: sensor=385 status=ok note=alpha-12-beta-7
+record 00416: sensor=304 status=ok note=alpha-0-beta-8
+record 00417: sensor=223 status=ok note=alpha-1-beta-9
+record 00418: sensor=142 status=ok note=alpha-2-beta-10
+record 00419: sensor=61 status=ok note=alpha-3-beta-11
+record 00420: sensor=980 status=retry note=alpha-4-beta-12
+record 00421: sensor=899 status=ok note=alpha-5-beta-13
+record 00422: sensor=818 status=ok note=alpha-6-beta-14
+record 00423: sensor=737 status=ok note=alpha-7-beta-15
+record 00424: sensor=656 status=ok note=alpha-8-beta-16
+record 00425: sensor=575 status=ok note=alpha-9-beta-0
+record 00426: sensor=494 status=ok note=alpha-10-beta-1
+record 00427: sensor=413 status=retry note=alpha-11-beta-2
+record 00428: sensor=332 status=ok note=alpha-12-beta-3
+record 00429: sensor=251 status=ok note=alpha-0-beta-4
+record 00430: sensor=170 status=ok note=alpha-1-beta-5
+record 00431: sensor=89 status=ok note=alpha-2-beta-6
+record 00432: sensor=8 status=ok note=alpha-3-beta-7
+record 00433: sensor=927 status=ok note=alpha-4-beta-8
+record 00434: sensor=846 status=retry note=alpha-5-beta-9
+record 00435: sensor=765 status=ok note=alpha-6-beta-10
+record 00436: sensor=684 status=ok note=alpha-7-beta-11
+record 00437: sensor=603 status=ok note=alpha-8-beta-12
+record 00438: sensor=522 status=ok note=alpha-9-beta-13
+record 00439: sensor=441 status=ok note=alpha-10-beta-14
+record 00440: sensor=360 status=ok note=alpha-11-beta-15
+record 00441: sensor=279 status=retry note=alpha-12-beta-16
+record 00442: sensor=198 status=ok note=alpha-0-beta-0
+record 00443: sensor=117 status=ok note=alpha-1-beta-1
+record 00444: sensor=36 status=ok note=alpha-2-beta-2
+record 00445: sensor=955 status=ok note=alpha-3-beta-3
+record 00446: sensor=874 status=ok note=alpha-4-beta-4
+record 00447: sensor=793 status=ok note=alpha-5-beta-5
+record 00448: sensor=712 status=retry note=alpha-6-beta-6
+record 00449: sensor=631 status=ok note=alpha-7-beta-7
+record 00450: sensor=550 status=ok note=alpha-8-beta-8
+record 00451: sensor=469 status=ok note=alpha-9-beta-9
+record 00452: sensor=388 status=ok note=alpha-10-beta-10
+record 00453: sensor=307 status=ok note=alpha-11-beta-11
+record 00454: sensor=226 status=ok note=alpha-12-beta-12
+record 00455: sensor=145 status=retry note=alpha-0-beta-13
+record 00456: sensor=64 status=ok note=alpha-1-beta-14
+record 00457: sensor=983 status=ok note=alpha-2-beta-15
+record 00458: sensor=902 status=ok note=alpha-3-beta-16
+record 00459: sensor=821 status=ok note=alpha-4-beta-0
+record 00460: sensor=740 status=ok note=alpha-5-beta-1
+record 00461: sensor=659 status=ok note=alpha-6-beta-2
+record 00462: sensor=578 status=retry note=alpha-7-beta-3
+record 00463: sensor=497 status=ok note=alpha-8-beta-4
+record 00464: sensor=416 status=ok note=alpha-9-beta-5
+record 00465: sensor=335 status=ok note=alpha-10-beta-6
+record 00466: sensor=254 status=ok note=alpha-11-beta-7
+record 00467: sensor=173 status=ok note=alpha-12-beta-8
+record 00468: sensor=92 status=ok note=alpha-0-beta-9
+record 00469: sensor=11 status=retry note=alpha-1-beta-10
+record 00470: sensor=930 status=ok note=alpha-2-beta-11
+record 00471: sensor=849 status=ok note=alpha-3-beta-12
+record 00472: sensor=768 status=ok note=alpha-4-beta-13
+record 00473: sensor=687 status=ok note=alpha-5-beta-14
+record 00474: sensor=606 status=ok note=alpha-6-beta-15
+record 00475: sensor=525 status=ok note=alpha-7-beta-16
+record 00476: sensor=444 status=retry note=alpha-8-beta-0
+record 00477: sensor=363 status=ok note=alpha-9-beta-1
+record 00478: sensor=282 status=ok note=alpha-10-beta-2
+record 00479: sensor=201 status=ok note=alpha-11-beta-3
+record 00480: sensor=120 status=ok note=alpha-12-beta-4
+record 00481: sensor=39 status=ok note=alpha-0-beta-5
+record 00482: sensor=958 status=ok note=alpha-1-beta-6
+record 00483: sensor=877 status=retry note=alpha-2-beta-7
+record 00484: sensor=796 status=ok note=alpha-3-beta-8
+record 00485: sensor=715 status=ok note=alpha-4-beta-9
+record 00486: sensor=634 status=ok note=alpha-5-beta-10
+record 00487: sensor=553 status=ok note=alpha-6-beta-11
+record 00488: sensor=472 status=ok note=alpha-7-beta-12
+record 00489: sensor=391 status=ok note=alpha-8-beta-13
+record 00490: sensor=310 status=retry note=alpha-9-beta-14
+record 00491: sensor=229 status=ok note=alpha-10-beta-15
+record 00492: sensor=148 status=ok note=alpha-11-beta-16
+record 00493: sensor=67 status=ok note=alpha-12-beta-0
+record 00494: sensor=986 status=ok note=alpha-0-beta-1
+record 00495: sensor=905 status=ok note=alpha-1-beta-2
+record 00496: sensor=824 status=ok note=alpha-2-beta-3
+record 00497: sensor=743 status=retry note=alpha-3-beta-4
+record 00498: sensor=662 status=ok note=alpha-4-beta-5
+record 00499: sensor=581 status=ok note=alpha-5-beta-6
+record 00500: sensor=500 status=ok note=alpha-6-beta-7
+record 00501: sensor=419 status=ok note=alpha-7-beta-8
+record 00502: sensor=338 status=ok note=alpha-8-beta-9
+record 00503: sensor=257 status=ok note=alpha-9-beta-10
+record 00504: sensor=176 status=retry note=alpha-10-beta-11
+record 00505: sensor=95 status=ok note=alpha-11-beta-12
+record 00506: sensor=14 status=ok note=alpha-12-beta-13
+record 00507: sensor=933 status=ok note=alpha-0-beta-14
+record 00508: sensor=852 status=ok note=alpha-1-beta-15
+record 00509: sensor=771 status=ok note=alpha-2-beta-16
+record 00510: sensor=690 status=ok note=alpha-3-beta-0
+record 00511: sensor=609 status=retry note=alpha-4-beta-1
+record 00512: sensor=528 status=ok note=alpha-5-beta-2
+record 00513: sensor=447 status=ok note=alpha-6-beta-3
+record 00514: sensor=366 status=ok note=alpha-7-beta-4
+record 00515: sensor=285 status=ok note=alpha-8-beta-5
+record 00516: sensor=204 status=ok note=alpha-9-beta-6
+record 00517: sensor=123 status=ok note=alpha-10-beta-7
+record 00518: sensor=42 status=retry note=alpha-11-beta-8
+record 00519: sensor=961 status=ok note=alpha-12-beta-9
+record 00520: sensor=880 status=ok note=alpha-0-beta-10
+record 00521: sensor=799 status=ok note=alpha-1-beta-11
+record 00522: sensor=718 status=ok note=alpha-2-beta-12
+record 00523: sensor=637 status=ok note=alpha-3-beta-13
+record 00524: sensor=556 status=ok note=alpha-4-beta-14
+record 00525: sensor=475 status=retry note=alpha-5-beta-15
+record 00526: sensor=394 status=ok note=alpha-6-beta-16
+record 00527: sensor=313 status=ok note=alpha-7-beta-0
+record 00528: sensor=232 status=ok note=alpha-8-beta-1
+record 00529: sensor=151 status=ok note=alpha-9-beta-2
+record 00530: sensor=70 status=ok note=alpha-10-beta-3
+record 00531: sensor=989 status=ok note=alpha-11-beta-4
+record 00532: sensor=908 status=retry note=alpha-12-beta-5
+record 00533: sensor=827 status=ok note=alpha-0-beta-6
+record 00534: sensor=746 status=ok note=alpha-1-beta-7
+record 00535: sensor=665 status=ok note=alpha-2-beta-8
+record 00536: sensor=584 status=ok note=alpha-3-beta-9
+record 00537: sensor=503 status=ok note=alpha-4-beta-10
+record 00538: sensor=422 status=ok note=alpha-5-beta-11
+record 00539: sensor=341 status=retry note=alpha-6-beta-12
+record 00540: sensor=260 status=ok note=alpha-7-beta-13
+record 00541: sensor=179 status=ok note=alpha-8-beta-14
+record 00542: sensor=98 status=ok note=alpha-9-beta-15
+record 00543: sensor=17 status=ok note=alpha-10-beta-16
+record 00544: sensor=936 status=ok note=alpha-11-beta-0
+record 00545: sensor=855 status=ok note=alpha-12-beta-1
+record 00546: sensor=774 status=retry note=alpha-0-beta-2
+record 00547: sensor=693 status=ok note=alpha-1-beta-3
+record 00548: sensor=612 status=ok note=alpha-2-beta-4
+record 00549: sensor=531 status=ok note=alpha-3-beta-5
+record 00550: sensor=450 status=ok note=alpha-4-beta-6
+record 00551: sensor=369 status=ok note=alpha-5-beta-7
+record 00552: sensor=288 status=ok note=alpha-6-beta-8
+record 00553: sensor=207 status=retry note=alpha-7-beta-9
+record 00554: sensor=126 status=ok note=alpha-8-beta-10
+record 00555: sensor=45 status=ok note=alpha-9-beta-11
+record 00556: sensor=964 status=ok note=alpha-10-beta-12
+record 00557: sensor=883 status=ok note=alpha-11-beta-13
+record 00558: sensor=802 status=ok note=alpha-12-beta-14
+record 00559: sensor=721 status=ok note=alpha-0-beta-15
+record 00560: sensor=640 status=retry note=alpha-1-beta-16
+record 00561: sensor=559 status=ok note=alpha-2-beta-0
+record 00562: sensor=478 status=ok note=alpha-3-beta-1
+record 00563: sensor=397 status=ok note=alpha-4-beta-2
+record 00564: sensor=316 status=ok note=alpha-5-beta-3
+record 00565: sensor=235 status=ok note=alpha-6-beta-4
+record 00566: sensor=154 status=ok note=alpha-7-beta-5
+record 00567: sensor=73 status=retry note=alpha-8-beta-6
+record 00568: sensor=992 status=ok note=alpha-9-beta-7
+record 00569: sensor=911 status=ok note=alpha-10-beta-8
+record 00570: sensor=830 status=ok note=alpha-11-beta-9
+record 00571: sensor=749 status=ok note=alpha-12-beta-10
+record 00572: sensor=668 status=ok note=alpha-0-beta-11
+record 00573: sensor=587 status=ok note=alpha-1-beta-12
+record 00574: sensor=506 status=retry note=alpha-2-beta-13
+record 00575: sensor=425 status=ok note=alpha-3-beta-14
+record 00576: sensor=344 status=ok note=alpha-4-beta-15
+record 00577: sensor=263 status=ok note=alpha-5-beta-16
+record 00578: sensor=182 status=ok note=alpha-6-beta-0
+record 00579: sensor=101 status=ok note=alpha-7-beta-1
+record 00580: sensor=20 status=ok note=alpha-8-beta-2
+record 00581: sensor=939 status=retry note=alpha-9-beta-3
+record 00582: sensor=858 status=ok note=alpha-10-beta-4
+record 00583: sensor=777 status=ok note=alpha-11-beta-5
+record 00584: sensor=696 status=ok note=alpha-12-beta-6
+record 00585: sensor=615 status=ok note=alpha-0-beta-7
+record 00586: sensor=534 status=ok note=alpha-1-beta-8
+record 00587: sensor=453 status=ok note=alpha-2-beta-9
+record 00588: sensor=372 status=retry note=alpha-3-beta-10
+record 00589: sensor=291 status=ok note=alpha-4-beta-11
+record 00590: sensor=210 status=ok note=alpha-5-beta-12
+record 00591: sensor=129 status=ok note=alpha-6-beta-13
+record 00592: sensor=48 status=ok note=alpha-7-beta-14
+record 00593: sensor=967 status=ok note=alpha-8-beta-15
+record 00594: sensor=886 status=ok note=alpha-9-beta-16
+record 00595: sensor=805 status=retry note=alpha-10-beta-0
+record 00596: sensor=724 status=ok note=alpha-11-beta-1
+record 00597: sensor=643 status=ok note=alpha-12-beta-2
+record 00598: sensor=562 status=ok note=alpha-0-beta-3
+record 00599: sensor=481 status=ok note=alpha-1-beta-4
+record 00600: sensor=400 status=ok note=alpha-2-beta-5
+record 00601: sensor=319 status=ok note=alpha-3-beta-6
+record 00602: sensor=238 status=retry note=alpha-4-beta-7
+record 00603: sensor=157 status=ok note=alpha-5-beta-8
+record 00604: sensor=76 status=ok note=alpha-6-beta-9
+record 00605: sensor=995 status=ok note=alpha-7-beta-10
+record 00606: sensor=914 status=ok note=alpha-8-beta-11
+record 00607: sensor=833 status=ok note=alpha-9-beta-12
+record 00608: sensor=752 status=ok note=alpha-10-beta-13
+record 00609: sensor=671 status=retry note=alpha-11-beta-14
+record 00610: sensor=590 status=ok note=alpha-12-beta-15
+record 00611: sensor=509 status=ok note=alpha-0-beta-16
+record 00612: sensor=428 status=ok note=alpha-1-beta-0
+record 00613: sensor=347 status=ok note=alpha-2-beta-1
+record 00614: sensor=266 status=ok note=alpha-3-beta-2
+record 00615: sensor=185 status=ok note=alpha-4-beta-3
+record 00616: sensor=104 status=retry note=alpha-5-beta-4
+record 00617: sensor=23 status=ok note=alpha-6-beta-5
+record 00618: sensor=942 status=ok note=alpha-7-beta-6
+record 00619: sensor=861 status=ok note=alpha-8-beta-7
+record 00620: sensor=780 status=ok note=alpha-9-beta-8
+record 00621: sensor=699 status=ok note=alpha-10-beta-9
+record 00622: sensor=618 status=ok note=alpha-11-beta-10
+record 00623: sensor=537 status=retry note=alpha-12-beta-11
+record 00624: sensor=456 status=ok note=alpha-0-beta-12
+record 00625: sensor=375 status=ok note=alpha-1-beta-13
+record 00626: sensor=294 status=ok note=alpha-2-beta-14
+record 00627: sensor=213 status=ok note=alpha-3-beta-15
+record 00628: sensor=132 status=ok note=alpha-4-beta-16
+record 00629: sensor=51 status=ok note=alpha-5-beta-0
+record 00630: sensor=970 status=retry note=alpha-6-beta-1
+record 00631: sensor=889 status=ok note=alpha-7-beta-2
+record 00632: sensor=808 status=ok note=alpha-8-beta-3
+record 00633: sensor=727 status=ok note=alpha-9-beta-4
+record 00634: sensor=646 status=ok note=alpha-10-beta-5
+record 00635: sensor=565 status=ok note=alpha-11-beta-6
+record 00636: sensor=484 status=ok note=alpha-12-beta-7
+record 00637: sensor=403 status=retry note=alpha-0-beta-8
+record 00638: sensor=322 status=ok note=alpha-1-beta-9
+record 00639: sensor=241 status=ok note=alpha-2-beta-10
+record 00640: sensor=160 status=ok note=alpha-3-beta-11
+record 00641: sensor=79 status=ok note=alpha-4-beta-12
+record 00642: sensor=998 status=ok note=alpha-5-beta-13
+record 00643: sensor=917 status=ok note=alpha-6-beta-14
+record 00644: sensor=836 status=retry note=alpha-7-beta-15
+record 00645: sensor=755 status=ok note=alpha-8-beta-16
+record 00646: sensor=674 status=ok note=alpha-9-beta-0
+record 00647: sensor=593 status=ok note=alpha-10-beta-1
+record 00648: sensor=512 status=ok note=alpha-11-beta-2
+record 00649: sensor=431 status=ok note=alpha-12-beta-3
+record 00650: sensor=350 status=ok note=alpha-0-beta-4
+record 00651: sensor=269 status=retry note=alpha-1-beta-5
+record 00652: sensor=188 status=ok note=alpha-2-beta-6
+record 00653: sensor=107 status=ok note=alpha-3-beta-7
+record 00654: sensor=26 status=ok note=alpha-4-beta-8
+record 00655: sensor=945 status=ok note=alpha-5-beta-9
+record 00656: sensor=864 status=ok note=alpha-6-beta-10
+record 00657: sensor=783 status=ok note=alpha-7-beta-11
+record 00658: sensor=702 status=retry note=alpha-8-beta-12
+record 00659: sensor=621 status=ok note=alpha-9-beta-13
+record 00660: sensor=540 status=ok note=alpha-10-beta-14
+record 00661: sensor=459 status=ok note=alpha-11-beta-15
+record 00662: sensor=378 status=ok note=alpha-12-beta-16
+record 00663: sensor=297 status=ok note=alpha-0-beta-0
+record 00664: sensor=216 status=ok note=alpha-1-beta-1
+record 00665: sensor=135 status=retry note=alpha-2-beta-2
+record 00666: sensor=54 status=ok note=alpha-3-beta-3
+record 00667: sensor=973 status=ok note=alpha-4-beta-4
+record 00668: sensor=892 status=ok note=alpha-5-beta-5
+record 00669: sensor=811 status=ok note=alpha-6-beta-6
+record 00670: sensor=730 status=ok note=alpha-7-beta-7
+record 00671: sensor=649 status=ok note=alpha-8-beta-8
+record 00672: sensor=568 status=retry note=alpha-9-beta-9
+record 00673: sensor=487 status=ok note=alpha-10-beta-10
+record 00674: sensor=406 status=ok note=alpha-11-beta-11
+record 00675: sensor=325 status=ok note=alpha-12-beta-12
+record 00676: sensor=244 status=ok note=alpha-0-beta-13
+record 00677: sensor=163 status=ok note=alpha-1-beta-14
+record 00678: sensor=82 status=ok note=alpha-2-beta-15
+record 00679: sensor=1 status=retry note=alpha-3-beta-16
+record 00680: sensor=920 status=ok note=alpha-4-beta-0
+record 00681: sensor=839 status=ok note=alpha-5-beta-1
+record 00682: sensor=758 status=ok note=alpha-6-beta-2
+record 00683: sensor=677 status=ok note=alpha-7-beta-3
+record 00684: sensor=596 status=ok note=alpha-8-beta-4
+record 00685: sensor=515 status=ok note=alpha-9-beta-5
+record 00686: sensor=434 status=retry note=alpha-10-beta-6
+record 00687: sensor=353 status=ok note=alpha-11-beta-7
+record 00688: sensor=272 status=ok note=alpha-12-beta-8
+record 00689: sensor=191 status=ok note=alpha-0-beta-9
+record 00690: sensor=110 status=ok note=alpha-1-beta-10
+record 00691: sensor=29 status=ok note=alpha-2-beta-11
+record 00692: sensor=948 status=ok note=alpha-3-beta-12
+record 00693: sensor=867 status=retry note=alpha-4-beta-13
+record 00694: sensor=786 status=ok note=alpha-5-beta-14
+record 00695: sensor=705 status=ok note=alpha-6-beta-15
+record 00696: sensor=624 status=ok note=alpha-7-beta-16
+record 00697: sensor=543 status=ok note=alpha-8-beta-0
+record 00698: sensor=462 status=ok note=alpha-9-beta-1
+record 00699: sensor=381 status=ok note=alpha-10-beta-2
+record 00700: sensor=300 status=retry note=alpha-11-beta-3
+record 00701: sensor=219 status=ok note=alpha-12-beta-4
+record 00702: sensor=138 status=ok note=alpha-0-beta-5
+record 00703: sensor=57 status=ok note=alpha-1-beta-6
+record 00704: sensor=976 status=ok note=alpha-2-beta-7
+record 00705: sensor=895 status=ok note=alpha-3-beta-8
+record 00706: sensor=814 status=ok note=alpha-4-beta-9
+record 00707: sensor=733 status=retry note=alpha-5-beta-10
+record 00708: sensor=652 status=ok note=alpha-6-beta-11
+record 00709: sensor=571 status=ok note=alpha-7-beta-12
+record 00710: sensor=490 status=ok note=alpha-8-beta-13
+record 00711: sensor=409 status=ok note=alpha-9-beta-14
+record 00712: sensor=328 status=ok note=alpha-10-beta-15
+record 00713: sensor=247 status=ok note=alpha-11-beta-16
+record 00714: sensor=166 status=retry note=alpha-12-beta-0
+record 00715: sensor=85 status=ok note=alpha-0-beta-1
+record 00716: sensor=4 status=ok note=alpha-1-beta-2
+record 00717: sensor=923 status=ok note=alpha-2-beta-3
+record 00718: sensor=842 status=ok note=alpha-3-beta-4
+record 00719: sensor=761 status=ok note=alpha-4-beta-5
+record 00720: sensor=680 status=ok note=alpha-5-beta-6
+record 00721: sensor=599 status=retry note=alpha-6-beta-7
+record 00722: sensor=518 status=ok note=alpha-7-beta-8
+record 00723: sensor=437 status=ok note=alpha-8-beta-9
+record 00724: sensor=356 status=ok note=alpha-9-beta-10
+record 00725: sensor=275 status=ok note=alpha-10-beta-11
+record 00726: sensor=194 status=ok note=alpha-11-beta-12
+record 00727: sensor=113 status=ok note=alpha-12-beta-13
+record 00728: sensor=32 status=retry note=alpha-0-beta-14
+record 00729: sensor=951 status=ok note=alpha-1-beta-15
+record 00730: sensor=870 status=ok note=alpha-2-beta-16
+record 00731: sensor=789 status=ok note=alpha-3-beta-0
+record 00732: sensor=708 status=ok note=alpha-4-beta-1
+record 00733: sensor=627 status=ok note=alpha-5-beta-2
+record 00734: sensor=546 status=ok note=alpha-6-beta-3
+record 00735: sensor=465 status=retry note=alpha-7-beta-4
+record 00736: sensor=384 status=ok note=alpha-8-beta-5
+record 00737: sensor=303 status=ok note=alpha-9-beta-6
+record 00738: sensor=222 status=ok note=alpha-10-beta-7
+record 00739: sensor=141 status=ok note=alpha-11-beta-8
+record 00740: sensor=60 status=ok note=alpha-12-beta-9
+record 00741: sensor=979 status=ok note=alpha-0-beta-10
+record 00742: sensor=898 status=retry note=alpha-1-beta-11
+record 00743: sensor=817 status=ok note=alpha-2-beta-12
+record 00744: sensor=736 status=ok note=alpha-3-beta-13
+record 00745: sensor=655 status=ok note=alpha-4-beta-14
+record 00746: sensor=574 status=ok note=alpha-5-beta-15
+record 00747: sensor=493 status=ok note=alpha-6-beta-16
+record 00748: sensor=412 status=ok note=alpha-7-beta-0
+record 00749: sensor=331 status=retry note=alpha-8-beta-1
+record 00750: sensor=250 status=ok note=alpha-9-beta-2
+record 00751: sensor=169 status=ok note=alpha-10-beta-3
+record 00752: sensor=88 status=ok note=alpha-11-beta-4
+record 00753: sensor=7 status=ok note=alpha-12-beta-5
+record 00754: sensor=926 status=ok note=alpha-0-beta-6
+record 00755: sensor=845 status=ok note=alpha-1-beta-7
+record 00756: sensor=764 status=retry note=alpha-2-beta-8
+record 00757: sensor=683 status=ok note=alpha-3-beta-9
+record 00758: sensor=602 status=ok note=alpha-4-beta-10
+record 00759: sensor=521 status=ok note=alpha-5-beta-11
+record 00760: sensor=440 status=ok note=alpha-6-beta-12
+record 00761: sensor=359 status=ok note=alpha-7-beta-13
+record 00762: sensor=278 status=ok note=alpha-8-beta-14
+record 00763: sensor=197 status=retry note=alpha-9-beta-15
+record 00764: sensor=116 status=ok note=alpha-10-beta-16
+record 00765: sensor=35 status=ok note=alpha-11-beta-0
+record 00766: sensor=954 status=ok note=alpha-12-beta-1
+record 00767: sensor=873 status=ok note=alpha-0-beta-2
+record 00768: sensor=792 status=ok note=alpha-1-beta-3
+record 00769: sensor=711 status=ok note=alpha-2-beta-4
+record 00770: sensor=630 status=retry note=alpha-3-beta-5
+record 00771: sensor=549 status=ok note=alpha-4-beta-6
+record 00772: sensor=468 status=ok note=alpha-5-beta-7
+record 00773: sensor=387 status=ok note=alpha-6-beta-8
+record 00774: sensor=306 status=ok note=alpha-7-beta-9
+record 00775: sensor=225 status=ok note=alpha-8-beta-10
+record 00776: sensor=144 status=ok note=alpha-9-beta-11
+record 00777: sensor=63 status=retry note=alpha-10-beta-12
+record 00778: sensor=982 status=ok note=alpha-11-beta-13
+record 00779: sensor=901 status=ok note=alpha-12-beta-14
+record 00780: sensor=820 status=ok note=alpha-0-beta-15
+record 00781: sensor=739 status=ok note=alpha-1-beta-16
+record 00782: sensor=658 status=ok note=alpha-2-beta-0
+record 00783: sensor=577 status=ok note=alpha-3-beta-1
+record 00784: sensor=496 status=retry note=alpha-4-beta-2
+record 00785: sensor=415 status=ok note=alpha-5-beta-3
+record 00786: sensor=334 status=ok note=alpha-6-beta-4
+record 00787: sensor=253 status=ok note=alpha-7-beta-5
+record 00788: sensor=172 status=ok note=alpha-8-beta-6
+record 00789: sensor=91 status=ok note=alpha-9-beta-7
+record 00790: sensor=10 status=ok note=alpha-10-beta-8
+record 00791: sensor=929 status=retry note=alpha-11-beta-9
+record 00792: sensor=848 status=ok note=alpha-12-beta-10
+record 00793: sensor=767 status=ok note=alpha-0-beta-11
+record 00794: sensor=686 status=ok note=alpha-1-beta-12
+record 00795: sensor=605 status=ok note=alpha-2-beta-13
+record 00796: sensor=524 status=ok note=alpha-3-beta-14
+record 00797: sensor=443 status=ok note=alpha-4-beta-15
+record 00798: sensor=362 status=retry note=alpha-5-beta-16
+record 00799: sensor=281 status=ok note=alpha-6-beta-0
+record 00800: sensor=200 status=ok note=alpha-7-beta-1<|assistant|><think></think><|user|>Now state the sensor value of record 00800. Reply with the number only.<|assistant|><think>
+
+--- generated text ---
+
+
+--- trace: prefill done; decode_max=64 ctx_room=15697 ---
+
+</think>200
+
+--- parsed message ---
+finish: stop
+generated_tokens: 2
+dsml_start: 0
+dsml_end: 0
+elapsed_sec: 329.174
+
+content:
+200
+
+===== end request 3 =====
+
+
+--- trace: thinking live checkpoint remembered: live=17073 visible=45205 ---
+

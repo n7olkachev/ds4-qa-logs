@@ -1,0 +1,16 @@
+=== stock test (original file was linked) ===
+attention selected=1 tokens=67 heads=17 dim=512 pos=0 cap=32 rope=0 f16=1: PASS, 0.019 ms
+attention selected=1 tokens=64 heads=17 dim=512 pos=0 cap=2052 rope=0 f16=1: PASS, 1.272 ms
+attention selected=0 tokens=257 heads=17 dim=512 pos=127 cap=384 rope=0 f16=1: PASS, 0.555 ms
+attention selected=0 tokens=32 heads=8 dim=512 pos=0 cap=32 rope=64 f16=0: PASS, 0.037 ms
+attention selected=0 tokens=31 heads=17 dim=512 pos=97 cap=128 rope=64 f16=0: PASS, 0.144 ms
+attention selected=0 tokens=32 heads=8 dim=512 pos=0 cap=32 rope=64 f16=1: PASS, 0.034 ms
+attention selected=0 tokens=31 heads=17 dim=512 pos=97 cap=128 rope=64 f16=1: PASS, 0.122 ms
+normalization and attention reductions: PASS
+exit=0
+
+=== rebuild with new cases ===
+make: *** [Makefile:1081: tests/test_glm_attention] Error 1
+=== run ===
+bash: line 1: ./tests/test_glm_attention: No such file or directory
+exit=127

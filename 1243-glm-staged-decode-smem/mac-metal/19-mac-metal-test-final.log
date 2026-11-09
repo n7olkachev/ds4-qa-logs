@@ -1,0 +1,46 @@
+ds4: Metal device Apple M1, 16.00 GiB RAM
+ds4: drift-patch flags hc_stable=on norm_unify=on kv_raw_f32=off rope_exp2_log2=off math_safe=off tensor_matmul=off
+ds4: Metal model views created in 0.043 ms, residency requested in 0.052 ms, warmup 0.386 ms (mapped 0.06 MiB from offset 0.00 MiB)
+ds4: Metal mapped mmaped model as 1 overlapping shared buffers
+ds4: Metal device Apple M1, 16.00 GiB RAM
+ds4: drift-patch flags hc_stable=on norm_unify=on kv_raw_f32=off rope_exp2_log2=off math_safe=off tensor_matmul=off
+ds4: Metal model views created in 0.043 ms, residency requested in 0.067 ms, warmup 0.681 ms (mapped 0.06 MiB from offset 0.00 MiB)
+ds4: Metal mapped mmaped model as 1 overlapping shared buffers
+ds4: Metal device Apple M1, 16.00 GiB RAM
+ds4: drift-patch flags hc_stable=on norm_unify=on kv_raw_f32=off rope_exp2_log2=off math_safe=off tensor_matmul=off
+Metal prefill prefix heads=8 count=17 rope=0: rollback/enabled bitwise and CPU reference PASS
+Metal prefill prefix heads=8 count=2051 rope=0: rollback/enabled bitwise and CPU reference PASS
+Metal prefill prefix heads=8 count=17 rope=64: rollback/enabled bitwise and CPU reference PASS
+Metal prefill prefix heads=8 count=2051 rope=64: rollback/enabled bitwise and CPU reference PASS
+Metal prefill prefix heads=64 count=17 rope=0: rollback/enabled bitwise and CPU reference PASS
+Metal prefill prefix heads=64 count=2051 rope=0: rollback/enabled bitwise and CPU reference PASS
+Metal prefill prefix heads=64 count=17 rope=64: rollback/enabled bitwise and CPU reference PASS
+Metal prefill prefix heads=64 count=2051 rope=64: rollback/enabled bitwise and CPU reference PASS
+Metal prefill prefix heads=17 count=17 rope=0: rollback/enabled bitwise and CPU reference PASS
+Metal prefill prefix heads=17 count=2051 rope=0: rollback/enabled bitwise and CPU reference PASS
+Metal prefill prefix heads=17 count=17 rope=64: rollback/enabled bitwise and CPU reference PASS
+Metal prefill prefix heads=17 count=2051 rope=64: rollback/enabled bitwise and CPU reference PASS
+attention selected=1 tokens=67 heads=17 dim=512 pos=0 cap=32 rope=0 f16=0: PASS, 1.003 ms
+attention selected=1 tokens=67 heads=17 dim=512 pos=0 cap=32 rope=0 f16=1: PASS, 0.408 ms
+attention selected=1 tokens=64 heads=17 dim=512 pos=0 cap=2052 rope=0 f16=1: PASS, 11.966 ms
+attention selected=0 tokens=257 heads=17 dim=512 pos=127 cap=384 rope=0 f16=1: PASS, 11.476 ms
+attention selected=0 tokens=32 heads=8 dim=512 pos=0 cap=32 rope=64 f16=0: PASS, 0.322 ms
+attention selected=0 tokens=31 heads=17 dim=512 pos=97 cap=128 rope=64 f16=0: PASS, 1.168 ms
+attention selected=0 tokens=32 heads=8 dim=512 pos=0 cap=32 rope=64 f16=1: PASS, 0.323 ms
+attention selected=0 tokens=31 heads=17 dim=512 pos=97 cap=128 rope=64 f16=1: PASS, 1.059 ms
+large decode window count=511 f16=0: PASS
+large decode window count=512 f16=0: PASS
+large decode window count=2051 f16=0: PASS
+large decode window count=12032 f16=0: SKIP (Metal threadgroup memory)
+large decode window count=12033 f16=0: SKIP (Metal threadgroup memory)
+large decode window count=16384 f16=0: SKIP (Metal threadgroup memory)
+large decode window count=65536 f16=0: SKIP (Metal threadgroup memory)
+large decode window count=511 f16=1: PASS
+large decode window count=512 f16=1: PASS
+large decode window count=2051 f16=1: PASS
+large decode window count=12032 f16=1: SKIP (Metal threadgroup memory)
+large decode window count=12033 f16=1: SKIP (Metal threadgroup memory)
+large decode window count=16384 f16=1: SKIP (Metal threadgroup memory)
+large decode window count=65536 f16=1: SKIP (Metal threadgroup memory)
+normalization and attention reductions: PASS
+pooled decode padding: PASS

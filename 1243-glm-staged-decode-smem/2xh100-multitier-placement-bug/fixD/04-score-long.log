@@ -1,0 +1,38 @@
+# ==== ds4 QA evidence ====
+# date_utc: 2026-11-08T22:36:31Z
+# host: 72654fbbca5c  runpod_pod: ?  dc: ?  gpu_count: ?
+# gpu: NVIDIA H100 80GB HBM3, 595.91.07, 81559 MiB, 9.0
+NVIDIA H100 80GB HBM3, 595.91.07, 81559 MiB, 9.0
+# nvcc: Build cuda_12.8.r12.8/compiler.35583870_0
+# os: Linux 6.8.0-147-generic x86_64  Ubuntu 24.04.3 LTS
+# tree: /data/fixD
+# commit: 5ebf36c37cb58dc86dd43fe2047099d7b39ab5c0  (Stage GLM decode attention scores in global memory past 12,032 rows)
+# dirty_files: 0
+# origin: https://github.com/n7olkachev/ds4.git
+# description: QA_BEFORE_RELEASES.md section 3: eight long Z.AI FP8 cases, rendered prompts, ctx 8192 (every prompt crosses the 2,051-token boundary)
+# =========================
+
+$ python3 gguf-tools/quality-testing/render_glm_references.py gguf-tools/quality-testing/data/glm53-flash-openrouter-zai-fp8-long
+
+$ gguf-tools/quality-testing/score_official /data/base/gguf/GLM-5.3-Flash-Q2.gguf gguf-tools/quality-testing/data/glm53-flash-openrouter-zai-fp8-long/manifest-rendered.tsv /workspace/evidence/fixD/glm53-q2-long.tsv 8192 --rendered-prompt --gpu-devices 0,1 --gpu-vram auto
+ds4: Linux cuda backend set oom_score_adj=1000
+ds4: CUDA backend initialized on NVIDIA H100 80GB HBM3 (sm_90) dev=0
+ds4: CUDA backend initialized on NVIDIA H100 80GB HBM3 (sm_90) dev=1
+ds4: peer access 0->1 validated across 4 sizes x 4 iterations (max 16 MiB)
+ds4: peer access 1->0 validated across 4 sizes x 4 iterations (max 16 MiB)
+multi-GPU layout:
+  GPU0: layers 0-35 + embedding  (69.4 / 71.8 GB)
+  GPU1: layers 36-45 + output head  (21.3 / 71.8 GB)
+ds4: per-tier graph scratch reserved: 2.93 GiB (pre-subtracted from each GPU budget)
+ds4: peer access matrix (validated): 0->1 DIRECT 1->0 DIRECT
+ds4: CUDA (no-copy) registered 89.88 GiB model mapping for multi-tier selective cache
+ds4: CUDA tier 0 (device 0) selective weights: 68.76 GiB in 1102 ranges
+ds4: CUDA tier 1 (device 1) selective weights: 21.11 GiB in 310 ranges
+ds4: GLM session ctx=8192 (model max=1048576); prefill/work cap=4096; dense attention limit=2051
+ds4: GLM graph using compact DSA KV only; expanded full-attention KV cache is skipped
+ds4: GLM graph allocating compact DSA cache: rows=8192 logical_ctx=8192 kv_layers=45 indexer_layers=11 f16 0.09 GiB
+ds4: GLM compact indexed prefill chunk=2048 score_rows=2048 score_scratch=16.00 MiB
+case_000 warning: no API logprobs parsed from gguf-tools/quality-testing/data/glm53-flash-openrouter-zai-fp8-long/responses/case_000.json
+ds4: selective-cache miss for offset=73840321088 bytes=786432 on logical_tier=0 (physical_device=0, current_device=0, label=GLM-5.3 BF16 matrix); this is a placement/cache-install bug
+case_000 sync failed: cuda GLM-5.3 prefill failed at token 0
+exit=1

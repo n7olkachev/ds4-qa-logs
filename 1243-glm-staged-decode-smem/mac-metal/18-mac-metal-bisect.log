@@ -1,0 +1,36 @@
+large decode window count=7424 f16=0: PASS
+large decode window count=7425 f16=0: PASS
+large decode window count=8192 f16=0: PASS
+large decode window count=10000 f16=0: PASS
+large decode window count=12033 f16=0: PASS
+large decode window count=13000 f16=0: PASS
+large decode window count=13500 f16=0: PASS
+large decode window count=14000 f16=0: PASS
+large decode window count=14500 f16=0: PASS
+large decode window count=15000 f16=0: PASS
+large decode window count=15500 f16=0: PASS
+large decode window count=16000 f16=0: PASS
+large decode window count=16384 f16=0: FAIL head=0 0.26433906 != -9.0279781e-05
+large decode window count=16384 f16=0: PASS
+large decode window count=20000 f16=0: FAIL head=0 0.264205039 != -9.96857057e-05
+large decode window count=20000 f16=0: PASS
+large decode window count=32768 f16=0: FAIL head=0 0.221164003 != -6.48633294e-05
+large decode window count=32768 f16=0: PASS
+large decode window count=7424 f16=1: PASS
+large decode window count=7425 f16=1: PASS
+large decode window count=8192 f16=1: PASS
+large decode window count=10000 f16=1: PASS
+large decode window count=12033 f16=1: PASS
+large decode window count=13000 f16=1: PASS
+large decode window count=13500 f16=1: PASS
+large decode window count=14000 f16=1: PASS
+large decode window count=14500 f16=1: PASS
+large decode window count=15000 f16=1: PASS
+large decode window count=15500 f16=1: PASS
+large decode window count=16000 f16=1: PASS
+large decode window count=16384 f16=1: FAIL head=0 0.26433906 != -9.0279781e-05
+large decode window count=16384 f16=1: PASS
+large decode window count=20000 f16=1: FAIL head=0 0.264205039 != -9.96857057e-05
+large decode window count=20000 f16=1: PASS
+large decode window count=32768 f16=1: FAIL head=0 0.221164003 != -6.48633294e-05
+large decode window count=32768 f16=1: PASS

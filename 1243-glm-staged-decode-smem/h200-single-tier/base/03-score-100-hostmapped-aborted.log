@@ -1,0 +1,237 @@
+# ==== ds4 QA evidence ====
+# date_utc: 2026-11-08T22:17:52Z
+# host: 7fb4680f6a16  runpod_pod: ?  dc: ?  gpu_count: ?
+# gpu: NVIDIA H200, 595.91.07, 143771 MiB, 9.0
+# nvcc: Build cuda_12.8.r12.8/compiler.35583870_0
+# os: Linux 6.8.0-147-generic x86_64  Ubuntu 24.04.3 LTS
+# tree: /data/base
+# commit: b3f50180ec2c7324892be1f50bc83555ccb8d5e7  (Read half-aligned Qwen Q2 weight rows correctly on Metal)
+# dirty_files: 0
+# origin: https://github.com/antirez/ds4.git
+# description: QA_BEFORE_RELEASES.md section 3: 100-case GLM 5.3 Flash Q2 fixture at ctx 4096 (reference: avg NLL 0.458030488, first-token 89/100, greedy prefix 7.37 on Metal)
+# =========================
+
+$ model identity
+file: /data/base/gguf/GLM-5.3-Flash-Q2.gguf
+bytes: 96505816384
+hf_api_xet_hash: 3717238bd6bb945cc065012f119519b8ce3ad04645dc2a1011bac077b415ffda
+hf_resolve_x_linked_etag: e81fd6241c6e55a64e1e14e47a3eab61a173fa8d7e4b5c1d1848827119705b32
+sha256: e81fd6241c6e55a64e1e14e47a3eab61a173fa8d7e4b5c1d1848827119705b32
+
+$ gguf-tools/quality-testing/score_official /data/base/gguf/GLM-5.3-Flash-Q2.gguf gguf-tools/quality-testing/data/glm53-flash-openrouter-zai-fp8-100/manifest.tsv /workspace/evidence/base/glm53-q2-100.tsv 4096
+ds4: Linux cuda backend set oom_score_adj=1000
+ds4: CUDA backend initialized on NVIDIA H200 (sm_90) dev=0
+ds4: CUDA (no-copy) registered 89.88 GiB model mapping for multi-tier selective cache
+ds4: CUDA preparing model tensor mappings
+ds4: CUDA prepared model tensor mappings 16.38 GiB
+ds4: CUDA prepared model tensor mappings 32.13 GiB
+ds4: CUDA prepared model tensor mappings 48.45 GiB
+ds4: CUDA prepared model tensor mappings 64.78 GiB
+ds4: CUDA prepared model tensor mappings 80.23 GiB
+ds4: CUDA startup model preparation covered 89.87 GiB of tensor spans in 0.076s
+ds4: cuda backend initialized for graph diagnostics
+ds4: memory: KV 0.05 GiB (raw 0.00 + compressed 0.05) + buffers 2.92 GiB + resident model 89.87 GiB = 92.84 GiB planned
+ds4: memory detail: ctx=4096 prefill_cap=2048 raw_kv_rows=0 compressed_kv_rows=4096 backend=cuda
+ds4: GLM graph using compact DSA KV only; expanded full-attention KV cache is skipped
+ds4: GLM graph allocating compact DSA cache: rows=4096 logical_ctx=4096 kv_layers=45 indexer_layers=11 f16 0.05 GiB
+ds4: GLM compact indexed prefill chunk=2048 score_rows=2048 score_scratch=8.00 MiB
+case_000 warning: no API logprobs parsed from gguf-tools/quality-testing/data/glm53-flash-openrouter-zai-fp8-100/responses/case_000.json
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA matmul_q8_0 quantize launch failed: operation failed due to a previous error during capture
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA matmul_q8_0 quantize launch failed: operation failed due to a previous error during capture
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA matmul_q8_0 quantize launch failed: operation failed due to a previous error during capture
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA matmul_q8_0 quantize launch failed: operation failed due to a previous error during capture
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA matmul_q8_0 quantize launch failed: operation failed due to a previous error during capture
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA matmul_q8_0 quantize launch failed: operation failed due to a previous error during capture
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+case_000 cases=1 prompt=20 target=127 avg_nll=0.395170 lcp=14 api_target_mae=0.000000 api_top_coverage=0/0 api_top1=0.000 api_topn=0.000 api_pair=0.000
+case_001 warning: no API logprobs parsed from gguf-tools/quality-testing/data/glm53-flash-openrouter-zai-fp8-100/responses/case_001.json
+case_001 cases=2 prompt=20 target=127 avg_nll=0.669368 lcp=5 api_target_mae=0.000000 api_top_coverage=0/0 api_top1=0.000 api_topn=0.000 api_pair=0.000
+case_002 warning: no API logprobs parsed from gguf-tools/quality-testing/data/glm53-flash-openrouter-zai-fp8-100/responses/case_002.json
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA matmul_q8_0 quantize launch failed: operation failed due to a previous error during capture
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA matmul_q8_0 quantize launch failed: operation failed due to a previous error during capture
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA matmul_q8_0 quantize launch failed: operation failed due to a previous error during capture
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA matmul_q8_0 quantize launch failed: operation failed due to a previous error during capture
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA matmul_q8_0 quantize launch failed: operation failed due to a previous error during capture
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA matmul_q8_0 quantize launch failed: operation failed due to a previous error during capture
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+Terminated
+exit=143
+# aborted after 3 cases: default (no --gpu-devices/--gpu-vram) placement on a discrete H200 = host-mapped no-copy mode, graph-capture errors (legacy stream vs capturing stream), ~1 case/min. Rerun uses --gpu-devices 0 --gpu-vram auto.

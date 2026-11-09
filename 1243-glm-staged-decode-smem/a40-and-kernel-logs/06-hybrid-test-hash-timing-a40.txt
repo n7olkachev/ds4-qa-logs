@@ -1,0 +1,78 @@
+=== HYBRID: full test_glm_attention ===
+large decode window count=16384 f16=1: PASS
+large decode window count=65536 f16=1: PASS
+normalization and attention reductions: PASS
+exit=0
+=== HYBRID: hashes (all counts) ===
+count=   511 f16=0: hash=7810e5034baf61bb out0=-0x1.41f246p-9 
+count=   512 f16=0: hash=d76506b6029332a3 out0=-0x1.5bb6ccp-9 
+count=   600 f16=0: hash=5210bc65f074c3d3 out0=-0x1.1b779ep-9 
+count=  2051 f16=0: hash=9998bcc4e1700ef3 out0=-0x1.144916p-11 
+count=  4096 f16=0: hash=6083fd559a130683 out0=-0x1.7c0c48p-15 
+count=  8192 f16=0: hash=60d6147b54e78f5b out0=-0x1.6fee4p-17 
+count= 12000 f16=0: hash=80a43c2f66ba396b out0=-0x1.319f2ep-13 
+count= 12032 f16=0: hash=53e67d2909780803 out0=-0x1.5ed61p-13 
+count= 12033 f16=0: hash=2e53d9beda71bed3 out0=-0x1.65c94p-13 
+count= 16384 f16=0: hash=f40e11fe27310f3b out0=-0x1.7b2b84p-14 
+count= 32768 f16=0: hash=79c06bd07e4be03b out0=-0x1.10cbcp-14 
+count= 65536 f16=0: hash=6f9e18e75bfe8233 out0=-0x1.a8a3cp-16 
+count=   511 f16=1: hash=7810e5034baf61bb out0=-0x1.41f246p-9 
+count=   512 f16=1: hash=d76506b6029332a3 out0=-0x1.5bb6ccp-9 
+count=   600 f16=1: hash=5210bc65f074c3d3 out0=-0x1.1b779ep-9 
+count=  2051 f16=1: hash=9998bcc4e1700ef3 out0=-0x1.144916p-11 
+count=  4096 f16=1: hash=6083fd559a130683 out0=-0x1.7c0c48p-15 
+count=  8192 f16=1: hash=60d6147b54e78f5b out0=-0x1.6fee4p-17 
+count= 12000 f16=1: hash=80a43c2f66ba396b out0=-0x1.319f2ep-13 
+count= 12032 f16=1: hash=53e67d2909780803 out0=-0x1.5ed61p-13 
+count= 12033 f16=1: hash=2e53d9beda71bed3 out0=-0x1.65c94p-13 
+count= 16384 f16=1: hash=f40e11fe27310f3b out0=-0x1.7b2b84p-14 
+count= 32768 f16=1: hash=79c06bd07e4be03b out0=-0x1.10cbcp-14 
+count= 65536 f16=1: hash=6f9e18e75bfe8233 out0=-0x1.a8a3cp-16 
+--- round 1 OLD
+count=  2048 f16=0: median=533.8 us
+count=  2051 f16=0: median=545.7 us
+count=  4096 f16=0: median=1564.7 us
+count= 12032 f16=0: median=4601.4 us
+count=  2048 f16=1: median=513.8 us
+count=  2051 f16=1: median=519.7 us
+count=  4096 f16=1: median=1089.4 us
+count= 12032 f16=1: median=3868.0 us
+--- round 1 HYBRID
+count=  2048 f16=0: median=529.6 us
+count=  2051 f16=0: median=548.3 us
+count=  4096 f16=0: median=1569.3 us
+count= 12032 f16=0: median=4632.0 us
+count= 12033 f16=0: median=3925.5 us
+count= 16384 f16=0: median=5319.4 us
+count= 65536 f16=0: median=21203.3 us
+count=  2048 f16=1: median=518.4 us
+count=  2051 f16=1: median=518.8 us
+count=  4096 f16=1: median=1200.0 us
+count= 12032 f16=1: median=4208.4 us
+count= 12033 f16=1: median=3724.7 us
+count= 16384 f16=1: median=5060.3 us
+count= 65536 f16=1: median=20124.7 us
+--- round 2 OLD
+count=  2048 f16=0: median=533.2 us
+count=  2051 f16=0: median=545.2 us
+count=  4096 f16=0: median=1564.1 us
+count= 12032 f16=0: median=4603.7 us
+count=  2048 f16=1: median=513.2 us
+count=  2051 f16=1: median=519.8 us
+count=  4096 f16=1: median=1089.1 us
+count= 12032 f16=1: median=3867.7 us
+--- round 2 HYBRID
+count=  2048 f16=0: median=529.7 us
+count=  2051 f16=0: median=548.4 us
+count=  4096 f16=0: median=1573.6 us
+count= 12032 f16=0: median=4629.0 us
+count= 12033 f16=0: median=3910.6 us
+count= 16384 f16=0: median=5298.2 us
+count= 65536 f16=0: median=21161.1 us
+count=  2048 f16=1: median=517.2 us
+count=  2051 f16=1: median=517.9 us
+count=  4096 f16=1: median=1198.8 us
+count= 12032 f16=1: median=4198.1 us
+count= 12033 f16=1: median=3725.7 us
+count= 16384 f16=1: median=5064.3 us
+count= 65536 f16=1: median=20143.2 us

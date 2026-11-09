@@ -1,0 +1,18 @@
+# ==== ds4 QA evidence ====
+# date_utc: 2026-11-08T23:08:12Z
+# host: 7fb4680f6a16  runpod_pod: ?  dc: ?  gpu_count: ?
+# gpu: NVIDIA H200, 595.91.07, 143771 MiB, 9.0
+# nvcc: Build cuda_12.8.r12.8/compiler.35583870_0
+# os: Linux 6.8.0-147-generic x86_64  Ubuntu 24.04.3 LTS
+# tree: /data/fixD
+# commit: 5ebf36c37cb58dc86dd43fe2047099d7b39ab5c0  (Stage GLM decode attention scores in global memory past 12,032 rows)
+# dirty_files: 0
+# origin: https://github.com/n7olkachev/ds4.git
+# description: DS4_CUDA_COPY_MODEL_CHUNKED=1 GPUFLAGS=[ ] QA_BEFORE_RELEASES.md section 3: eight long Z.AI FP8 cases, rendered prompts, ctx 8192 (every prompt crosses the 2,051-token boundary)
+# =========================
+
+$ python3 gguf-tools/quality-testing/render_glm_references.py gguf-tools/quality-testing/data/glm53-flash-openrouter-zai-fp8-long
+
+$ gguf-tools/quality-testing/score_official /data/base/gguf/GLM-5.3-Flash-Q2.gguf gguf-tools/quality-testing/data/glm53-flash-openrouter-zai-fp8-long/manifest-rendered.tsv /workspace/evidence/fixD/glm53-q2-long.tsv 8192 --rendered-prompt  
+ds4: another ds4 process is already running (pid 6891); refusing to start
+exit=2

@@ -1,0 +1,25 @@
+345 MHz, 1980 MHz, 39, 77.51 W
+--- round 1 base
+heads=64 count=  2051 f16=1: median=507.4 us
+heads=64 count=  4096 f16=1: median=974.1 us
+heads=64 count= 12032 f16=1: median=2815.0 us
+--- round 1 fix
+heads=64 count=  2051 f16=1: median=527.7 us
+heads=64 count=  4096 f16=1: median=1005.9 us
+heads=64 count= 12032 f16=1: median=2921.9 us
+--- round 2 base
+heads=64 count=  2051 f16=1: median=506.7 us
+heads=64 count=  4096 f16=1: median=961.9 us
+heads=64 count= 12032 f16=1: median=2795.6 us
+--- round 2 fix
+heads=64 count=  2051 f16=1: median=528.0 us
+heads=64 count=  4096 f16=1: median=1006.6 us
+heads=64 count= 12032 f16=1: median=2922.0 us
+--- round 3 base
+heads=64 count=  2051 f16=1: median=506.6 us
+heads=64 count=  4096 f16=1: median=961.9 us
+heads=64 count= 12032 f16=1: median=2796.2 us
+--- round 3 fix
+heads=64 count=  2051 f16=1: median=527.0 us
+heads=64 count=  4096 f16=1: median=1005.5 us
+heads=64 count= 12032 f16=1: median=2921.0 us

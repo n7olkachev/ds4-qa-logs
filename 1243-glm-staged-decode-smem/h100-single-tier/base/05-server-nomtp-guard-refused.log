@@ -1,0 +1,26 @@
+# ==== ds4 QA evidence ====
+# date_utc: 2026-11-08T23:24:46Z
+# host: ba2394cc7034  runpod_pod: ?  dc: ?  gpu_count: ?
+# gpu: NVIDIA H100 80GB HBM3, 595.91.07, 81559 MiB, 9.0
+# nvcc: Build cuda_12.8.r12.8/compiler.35583870_0
+# os: Linux 6.8.0-147-generic x86_64  Ubuntu 24.04.3 LTS
+# tree: /data/base
+# commit: b3f50180ec2c7324892be1f50bc83555ccb8d5e7  (Read half-aligned Qwen Q2 weight rows correctly on Metal)
+# dirty_files: 0
+# origin: https://github.com/antirez/ds4.git
+# description: DS4_CUDA_COPY_MODEL=unset ds4-server --cuda   , three-turn greedy session whose MTP window crosses 12,033 positions (issue #1243 scenario)
+# =========================
+
+$ ./ds4-server --cuda   -m /data/base/gguf/GLM-5.3-Flash-Q2.gguf --ctx 32768 --port 8011 --trace /workspace/evidence/base/05-trace-nomtp.txt 
+ds4: Linux cuda backend set oom_score_adj=1000
+ds4: GLM memory guard refused ctx=32768 compact_cap=32768 before GLM graph allocation
+ds4:   model map: 89.88 GiB
+ds4:   graph cache/scratch: 3.34 GiB (full KV 0.00 GiB, compact DSA 0.37 GiB, scratch 2.98 GiB)
+ds4:   required model+graph: 93.22 GiB; guard budget: 47.18 GiB (base 79.18 GiB, fraction 0.99, reserve 32.00 GiB, transient 0.00 GiB)
+ds4:   set DS4_GLM_MEMORY_GUARD=0 to bypass, use a smaller --ctx, tensor parallelism, or SSD streaming
+
+# ==== summary (base, nomtp) ====
+# 'staged decode weights launch failed' lines: 0
+# 'glm mtp step failed' lines: 0
+# mtp cycles ACCEPT: 0  reject: 0
+# sha256 of greedy texts: e3b0c44298fc1c14

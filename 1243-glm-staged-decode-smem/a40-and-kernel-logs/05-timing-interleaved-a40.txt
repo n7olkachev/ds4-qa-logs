@@ -1,0 +1,67 @@
+210 MHz, 1740 MHz, 39, 33.51 W
+--- round 1: OLD
+count=  2048 f16=0: median=529.6 us
+count=  2051 f16=0: median=531.2 us
+count=  4096 f16=0: median=1558.0 us
+count=  8192 f16=0: median=3129.3 us
+count= 12032 f16=0: median=4591.2 us
+count=  2048 f16=1: median=512.9 us
+count=  2051 f16=1: median=519.9 us
+count=  4096 f16=1: median=1033.4 us
+count=  8192 f16=1: median=2614.4 us
+count= 12032 f16=1: median=3864.5 us
+--- round 1: NEW
+count=  2048 f16=0: median=571.1 us
+count=  2051 f16=0: median=576.4 us
+count=  4096 f16=0: median=1429.8 us
+count=  8192 f16=0: median=2871.3 us
+count= 12032 f16=0: median=4212.5 us
+count=  2048 f16=1: median=511.5 us
+count=  2051 f16=1: median=522.7 us
+count=  4096 f16=1: median=1024.1 us
+count=  8192 f16=1: median=2526.0 us
+count= 12032 f16=1: median=3730.9 us
+--- round 2: OLD
+count=  2048 f16=0: median=538.7 us
+count=  2051 f16=0: median=544.3 us
+count=  4096 f16=0: median=1566.6 us
+count=  8192 f16=0: median=3132.1 us
+count= 12032 f16=0: median=4599.0 us
+count=  2048 f16=1: median=507.3 us
+count=  2051 f16=1: median=517.6 us
+count=  4096 f16=1: median=1086.2 us
+count=  8192 f16=1: median=2618.4 us
+count= 12032 f16=1: median=3868.6 us
+--- round 2: NEW
+count=  2048 f16=0: median=580.8 us
+count=  2051 f16=0: median=597.9 us
+count=  4096 f16=0: median=1439.1 us
+count=  8192 f16=0: median=2877.8 us
+count= 12032 f16=0: median=4221.5 us
+count=  2048 f16=1: median=512.3 us
+count=  2051 f16=1: median=523.1 us
+count=  4096 f16=1: median=1063.9 us
+count=  8192 f16=1: median=2530.4 us
+count= 12032 f16=1: median=3737.8 us
+--- round 3: OLD
+count=  2048 f16=0: median=532.3 us
+count=  2051 f16=0: median=544.8 us
+count=  4096 f16=0: median=1559.4 us
+count=  8192 f16=0: median=3126.0 us
+count= 12032 f16=0: median=4596.8 us
+count=  2048 f16=1: median=512.5 us
+count=  2051 f16=1: median=518.6 us
+count=  4096 f16=1: median=1088.4 us
+count=  8192 f16=1: median=2613.4 us
+count= 12032 f16=1: median=3870.2 us
+--- round 3: NEW
+count=  2048 f16=0: median=580.0 us
+count=  2051 f16=0: median=597.7 us
+count=  4096 f16=0: median=1438.3 us
+count=  8192 f16=0: median=2877.0 us
+count= 12032 f16=0: median=4220.8 us
+count=  2048 f16=1: median=513.3 us
+count=  2051 f16=1: median=522.3 us
+count=  4096 f16=1: median=1064.1 us
+count=  8192 f16=1: median=2530.6 us
+count= 12032 f16=1: median=3736.9 us

@@ -1,0 +1,41 @@
+
+===== request 1 2026-11-08 22:37:25 =====
+kind: chat
+model: ds4
+stream: 0
+tools: 0
+think_mode: high
+prompt_tokens: 32
+effective_prompt_tokens: 32
+cached_tokens: 0
+max_tokens: 64
+temperature: 0.000
+top_k: 0
+top_p: 1.000
+min_p: 0.050
+ignore_eos: 0
+seed: 0
+stream_include_usage: 0
+
+--- cache decision ---
+live_tokens_before: 0
+prompt_tokens: 32
+live_prompt_common: 0
+memory_token_reusable: 0
+memory_miss_reason: no-live-checkpoint
+tool_replay: mem=0 disk=0 canonical=0 missing_ids=0
+cache_source: none
+cached_tokens: 0
+disk_cached_tokens: 0
+
+--- raw request json ---
+{"model": "ds4", "messages": [{"role": "system", "content": "You are a terse assistant. Answer directly, no thinking."}, {"role": "user", "content": "Say hello in exactly five words."}], "max_tokens": 64, "temperature": 0, "stream": false}
+
+--- rendered prompt ---
+[gMASK]<sop><|system|>Reasoning Effort: High<|system|>You are a terse assistant. Answer directly, no thinking.<|user|>Say hello in exactly five words.<|assistant|><think>
+
+--- generated text ---
+
+
+--- trace: prefill failed: cuda GLM-5.3 prefill failed at token 0 ---
+

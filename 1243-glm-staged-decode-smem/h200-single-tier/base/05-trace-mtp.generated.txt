@@ -1,0 +1,26 @@
+
+
+--- trace: prefill done; decode_max=64 ctx_room=32736 ---
+
+</think>Hello there, nice to meet you!
+
+--- trace: speculative boundary rewind: from=42 to=41 ---
+
+
+
+--- trace: speculative boundary: kept=1 discarded=1 resample=0 rewind_ms=584.474 ---
+
+
+
+
+
+--- trace: prefill done; decode_max=96 ctx_room=15719 ---
+
+Count retries. Pattern: every 7th record? Check: record 7 retry, 14, 21, 28, 35, 42, 49, 56, 63, 70, 77, 84, 91, 98, 105, 112, 119, 126, 133, 140, 147, 154, 161, 168, 175, 182, 189,
+
+
+
+--- trace: prefill done; decode_max=64 ctx_room=15697 ---
+
+</think>200
+

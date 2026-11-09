@@ -1,0 +1,148 @@
+2026-11-08T22:34:35Z gpu flags: --gpu-devices 0,1 --gpu-vram auto
+2026-11-08T22:34:35Z model complete: 96505816384 bytes
+2026-11-08T22:35:45Z identity: file: /data/base/gguf/GLM-5.3-Flash-Q2.gguf bytes: 96505816384 hf_api_xet_hash: 3717238bd6bb945cc065012f119519b8ce3ad04645dc2a1011bac077b415ffda hf_resolve_x_linked_etag: e81fd6241c6e55a64e1e14e47a3eab61a173fa8d7e4b5c1d1848827119705b32 sha256: e81fd6241c6e55a64e1e14e47a3eab61a173fa8d7e4b5c1d1848827119705b32 
+2026-11-08T22:35:45Z fixtures base
+done: /workspace/evidence/base/03-score-100.log /workspace/evidence/base/04-score-long.log
+exit=1
+exit=1
+2026-11-08T22:36:17Z fixtures fixD
+done: /workspace/evidence/fixD/03-score-100.log /workspace/evidence/fixD/04-score-long.log
+exit=1
+exit=1
+2026-11-08T22:36:47Z mtp scenario base mtp
+Traceback (most recent call last):
+  File "/workspace/qa/client.py", line 30, in <module>
+    text, usage, dt = chat(msgs, mt)
+                      ^^^^^^^^^^^^^^
+  File "/workspace/qa/client.py", line 12, in chat
+    with urllib.request.urlopen(req, timeout=3600) as r:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 215, in urlopen
+    return opener.open(url, data, timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 521, in open
+    response = meth(req, response)
+               ^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 630, in http_response
+    response = self.parent.error(
+               ^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 559, in error
+    return self._call_chain(*args)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 492, in _call_chain
+    result = func(*args)
+             ^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 639, in http_error_default
+    raise HTTPError(req.full_url, code, msg, hdrs, fp)
+urllib.error.HTTPError: HTTP Error 500: Internal Server Error
+# ==== summary (base, mtp) ====
+# 'staged decode weights launch failed' lines: 0
+# 'glm mtp step failed' lines: 0
+# mtp cycles ACCEPT: 0  reject: 0
+# sha256 of greedy texts: e3b0c44298fc1c14
+2026-11-08T22:37:10Z mtp scenario fixD mtp
+Traceback (most recent call last):
+  File "/workspace/qa/client.py", line 30, in <module>
+    text, usage, dt = chat(msgs, mt)
+                      ^^^^^^^^^^^^^^
+  File "/workspace/qa/client.py", line 12, in chat
+    with urllib.request.urlopen(req, timeout=3600) as r:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 215, in urlopen
+    return opener.open(url, data, timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 521, in open
+    response = meth(req, response)
+               ^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 630, in http_response
+    response = self.parent.error(
+               ^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 559, in error
+    return self._call_chain(*args)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 492, in _call_chain
+    result = func(*args)
+             ^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 639, in http_error_default
+    raise HTTPError(req.full_url, code, msg, hdrs, fp)
+urllib.error.HTTPError: HTTP Error 500: Internal Server Error
+# ==== summary (fixD, mtp) ====
+# 'staged decode weights launch failed' lines: 0
+# 'glm mtp step failed' lines: 0
+# mtp cycles ACCEPT: 0  reject: 0
+# sha256 of greedy texts: e3b0c44298fc1c14
+2026-11-08T22:37:32Z mtp scenario fixD nomtp
+Traceback (most recent call last):
+  File "/workspace/qa/client.py", line 30, in <module>
+    text, usage, dt = chat(msgs, mt)
+                      ^^^^^^^^^^^^^^
+  File "/workspace/qa/client.py", line 12, in chat
+    with urllib.request.urlopen(req, timeout=3600) as r:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 215, in urlopen
+    return opener.open(url, data, timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 521, in open
+    response = meth(req, response)
+               ^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 630, in http_response
+    response = self.parent.error(
+               ^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 559, in error
+    return self._call_chain(*args)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 492, in _call_chain
+    result = func(*args)
+             ^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 639, in http_error_default
+    raise HTTPError(req.full_url, code, msg, hdrs, fp)
+urllib.error.HTTPError: HTTP Error 500: Internal Server Error
+# ==== summary (fixD, nomtp) ====
+# 'staged decode weights launch failed' lines: 0
+# 'glm mtp step failed' lines: 0
+# mtp cycles ACCEPT: 0  reject: 0
+# sha256 of greedy texts: e3b0c44298fc1c14
+2026-11-08T22:37:54Z bundle
+# ==== comparison base (b3f5018) vs fixD (5ebf36c) ====
+## 100-case fixture: python3 compare_scores.py
+no common cases
+
+## long cases: compare_scores.py
+no common cases
+
+## summary lines
+
+## greedy texts (sha256): base-mtp fix-mtp fix-nomtp
+e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855  base/05-text-mtp.txt
+e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855  fixD/05-text-mtp.txt
+e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855  fixD/05-text-nomtp.txt
+
+## diff base-mtp vs fix-mtp
+IDENTICAL
+
+## diff fix-mtp vs fix-nomtp
+IDENTICAL
+
+## server summaries
+# ==== ds4 QA evidence ====
+# =========================
+# ==== summary (base, mtp) ====
+# mtp cycles ACCEPT: 0  reject: 0
+# sha256 of greedy texts: e3b0c44298fc1c14
+# ==== ds4 QA evidence ====
+# =========================
+# ==== summary (fixD, mtp) ====
+# mtp cycles ACCEPT: 0  reject: 0
+# sha256 of greedy texts: e3b0c44298fc1c14
+# ==== ds4 QA evidence ====
+# =========================
+# ==== summary (fixD, nomtp) ====
+# mtp cycles ACCEPT: 0  reject: 0
+# sha256 of greedy texts: e3b0c44298fc1c14
+
+## hash lines base vs fix (counts both could launch must match)
+grep: base/02-hash-timing.log: No such file or directory
+grep: fixD/02-hash-timing.loggrep: base/02-hash-timing.log: No such file or directory
+: No such file or directory
+BITWISE IDENTICAL where base launches
+2026-11-08T22:37:54Z ALL DONE

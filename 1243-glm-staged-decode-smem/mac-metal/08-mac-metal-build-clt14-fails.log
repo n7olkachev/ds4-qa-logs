@@ -1,0 +1,73 @@
+cc -O3 -g -mcpu=native -Wall -Wextra -std=c99 -I. -c -o tests/test_glm_attention.o tests/test_glm_attention.c
+cc -O3 -ffast-math -g -mcpu=native -Wall -Wextra -fobjc-arc -c -o ds4_metal.o ds4_metal.m
+ds4_metal.m:1133:26: error: no known instance method for selector 'removeResidencySet:'
+                [g_queue removeResidencySet:_residencySet];
+                         ^~~~~~~~~~~~~~~~~~
+ds4_metal.m:1135:28: error: no known instance method for selector 'endResidency'
+            [_residencySet endResidency];
+                           ^~~~~~~~~~~~
+ds4_metal.m:1155:26: error: no known instance method for selector 'removeResidencySet:'
+                [g_queue removeResidencySet:_residencySet];
+                         ^~~~~~~~~~~~~~~~~~
+ds4_metal.m:1157:28: error: no known instance method for selector 'endResidency'
+            [_residencySet endResidency];
+                           ^~~~~~~~~~~~
+ds4_metal.m:2168:26: error: no known instance method for selector 'removeResidencySet:'
+                [g_queue removeResidencySet:g_model_residency_set];
+                         ^~~~~~~~~~~~~~~~~~
+ds4_metal.m:2170:36: error: no known instance method for selector 'endResidency'
+            [g_model_residency_set endResidency];
+                                   ^~~~~~~~~~~~
+ds4_metal.m:2171:36: error: no known instance method for selector 'removeAllAllocations'
+            [g_model_residency_set removeAllAllocations];
+                                   ^~~~~~~~~~~~~~~~~~~~
+ds4_metal.m:2208:9: error: unknown type name 'MTLResidencySetDescriptor'; did you mean 'MTLRenderPassDescriptor'?
+        MTLResidencySetDescriptor *desc = [[MTLResidencySetDescriptor alloc] init];
+        ^~~~~~~~~~~~~~~~~~~~~~~~~
+        MTLRenderPassDescriptor
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/Metal.framework/Headers/MTLCommandBuffer.h:25:8: note: 'MTLRenderPassDescriptor' declared here
+@class MTLRenderPassDescriptor;
+       ^
+ds4_metal.m:2208:45: error: unknown receiver 'MTLResidencySetDescriptor'; did you mean 'MTLRenderPassDescriptor'?
+        MTLResidencySetDescriptor *desc = [[MTLResidencySetDescriptor alloc] init];
+                                            ^~~~~~~~~~~~~~~~~~~~~~~~~
+                                            MTLRenderPassDescriptor
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/Metal.framework/Headers/MTLCommandBuffer.h:25:8: note: 'MTLRenderPassDescriptor' declared here
+@class MTLRenderPassDescriptor;
+       ^
+ds4_metal.m:2209:14: error: property 'label' not found on object of type 'MTLRenderPassDescriptor *'
+        desc.label = @"ds4_model";
+             ^
+ds4_metal.m:2210:14: error: property 'initialCapacity' not found on object of type 'MTLRenderPassDescriptor *'
+        desc.initialCapacity = g_model_view_count;
+             ^
+ds4_metal.m:2213:43: error: no known instance method for selector 'newResidencySetWithDescriptor:error:'
+        g_model_residency_set = [g_device newResidencySetWithDescriptor:desc error:&error];
+                                          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ds4_metal.m:2221:36: error: no known instance method for selector 'addAllocation:'
+            [g_model_residency_set addAllocation:g_model_views[i].buffer];
+                                   ^~~~~~~~~~~~~
+ds4_metal.m:2224:32: error: no known instance method for selector 'requestResidency'
+        [g_model_residency_set requestResidency];
+                               ^~~~~~~~~~~~~~~~
+ds4_metal.m:2228:22: error: no known instance method for selector 'addResidencySet:'
+            [g_queue addResidencySet:g_model_residency_set];
+                     ^~~~~~~~~~~~~~~
+ds4_metal.m:2965:15: warning: unused variable 'metal4_disabled' [-Wunused-variable]
+    const int metal4_disabled = ds4_gpu_env_bool("DS4_METAL_DISABLE_METAL4") > 0;
+              ^
+ds4_metal.m:7056:25: error: property 'mathMode' not found on object of type 'MTLCompileOptions *'
+                options.mathMode = MTLMathModeSafe;
+                        ^
+ds4_metal.m:7056:36: error: use of undeclared identifier 'MTLMathModeSafe'
+                options.mathMode = MTLMathModeSafe;
+                                   ^
+ds4_metal.m:9420:26: error: no known instance method for selector 'removeResidencySet:'
+                [g_queue removeResidencySet:g_weight_residency_set];
+                         ^~~~~~~~~~~~~~~~~~
+ds4_metal.m:9421:37: error: no known instance method for selector 'endResidency'
+            [g_weight_residency_set endResidency];
+                                    ^~~~~~~~~~~~
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+1 warning and 20 errors generated.
+make: *** [ds4_metal.o] Error 1

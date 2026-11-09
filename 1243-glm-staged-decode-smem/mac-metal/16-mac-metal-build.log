@@ -1,0 +1,10 @@
+cc -O3 -ffast-math -g -mcpu=native -Wall -Wextra -fobjc-arc -c -o ds4_metal.o ds4_metal.m
+ds4_metal.m:2965:15: warning: unused variable 'metal4_disabled' [-Wunused-variable]
+ 2965 |     const int metal4_disabled = ds4_gpu_env_bool("DS4_METAL_DISABLE_METAL4") > 0;
+      |               ^~~~~~~~~~~~~~~
+ds4_metal.m:2897:12: warning: unused function 'ds4_gpu_compile_tensor_probe' [-Wunused-function]
+ 2897 | static int ds4_gpu_compile_tensor_probe(void) {
+      |            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+2 warnings generated.
+cc -O3 -ffast-math -g -mcpu=native -Wall -Wextra -std=c99 -c -o ds4_image.o ds4_image.c
+cc -O3 -ffast-math -g -mcpu=native -Wall -Wextra -std=c99 -o tests/test_glm_attention tests/test_glm_attention.o ds4_metal.o ds4_image.o -lm -pthread -framework Foundation -framework Metal

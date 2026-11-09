@@ -1,0 +1,289 @@
+# ==== ds4 QA evidence ====
+# date_utc: 2026-11-08T22:38:03Z
+# host: 7fb4680f6a16  runpod_pod: ?  dc: ?  gpu_count: ?
+# gpu: NVIDIA H200, 595.91.07, 143771 MiB, 9.0
+# nvcc: Build cuda_12.8.r12.8/compiler.35583870_0
+# os: Linux 6.8.0-147-generic x86_64  Ubuntu 24.04.3 LTS
+# tree: /data/fixD
+# commit: 5ebf36c37cb58dc86dd43fe2047099d7b39ab5c0  (Stage GLM decode attention scores in global memory past 12,032 rows)
+# dirty_files: 0
+# origin: https://github.com/n7olkachev/ds4.git
+# description: ds4-server --cuda --mtp --mtp-timing, three-turn greedy session whose MTP window crosses 12,033 positions (issue #1243 scenario)
+# =========================
+
+$ ./ds4-server --cuda --gpu-devices 0 --gpu-vram auto -m /data/base/gguf/GLM-5.3-Flash-Q2.gguf --ctx 32768 --port 8011 --trace /workspace/evidence/fixD/05-trace-mtp.txt --mtp --mtp-timing
+ds4: GPU config: 1 device [0] requested, budgets 132 GB; auto=true
+ds4: Linux cuda backend set oom_score_adj=1000
+ds4: CUDA backend initialized on NVIDIA H200 (sm_90) dev=0
+ds4: CUDA (no-copy) registered 89.88 GiB model mapping for multi-tier selective cache
+ds4: CUDA preparing model tensor mappings
+ds4: CUDA prepared model tensor mappings 16.38 GiB
+ds4: CUDA prepared model tensor mappings 32.13 GiB
+ds4: CUDA prepared model tensor mappings 48.45 GiB
+ds4: CUDA prepared model tensor mappings 64.78 GiB
+ds4: CUDA prepared model tensor mappings 80.23 GiB
+ds4: CUDA startup model preparation covered 89.87 GiB of tensor spans in 0.076s
+ds4: cuda backend initialized for graph diagnostics
+ds4: memory: KV 0.37 GiB (raw 0.00 + compressed 0.37) + buffers 2.98 GiB + resident model 89.87 GiB = 93.21 GiB planned
+ds4: memory detail: ctx=32768 prefill_cap=2048 raw_kv_rows=0 compressed_kv_rows=32768 backend=cuda
+1108 22:38:09 ds4-server: context buffers 3422.43 MiB (ctx=32768, backend=cuda, prefill_chunk=2048, raw_kv_rows=0, compressed_kv_rows=32768)
+ds4: GLM session ctx=32768 (model max=1048576); prefill/work cap=4096; dense attention limit=2051
+ds4: GLM graph using compact DSA KV only; expanded full-attention KV cache is skipped
+ds4: GLM graph allocating compact DSA cache: rows=32768 logical_ctx=32768 kv_layers=45 indexer_layers=11 f16 0.37 GiB
+ds4: GLM compact indexed prefill chunk=2048 score_rows=2048 score_scratch=64.00 MiB
+1108 22:38:09 ds4-server: tracing session to /workspace/evidence/fixD/05-trace-mtp.txt
+1108 22:38:09 ds4-server: listening on http://127.0.0.1:8011
+1108 22:38:13 ds4-server: chat ctx=0..32:32 prompt start
+1108 22:38:18 ds4-server: chat ctx=0..32:32 prefill chunk 32/32 (100.0%) chunk=0.00 t/s avg=6.30 t/s 5.081s
+1108 22:38:18 ds4-server: chat ctx=0..32:32 prompt done 5.082s
+ds4: glm mtp cycle: verify2 578.2 ms, head+draft 647.4 ms, reject (draft 0 '!' vs true 1052 ' there')
+ds4: glm mtp cycle: verify2 574.8 ms, head+draft 68.0 ms, ACCEPT (draft 11 ',' vs true 11 ',')
+ds4: glm mtp cycle: verify2 589.6 ms, head+draft 68.3 ms, ACCEPT (draft 311 ' to' vs true 311 ' to')
+ds4: glm mtp cycle: verify2 600.6 ms, head+draft 68.1 ms, ACCEPT (draft 498 ' you' vs true 498 ' you')
+ds4: glm mtp cycle: verify2 609.5 ms, head+draft 68.3 ms, ACCEPT (draft 154827 '<|user|>' vs true 154827 '<|user|>')
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA matmul_q8_0 quantize launch failed: operation failed due to a previous error during capture
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA matmul_q8_0 quantize launch failed: operation failed due to a previous error during capture
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA matmul_q8_0 quantize launch failed: operation failed due to a previous error during capture
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+1108 22:38:23 ds4-server: chat ctx=32..41:9 gen=9 decoding chunk=1.77 t/s avg=1.77 t/s 5.083s
+1108 22:38:23 ds4-server: thinking live checkpoint remembered ctx=0..32:32 live=41 visible=208
+1108 22:38:23 ds4-server: chat ctx=0..32:32 gen=9 finish=stop 10.167s
+1108 22:38:23 ds4-server: chat ctx=41..17049:17008 prompt start
+1108 22:39:02 ds4-server: chat ctx=41..17049:17008 prefill chunk 2048/17008 (12.0%) chunk=0.00 t/s avg=53.40 t/s 38.348s
+1108 22:39:41 ds4-server: chat ctx=41..17049:17008 prefill chunk 4096/17008 (24.1%) chunk=52.70 t/s avg=53.05 t/s 77.212s
+1108 22:40:20 ds4-server: chat ctx=41..17049:17008 prefill chunk 6144/17008 (36.1%) chunk=52.58 t/s avg=52.89 t/s 116.159s
+1108 22:40:59 ds4-server: chat ctx=41..17049:17008 prefill chunk 8192/17008 (48.2%) chunk=52.42 t/s avg=52.77 t/s 155.227s
+1108 22:41:38 ds4-server: chat ctx=41..17049:17008 prefill chunk 10240/17008 (60.2%) chunk=52.58 t/s avg=52.74 t/s 194.175s
+1108 22:42:17 ds4-server: chat ctx=41..17049:17008 prefill chunk 12288/17008 (72.2%) chunk=52.63 t/s avg=52.72 t/s 233.091s
+1108 22:42:56 ds4-server: chat ctx=41..17049:17008 prefill chunk 14336/17008 (84.3%) chunk=52.46 t/s avg=52.68 t/s 272.133s
+1108 22:43:35 ds4-server: chat ctx=41..17049:17008 prefill chunk 16384/17008 (96.3%) chunk=52.53 t/s avg=52.66 t/s 311.121s
+1108 22:43:50 ds4-server: chat ctx=41..17049:17008 prefill chunk 17008/17008 (100.0%) chunk=41.66 t/s avg=52.16 t/s 326.100s
+1108 22:43:50 ds4-server: chat ctx=41..17049:17008 prompt done 326.100s
+ds4: glm mtp cycle: verify2 659.4 ms, head+draft 72.7 ms, ACCEPT (draft 13 '.' vs true 13 '.')
+ds4: glm mtp cycle: verify2 642.1 ms, head+draft 665.9 ms, reject (draft 4977 ' seems' vs true 25 ':')
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA matmul_q8_0 quantize launch failed: operation failed due to a previous error during capture
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA matmul_q8_0 quantize launch failed: operation failed due to a previous error during capture
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA matmul_q8_0 quantize launch failed: operation failed due to a previous error during capture
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: glm mtp cycle: verify2 620.3 ms, head+draft 72.1 ms, ACCEPT (draft 220 ' ' vs true 220 ' ')
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA matmul_q8_0 quantize launch failed: operation failed due to a previous error during capture
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA matmul_q8_0 quantize launch failed: operation failed due to a previous error during capture
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA matmul_q8_0 quantize launch failed: operation failed due to a previous error during capture
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: CUDA glm shared swiglu one failed: operation would make the legacy stream depend on a capturing blocking stream
+ds4: glm mtp cycle: verify2 681.6 ms, head+draft 666.9 ms, reject (draft 154840 '<|code_suffix|>' vs true 339 'th')
+ds4: glm mtp cycle: verify2 639.6 ms, head+draft 72.8 ms, ACCEPT (draft 3255 ' record' vs true 3255 ' record')
+ds4: glm mtp cycle: verify2 657.7 ms, head+draft 72.9 ms, ACCEPT (draft 6771 ' Let' vs true 6771 ' Let')
+ds4: glm mtp cycle: verify2 641.9 ms, head+draft 72.6 ms, ACCEPT (draft 1779 ' check' vs true 1779 ' check')
+ds4: glm mtp cycle: verify2 652.9 ms, head+draft 665.0 ms, reject (draft 220 ' ' vs true 3255 ' record')
+ds4: glm mtp cycle: verify2 624.3 ms, head+draft 72.7 ms, ACCEPT (draft 220 ' ' vs true 220 ' ')
+ds4: glm mtp cycle: verify2 644.6 ms, head+draft 664.8 ms, reject (draft 99752 '000' vs true 22624 ' retry')
+ds4: glm mtp cycle: verify2 655.1 ms, head+draft 72.4 ms, ACCEPT (draft 11 ',' vs true 11 ',')
+ds4: glm mtp cycle: verify2 652.8 ms, head+draft 72.8 ms, ACCEPT (draft 99367 '14' vs true 99367 '14')
+ds4: glm mtp cycle: verify2 668.9 ms, head+draft 666.1 ms, reject (draft 22624 ' retry' vs true 220 ' ')
+ds4: glm mtp cycle: verify2 673.2 ms, head+draft 72.5 ms, ACCEPT (draft 99146 '21' vs true 99146 '21')
+ds4: glm mtp cycle: verify2 677.5 ms, head+draft 666.3 ms, reject (draft 9829 ' yes' vs true 220 ' ')
+ds4: glm mtp cycle: verify2 688.5 ms, head+draft 72.3 ms, ACCEPT (draft 99869 '28' vs true 99869 '28')
+ds4: glm mtp cycle: verify2 681.8 ms, head+draft 665.6 ms, reject (draft 9829 ' yes' vs true 220 ' ')
+ds4: glm mtp cycle: verify2 685.1 ms, head+draft 72.3 ms, ACCEPT (draft 100235 '35' vs true 100235 '35')
+ds4: glm mtp cycle: verify2 679.2 ms, head+draft 666.5 ms, reject (draft 9829 ' yes' vs true 220 ' ')
+ds4: glm mtp cycle: verify2 679.2 ms, head+draft 72.5 ms, ACCEPT (draft 101961 '42' vs true 101961 '42')
+ds4: glm mtp cycle: verify2 669.7 ms, head+draft 665.9 ms, reject (draft 9829 ' yes' vs true 220 ' ')
+ds4: glm mtp cycle: verify2 671.0 ms, head+draft 72.5 ms, ACCEPT (draft 101474 '49' vs true 101474 '49')
+ds4: glm mtp cycle: verify2 669.8 ms, head+draft 665.9 ms, reject (draft 1112 '...' vs true 220 ' ')
+ds4: glm mtp cycle: verify2 686.4 ms, head+draft 72.4 ms, ACCEPT (draft 101917 '56' vs true 101917 '56')
+ds4: glm mtp cycle: verify2 683.9 ms, head+draft 665.3 ms, reject (draft 9829 ' yes' vs true 220 ' ')
+ds4: glm mtp cycle: verify2 679.8 ms, head+draft 72.4 ms, ACCEPT (draft 103302 '63' vs true 103302 '63')
+ds4: glm mtp cycle: verify2 672.3 ms, head+draft 666.4 ms, reject (draft 9829 ' yes' vs true 220 ' ')
+ds4: glm mtp cycle: verify2 676.2 ms, head+draft 72.4 ms, ACCEPT (draft 100096 '70' vs true 100096 '70')
+ds4: glm mtp cycle: verify2 691.4 ms, head+draft 666.2 ms, reject (draft 9829 ' yes' vs true 220 ' ')
+ds4: glm mtp cycle: verify2 686.9 ms, head+draft 72.2 ms, ACCEPT (draft 102114 '77' vs true 102114 '77')
+ds4: glm mtp cycle: verify2 676.1 ms, head+draft 665.6 ms, reject (draft 2503 ' ...' vs true 220 ' ')
+1108 22:44:22 ds4-server: chat ctx=17049..17099:50 gen=50 THINKING decoding chunk=1.54 t/s avg=1.54 t/s 32.548s
+ds4: glm mtp cycle: verify2 685.0 ms, head+draft 72.3 ms, ACCEPT (draft 104029 '84' vs true 104029 '84')
+ds4: glm mtp cycle: verify2 651.3 ms, head+draft 665.2 ms, reject (draft 2503 ' ...' vs true 220 ' ')
+ds4: glm mtp cycle: verify2 677.1 ms, head+draft 72.7 ms, ACCEPT (draft 104327 '91' vs true 104327 '91')
+ds4: glm mtp cycle: verify2 679.4 ms, head+draft 72.8 ms, ACCEPT (draft 220 ' ' vs true 220 ' ')
+ds4: glm mtp cycle: verify2 672.4 ms, head+draft 665.2 ms, reject (draft 1112 '...' vs true 11 ',')
+ds4: glm mtp cycle: verify2 671.8 ms, head+draft 665.9 ms, reject (draft 1112 '...' vs true 220 ' ')
+ds4: glm mtp cycle: verify2 657.4 ms, head+draft 72.2 ms, ACCEPT (draft 108345 '105' vs true 108345 '105')
+ds4: glm mtp cycle: verify2 671.8 ms, head+draft 664.8 ms, reject (draft 1112 '...' vs true 220 ' ')
+ds4: glm mtp cycle: verify2 668.1 ms, head+draft 72.7 ms, ACCEPT (draft 110800 '112' vs true 110800 '112')
+ds4: glm mtp cycle: verify2 667.8 ms, head+draft 665.3 ms, reject (draft 1112 '...' vs true 220 ' ')
+ds4: glm mtp cycle: verify2 688.5 ms, head+draft 72.7 ms, ACCEPT (draft 112114 '119' vs true 112114 '119')
+ds4: glm mtp cycle: verify2 669.3 ms, head+draft 665.8 ms, reject (draft 1112 '...' vs true 220 ' ')
+ds4: glm mtp cycle: verify2 685.2 ms, head+draft 72.6 ms, ACCEPT (draft 114062 '126' vs true 114062 '126')
+ds4: glm mtp cycle: verify2 668.2 ms, head+draft 664.8 ms, reject (draft 2503 ' ...' vs true 220 ' ')
+ds4: glm mtp cycle: verify2 688.2 ms, head+draft 72.3 ms, ACCEPT (draft 117055 '133' vs true 117055 '133')
+ds4: glm mtp cycle: verify2 663.5 ms, head+draft 665.8 ms, reject (draft 2503 ' ...' vs true 220 ' ')
+ds4: glm mtp cycle: verify2 687.0 ms, head+draft 72.9 ms, ACCEPT (draft 108157 '140' vs true 108157 '140')
+ds4: glm mtp cycle: verify2 665.3 ms, head+draft 666.0 ms, reject (draft 2503 ' ...' vs true 220 ' ')
+ds4: glm mtp cycle: verify2 686.5 ms, head+draft 72.8 ms, ACCEPT (draft 122463 '147' vs true 122463 '147')
+ds4: glm mtp cycle: verify2 675.8 ms, head+draft 666.7 ms, reject (draft 2503 ' ...' vs true 220 ' ')
+ds4: glm mtp cycle: verify2 685.7 ms, head+draft 72.4 ms, ACCEPT (draft 124211 '154' vs true 124211 '154')
+ds4: glm mtp cycle: verify2 676.1 ms, head+draft 666.3 ms, reject (draft 2503 ' ...' vs true 220 ' ')
+ds4: glm mtp cycle: verify2 673.9 ms, head+draft 72.7 ms, ACCEPT (draft 127279 '161' vs true 127279 '161')
+ds4: glm mtp cycle: verify2 676.0 ms, head+draft 666.3 ms, reject (draft 2503 ' ...' vs true 220 ' ')
+ds4: glm mtp cycle: verify2 682.5 ms, head+draft 72.5 ms, ACCEPT (draft 112283 '168' vs true 112283 '168')
+ds4: glm mtp cycle: verify2 646.3 ms, head+draft 666.3 ms, reject (draft 2503 ' ...' vs true 220 ' ')
+ds4: glm mtp cycle: verify2 685.1 ms, head+draft 72.5 ms, ACCEPT (draft 115381 '175' vs true 115381 '175')
+ds4: glm mtp cycle: verify2 672.5 ms, head+draft 664.7 ms, reject (draft 2503 ' ...' vs true 220 ' ')
+ds4: glm mtp cycle: verify2 690.7 ms, head+draft 72.2 ms, ACCEPT (draft 126334 '182' vs true 126334 '182')
+ds4: glm mtp cycle: verify2 665.2 ms, head+draft 664.5 ms, reject (draft 124206 '189' vs true 220 ' ')
+1108 22:44:54 ds4-server: chat ctx=17099..17145:46 gen=96 THINKING decoding chunk=1.44 t/s avg=1.49 t/s 64.517s
+ds4-server: thinking not closed, ignoring incomplete GLM tool calls in reasoning
+1108 22:44:54 ds4-server: chat ctx=41..17049:17008 gen=96 THINKING finish=length 390.622s
+1108 22:44:54 ds4-server: live kv cache miss live=17145 prompt=17071 common=17049 vision=match reason=token-mismatch
+1108 22:44:54 ds4-server: chat ctx=0..17071:17071 prompt start
+1108 22:45:33 ds4-server: chat ctx=0..17071:17071 prefill chunk 2048/17071 (12.0%) chunk=0.00 t/s avg=53.29 t/s 38.432s
+1108 22:46:11 ds4-server: chat ctx=0..17071:17071 prefill chunk 4096/17071 (24.0%) chunk=52.65 t/s avg=52.97 t/s 77.330s
+1108 22:46:50 ds4-server: chat ctx=0..17071:17071 prefill chunk 6144/17071 (36.0%) chunk=52.59 t/s avg=52.84 t/s 116.273s
+1108 22:47:29 ds4-server: chat ctx=0..17071:17071 prefill chunk 8192/17071 (48.0%) chunk=52.59 t/s avg=52.78 t/s 155.218s
+1108 22:48:08 ds4-server: chat ctx=0..17071:17071 prefill chunk 10240/17071 (60.0%) chunk=52.52 t/s avg=52.72 t/s 194.216s
+1108 22:48:47 ds4-server: chat ctx=0..17071:17071 prefill chunk 12288/17071 (72.0%) chunk=52.52 t/s avg=52.69 t/s 233.207s
+1108 22:49:26 ds4-server: chat ctx=0..17071:17071 prefill chunk 14336/17071 (84.0%) chunk=52.75 t/s avg=52.70 t/s 272.029s
+1108 22:50:05 ds4-server: chat ctx=0..17071:17071 prefill chunk 16384/17071 (96.0%) chunk=52.45 t/s avg=52.67 t/s 311.075s
+1108 22:50:21 ds4-server: chat ctx=0..17071:17071 prefill chunk 17071/17071 (100.0%) chunk=42.46 t/s avg=52.16 t/s 327.256s
+1108 22:50:21 ds4-server: chat ctx=0..17071:17071 prompt done 327.256s
+ds4: glm mtp cycle: verify2 616.0 ms, head+draft 660.5 ms, reject (draft 98867 '200' vs true 154827 '<|user|>')
+1108 22:50:23 ds4-server: chat ctx=17071..17073:2 gen=2 decoding chunk=1.04 t/s avg=1.04 t/s 1.917s
+1108 22:50:23 ds4-server: thinking live checkpoint remembered ctx=0..17071:17071 live=17073 visible=45205
+1108 22:50:23 ds4-server: chat ctx=0..17071:17071 gen=2 finish=stop 329.175s
+1108 22:50:25 ds4-server: shutdown requested, draining requests
+
+# ==== summary (fixD, mtp) ====
+# 'staged decode weights launch failed' lines: 0
+# 'glm mtp step failed' lines: 0
+# mtp cycles ACCEPT: 36  reject: 31
+# sha256 of greedy texts: 4058fc2d282eaefd
